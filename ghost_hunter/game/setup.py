@@ -52,8 +52,8 @@ class setup(arcade.Window):
 
     def draw_map(self):
         
-        #map_name = ":resources:tiled_maps/Apartment_2.3.json"
-        map_name = "game/images/Apartment_2.3.json"
+        map_name = ":resources:tiled_maps/Apartment_2.3.json"
+        #map_name = "game/images/Apartment_2.3.json"
         # Layer specific options are defined based on Layer names in a dictionary
         # Doing this will make the SpriteList for the platforms layer
         # use spatial hashing for detection.        
