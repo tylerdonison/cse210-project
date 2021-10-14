@@ -9,6 +9,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
 SCREEN_TITLE = "Python Ghost Hunter"
 
+# Constants used to scale our sprites from their original size
 TILE_SCALING = 1
 CHARACTER_SCALING = 1
 SPRITE_PIXEL_SIZE = 128
@@ -23,3 +24,5 @@ TOP_VIEWPORT_MARGIN = 100
 
 PLAYER_START_X = 550
 PLAYER_START_Y = 200
+
+
