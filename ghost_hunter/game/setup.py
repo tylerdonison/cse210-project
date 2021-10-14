@@ -4,6 +4,10 @@ from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH
 from game.constants import CHARACTER_SCALING, TILE_SCALING
 from game.constants import PLAYER_MOVEMENT_SPEED, PLAYER_START_X, PLAYER_START_Y
 from game import images
+from game.player import Player
+from arcade.experimental.lights import Light, LightLayer
+
+AMBIENT_COLOR = (10, 10, 10)
 
 class setup(arcade.Window):
     """
@@ -22,7 +26,7 @@ class setup(arcade.Window):
         self.scene = None
         
         # Separate variable that holds the player sprite
-        self.player_sprite = None
+        self.player = Player()
 
         # Our physics engine
         self.physics_engine = None
@@ -33,6 +37,10 @@ class setup(arcade.Window):
         # A Camera that can be used to draw GUI elements
         self.gui_camera = None
 
+        #Layers that will cover the tiled map
+        self.player_light = None
+        self.light_layer = None
+
         arcade.set_background_color(arcade.csscolor.BLACK)
 
     def setup(self):
@@ -42,7 +50,13 @@ class setup(arcade.Window):
         self.player_setup()
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEngineSimple(
-            self.player_sprite, self.scene.get_sprite_list("Tile Layer 1"))
+            self.player.sprite, self.scene.get_sprite_list("Tile Layer 1"))
+        
+        
+        self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.light_layer.set_background_color(arcade.color.BLACK)
+        self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
+
 
     def setup_camera(self):
         """Setup the Cameras"""
@@ -51,7 +65,6 @@ class setup(arcade.Window):
         self.gui_camera = arcade.Camera(self.width, self.height)
 
     def draw_map(self):
-        
         map_name = ":resources:tiled_maps/Apartment_2.3.json"
         #map_name = "game/images/Apartment_2.3.json"
         # Layer specific options are defined based on Layer names in a dictionary
@@ -66,20 +79,15 @@ class setup(arcade.Window):
             # },
         }        
         # Read in the tiled map
-        self.tile_map = arcade.load_tilemap(map_name, TILE_SCALING, layer_options)
+        self.tile_map = arcade.load_tilemap(
+            map_name, TILE_SCALING, layer_options)
         self.scene = arcade.Scene.from_tilemap(self.tile_map)
         # Set the background color
         if self.tile_map.tiled_map.background_color:
             arcade.set_background_color(self.tile_map.tiled_map.background_color)
     
     def player_setup(self):
-        player_list = arcade.SpriteList()
-        # Set up the player, specifically placing it at these coordinates.
-        image_source = ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png"
-        self.player_sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
-        self.player_sprite.center_x = PLAYER_START_X
-        self.player_sprite.center_y = PLAYER_START_Y
-        self.scene.add_sprite("Player", self.player_sprite)
+        self.scene.add_sprite("Player", self.player.sprite)
 
     def on_draw(self):
         """Render the screen."""
@@ -90,8 +98,12 @@ class setup(arcade.Window):
         # Activate the game camera
         self.camera.use()
 
-        # Draw our Scene
-        self.scene.draw()
+        # Draw our Scene with the light_layer
+        with self.light_layer:
+            self.scene.draw()
+        
+        self.light_layer.draw(ambient_color=AMBIENT_COLOR)
+        self.light_layer.add(self.player_light)
 
         # Activate the GUI camera before drawing GUI elements
         self.gui_camera.use()
@@ -100,29 +112,30 @@ class setup(arcade.Window):
         """Called whenever a key is pressed."""
 
         if key == arcade.key.UP or key == arcade.key.W:
-            self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
+            self.player.sprite.change_y = PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.DOWN or key == arcade.key.S:
-            self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
+            self.player.sprite.change_y = -PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.LEFT or key == arcade.key.A:
-            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+            self.player.sprite.change_x = -PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
-            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+            self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
         if key == arcade.key.UP or key == arcade.key.W:
-            self.player_sprite.change_y = 0
+            self.player.sprite.change_y = 0
         elif key == arcade.key.DOWN or key == arcade.key.S:
-            self.player_sprite.change_y = 0
+            self.player.sprite.change_y = 0
         elif key == arcade.key.LEFT or key == arcade.key.A:
-            self.player_sprite.change_x = 0
+            self.player.sprite.change_x = 0
         elif key == arcade.key.RIGHT or key == arcade.key.D:
-            self.player_sprite.change_x = 0
+            self.player.sprite.change_x = 0
 
+    
     def center_camera_to_player(self):
-        screen_center_x = self.player_sprite.center_x - (self.camera.viewport_width / 2)
-        screen_center_y = self.player_sprite.center_y - (
+        screen_center_x = self.player.sprite.center_x - (self.camera.viewport_width / 2)
+        screen_center_y = self.player.sprite.center_y - (
             self.camera.viewport_height / 2
         )
         if screen_center_x < 0:
@@ -135,5 +148,5 @@ class setup(arcade.Window):
     
     def on_update(self, delta_time):
         self.physics_engine.update()
-
+        self.player_light.position = self.player.sprite.position
         self.center_camera_to_player()
