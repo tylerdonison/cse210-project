@@ -1,7 +1,6 @@
 import arcade
 from game.constants import CHARACTER_SCALING
 from game.constants import PLAYER_MOVEMENT_SPEED, PLAYER_START_X, PLAYER_START_Y
-from game.constants import LIGHT_RADIUS
 
 class Player:
     
