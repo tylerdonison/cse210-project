@@ -79,4 +79,8 @@ class Enemy(Entity):
 
         self.should_update_walk += 1
         
+class ZombieEnemy(Enemy):
+    def __init__(self):
 
+        # Set up parent class
+        super().__init__("zombie", "zombie")
