@@ -15,11 +15,4 @@ class Player:
         self.sprite = arcade.Sprite(image_source, CHARACTER_SCALING)
         self.sprite.center_x = PLAYER_START_X
         self.sprite.center_y = PLAYER_START_Y
-    
-    def get_player_circle(self, point):
-        #(x - center_x)^2 + (y - center_y)^2 < radius^2
-        radius = LIGHT_RADIUS
-        x_center = self.sprite.center_x
-        y_center = self.sprite.center_y
-        x = point.x
 
