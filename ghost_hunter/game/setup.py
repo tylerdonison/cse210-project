@@ -132,7 +132,6 @@ class setup(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
 
-    
     def center_camera_to_player(self):
         screen_center_x = self.player.sprite.center_x - (self.camera.viewport_width / 2)
         screen_center_y = self.player.sprite.center_y - (
