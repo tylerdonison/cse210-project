@@ -6,6 +6,7 @@ from game.constants import PLAYER_MOVEMENT_SPEED, PLAYER_START_X, PLAYER_START_Y
 from game import images
 from game.player import Player
 from arcade.experimental.lights import Light, LightLayer
+from game.ghost import Ghost
 
 AMBIENT_COLOR = (10, 10, 10)
 
@@ -40,6 +41,9 @@ class setup(arcade.Window):
         #Layers that will cover the tiled map
         self.player_light = None
         self.light_layer = None
+
+        self.clock = 0
+        self.ghost = Ghost()
 
         arcade.set_background_color(arcade.csscolor.BLACK)
 
@@ -149,3 +153,5 @@ class setup(arcade.Window):
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
         self.center_camera_to_player()
+        self.ghost.execute()
+        
