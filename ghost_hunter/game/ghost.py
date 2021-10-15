@@ -1,13 +1,26 @@
 """This is the module in charge of controlling the ghost
 """
 import arcade
-from ghost_mode_action import Action_Mode
-from ghost_mode_hunt import Hunt_Mode
+from game.ghost_mode_action import Action_Mode
+from game.ghost_mode_hunt import Hunt_Mode
+import os
+from game.constants import CHARACTER_SCALING
+from game.entity import Entity
 
-class Ghost():
+class Ghost(Entity):
     """The ghost is a spooky being who leaves clues and hunts the player.
 
-    Stereotype: Information Holder
+    Stereotype: Information Holder, Controller
+
+    Attributes:
+        cooldown_time (int): The cooldown time for hunt mode.
+        hunt_time (int): The duration of the hunt.
+        time_since_last_interaction (int): The time that passed since the last interaction.
+        hunt_mode_on (boolean): Whether the ghost is hunting or not.
+        hunt_mode (Hunt_Mode): A Hunt_Mode object to control the hunt mode of the ghost.
+        action_mode (Action_Mode): A Action_Mode object to control the action mode of the ghost.
+        hunt_duration (int): The duration of a hunt
+        max_cooldown_time (int): The maximum a cooldown can last. 
     """
     def __init__(self):
         """The class constructor
@@ -15,15 +28,24 @@ class Ghost():
         Args:
             self (Ghost): An instance of Ghost
         """
+        Entity.__init__(self)
+        path = r'C:\CSE210\cse210-project\ghost_hunter\game\images'
+        self.sprite = arcade.Sprite(os.path.join(
+            path, "ghost_front_sprite.png"), CHARACTER_SCALING)
+        #need to change its position to be a random one inside one of the rooms
+        Entity.setup(
+            self,  os.path.join(
+                path, "ghost_front_sprite.png"), 500, 500)
+        
         self.cooldown_time = 0
         self.hunt_time = 0
         self.time_since_last_interaction = 0
         self.hunt_mode_on = False
-        self.position = 500,500
         self.hunt_mode = Hunt_Mode()
         self.action_mode = Action_Mode()
         self.hunt_duration = 15
         self.max_cooldown_time = 30
+
 
     def execute(self,sanity):
         """This executes all of the updates and actions that the ghost object should have during

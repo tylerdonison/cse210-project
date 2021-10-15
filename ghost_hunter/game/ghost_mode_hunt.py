@@ -18,7 +18,7 @@ class Hunt_Mode:
 
 
     
-    def hunt_check(sanity):
+    def hunt_check(self, sanity):
         """Checks to see if the ghost will hunt the player. There is a 1 in 20 chance of being hunted if they have 100 sanity
         and a 1 in 1 chance if their sanity gets to 5
 
@@ -32,7 +32,7 @@ class Hunt_Mode:
             sanity = 5 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
 
         
-        chance_of_being_hunted_inverse = sanity / 5
+        chance_of_being_hunted_inverse = int(sanity / 5)
         round(chance_of_being_hunted_inverse) #ensures that the chance of being hunted will be an int
 
         #creates a list from 1 to the inverse of the chance of being hunted. (A greater number is better for the player). Then randomly chooses a number
