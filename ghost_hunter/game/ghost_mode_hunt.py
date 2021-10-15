@@ -8,6 +8,11 @@ class Hunt_Mode:
     def hunt(self):
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         """
+        #lock front door
+        #make ghost visible
+        #move towards person if in line of sight
+        #if the person is not in line of sight. Mov
+
 
 
 

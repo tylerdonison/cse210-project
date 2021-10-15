@@ -22,6 +22,8 @@ class Ghost():
         self.position = 500,500
         self.hunt_mode = Hunt_Mode()
         self.action_mode = Action_Mode()
+        self.hunt_duration = 15
+        self.max_cooldown_time = 30
 
     def execute(self,sanity):
         """This executes all of the updates and actions that the ghost object should have during
@@ -47,12 +49,14 @@ class Ghost():
             self.cooldown_time = 0
         else:
             self.cooldown_time +=1
+            self.time_since_last_interaction += 1
 
-        if self.cooldown_time > 30:
+
+        if self.cooldown_time > self.max_cooldown_time:
             self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
             self.cooldown_time -= 5 #this prevents the hunt mode from checking every second after cooldown time is greater than 30
 
-        if self.hunt_time > 15:
+        if self.hunt_time > self.hunt_duration:
             self.hunt_mode_on == False
             self.hunt_time = 0
 
