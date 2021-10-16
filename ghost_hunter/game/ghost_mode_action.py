@@ -1,6 +1,6 @@
 """This module is in charge of controlling the actions of the ghost"""
 import random
-import constants
+from game import constants
 
 class Action_Mode():
     """This is the class that controls the actions of the ghost while they are not hunting.
@@ -14,7 +14,7 @@ class Action_Mode():
             self (Action_Mode): an instance of Action Mode
         """
         
-        self.possible_objects = {f'{constants.ROOM_LIST[0]}' : constants.DINNING_INTERACTIONS, 
+        self.possible_objects = {f"{constants.ROOM_LIST[0]}" : constants.DINNING_INTERACTIONS, 
         f'{constants.ROOM_LIST[1]}' : constants.BEDROOM_INTERACTIONS,
         f'{constants.ROOM_LIST[2]}' : constants.BATHROOM_INTERACTIONS}
 
@@ -38,7 +38,7 @@ class Action_Mode():
         interaction = random.choice(possible_interactions)
 
         if interaction == "fingerprints":
-            self.place_fingerprints(self, room, object)
+            self.place_fingerprints(room, object)
 
 
     def place_fingerprints(self, room, object):

@@ -92,6 +92,7 @@ class setup(arcade.Window):
     
     def player_setup(self):
         self.scene.add_sprite("Player", self.player.sprite)
+        self.scene.add_sprite("Ghost", self.ghost.sprite)
 
     def on_draw(self):
         """Render the screen."""
@@ -153,5 +154,5 @@ class setup(arcade.Window):
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
         self.center_camera_to_player()
-        self.ghost.execute()
+        self.ghost.execute(self.player.sanity)
         
