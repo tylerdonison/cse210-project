@@ -1,5 +1,6 @@
 """This is the module in charge of controlling the ghost
 """
+from game.image_loader import Image_Loader
 import random
 import arcade
 from game.ghost_mode_action import Action_Mode
@@ -30,13 +31,11 @@ class Ghost(Entity):
             self (Ghost): An instance of Ghost
         """
         Entity.__init__(self)
-        path = r'C:\CSE210\cse210-project\ghost_hunter\game\images'
-        self.sprite = arcade.Sprite(os.path.join(
-            path, "ghost_front_sprite.png"), CHARACTER_SCALING)
+        path = Image_Loader().ghost_front_path
+        self.sprite = arcade.Sprite(path, CHARACTER_SCALING)
         #need to change its position to be a random one inside one of the rooms
         Entity.setup(
-            self,  os.path.join(
-                path, "ghost_front_sprite.png"), 500, 500)
+            self, path, 500, 500)
         
         self.cooldown_time = 0
         self.hunt_time = 0
@@ -57,7 +56,6 @@ class Ghost(Entity):
             sanity (int): the players current sanity
         """
         self.update_time_and_status(sanity)
-        self.do_interaction()
         self.do_hunt()
 
     def update_time_and_status(self,sanity):
