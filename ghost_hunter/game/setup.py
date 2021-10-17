@@ -7,6 +7,7 @@ from game import images
 from game.player import Player
 from arcade.experimental.lights import Light, LightLayer
 from game.ghost import Ghost
+from game.image_loader import Image_Loader
 
 AMBIENT_COLOR = (10, 10, 10)
 
@@ -45,6 +46,7 @@ class setup(arcade.Window):
         self.clock = 0
         self.ghost = Ghost()
 
+
         arcade.set_background_color(arcade.csscolor.BLACK)
 
     def setup(self):
@@ -69,8 +71,8 @@ class setup(arcade.Window):
         self.gui_camera = arcade.Camera(self.width, self.height)
 
     def draw_map(self):
-        map_name = ":resources:tiled_maps/Apartment_2.3.json"
-        #map_name = "game/images/Apartment_2.3.json"
+        #map_name = ":resources:tiled_maps/Apartment_2.3.json"
+        map_name = Image_Loader().get_map_name()
         # Layer specific options are defined based on Layer names in a dictionary
         # Doing this will make the SpriteList for the platforms layer
         # use spatial hashing for detection.        
