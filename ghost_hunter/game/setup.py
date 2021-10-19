@@ -56,7 +56,7 @@ class setup(arcade.View):
         self.player_setup()
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEngineSimple(
-            self.player.sprite, self.scene.get_sprite_list("Walls))
+            self.player.sprite, self.scene.get_sprite_list("Walls"))
         
         
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)

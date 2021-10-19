@@ -35,7 +35,7 @@ class Ghost(Entity):
         self.sprite = arcade.Sprite(path, CHARACTER_SCALING)
         #need to change its position to be a random one inside one of the rooms
         Entity.setup(
-            self, path, 500, 500)
+            self, path, 192, 576)
         
         self.cooldown_time = 0
         self.hunt_time = 0
