@@ -56,7 +56,7 @@ class setup(arcade.Window):
         self.player_setup()
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEngineSimple(
-            self.player.sprite, self.scene.get_sprite_list("Tile Layer 1"))
+            self.player.sprite, self.scene.get_sprite_list("Walls))
         
         
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -71,13 +71,12 @@ class setup(arcade.Window):
         self.gui_camera = arcade.Camera(self.width, self.height)
 
     def draw_map(self):
-        #map_name = ":resources:tiled_maps/Apartment_2.3.json"
         map_name = Image_Loader().get_map_name()
         # Layer specific options are defined based on Layer names in a dictionary
         # Doing this will make the SpriteList for the platforms layer
         # use spatial hashing for detection.        
         layer_options = {
-            "Tile Layer 1": {
+            "Walls": {
                 "use_spatial_hash": True,
             },
             # "Room Names":{
