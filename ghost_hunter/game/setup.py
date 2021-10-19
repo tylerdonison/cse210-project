@@ -11,7 +11,7 @@ from game.image_loader import Image_Loader
 
 AMBIENT_COLOR = (10, 10, 10)
 
-class setup(arcade.Window):
+class setup(arcade.View):
     """
     Main application class.
     """
@@ -19,7 +19,7 @@ class setup(arcade.Window):
     def __init__(self):
 
         # Call the parent class and set up the window
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        super().__init__()
         
         # TileMap Object
         self.tile_map = None
@@ -67,8 +67,8 @@ class setup(arcade.Window):
     def setup_camera(self):
         """Setup the Cameras"""
         
-        self.camera = arcade.Camera(self.width, self.height)
-        self.gui_camera = arcade.Camera(self.width, self.height)
+        self.camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.gui_camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def draw_map(self):
         map_name = Image_Loader().get_map_name()
