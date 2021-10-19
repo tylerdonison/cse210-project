@@ -1,9 +1,10 @@
 import os
 
-ROOM_LIST = ["Dinning Room", "Bedroom", "Bathroom"]
-DINNING_INTERACTIONS = ["Sink", "Television", "Couch"]
-BEDROOM_INTERACTIONS = ["Bed", "Computer", "Dresser"]
-BATHROOM_INTERACTIONS = ["Sink", "Bathtub", "Toliet"]
+ROOM_LIST = ["Dining Room", "Bedroom", "Bathroom"]
+INTERACTIONS_DICTIONARY = {"Dining Room":["Sink","Television","Couch"], "Bedroom":["Bed","Computer","Dresser"], 
+"Bathroom":["Sink","Bathtub","Toilet"]}
+OBJECT_COORDINATES = {"Sink":[196,800], "Television":[400,600], "Couch":[700,1400], "Bed":[964,1500], 
+"Computer":[1500,1400], "Dresser":[1500,1000], "Sink":[964,576], "Bathtub":[1500,576], "Toilet":[1500,900]}
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650

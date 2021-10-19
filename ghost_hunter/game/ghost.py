@@ -42,7 +42,7 @@ class Ghost(Entity):
         self.timer = 0
         self.hunt_mode_on = False
         self.hunt_mode = Hunt_Mode()
-        self.action_mode = Action_Mode()
+        self.action_mode = Action_Mode("ghost_type1")
         self.hunt_duration = 15
         self.max_cooldown_time = 30
 
@@ -57,6 +57,8 @@ class Ghost(Entity):
         """
         self.update_time_and_status(sanity)
         self.do_hunt()
+        emf_reading = self.action_mode.adjust_emf_reading()
+        temp_reading = self.action_mode.adjust_temp_reading()
 
     def update_time_and_status(self,sanity):
         """This method updates the cooldown time or, if the ghost is hunging, the hunt time.
