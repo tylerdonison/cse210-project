@@ -8,7 +8,7 @@ class Handle_Collisions_Action():
         self.instruments = instruments
         self.instrument_to_ignore = None
     
-    def check_collision_between_player_and_user(self):
+    def check_collision_between_player_and_ghost(self):
         new_player = self.player
         new_player.center_x += 20
         if check_for_collision(new_player, self.ghost):

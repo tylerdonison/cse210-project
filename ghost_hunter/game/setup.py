@@ -227,7 +227,10 @@ class setup(arcade.View):
         self.collisions_update()
 
     def collisions_update(self):
-        if self.handle_collisions_action.check_collision_between_player_and_user():
+        if self.handle_collisions_action.check_collision_between_player_and_ghost():
+            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
+                self.game_end()
+            else:
                 self.game_over()
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
@@ -238,7 +241,6 @@ class setup(arcade.View):
             y_position = self.player.sprite.center_y - 50
             self.instruments[index_of_instrument].center_x = x_position
             self.instruments[index_of_instrument].center_y = y_position
-            #set_position(x_position, y_position)
             self.player.instrument.center_x = x_position
             self.player.instrument.center_y = y_position
             self.handle_collisions_action.instrument_to_ignore = index_of_instrument
@@ -249,5 +251,10 @@ class setup(arcade.View):
         self.instruments[2].set_position(950, 160)
 
     def game_over(self):
+        """The game is over"""
         self.window.close()
-        
+    
+    def game_end(self):
+        """The game has ended because the ghost was caught.
+        """
+        self.window.close()
