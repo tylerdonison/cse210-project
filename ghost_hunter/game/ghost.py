@@ -1,6 +1,7 @@
 """This is the module in charge of controlling the ghost
 """
 from game.image_loader import Image_Loader
+import math
 import random
 import arcade
 from game.ghost_mode_action import Action_Mode
