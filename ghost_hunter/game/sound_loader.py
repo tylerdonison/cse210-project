@@ -41,6 +41,9 @@ class Sound_Loader:
 
     def get_Backward_Souls_path(self):
         return self.Backward_Souls
+    
+    def get_ballroom_guests_path(self):
+        return self.ballroom_guests
 
     def get_chains_path(self): 
             return self.chains
@@ -75,10 +78,5 @@ class Sound_Loader:
     def get_zombie_path(self): 
         return self.zombie
         
-    def get_attic_screams_3_path(self): 
-        return self.get_attic_screams_3
-
-    def get_ballroom_guests_path(self):
-        return self.ballroom_guests
      
  
