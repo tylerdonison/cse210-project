@@ -11,6 +11,7 @@ from arcade.experimental.lights import Light, LightLayer
 from game.ghost import Ghost
 from game.image_loader import Image_Loader
 from game.room import Room
+from game.handle_collisions_action import Handle_Collisions_Action
 from random import randint
 
 AMBIENT_COLOR = (10, 10, 10)
@@ -50,6 +51,8 @@ class setup(arcade.View):
         self.clock = 0
         self.ghost = Ghost(self.player)
         self.room_map = None
+
+        self.handle_collisions_action = None
 
         self.room_name = ROOM_LIST[randint(0, len(ROOM_LIST) - 1)]
         print(self.room_name)
@@ -108,6 +111,7 @@ class setup(arcade.View):
     def player_setup(self):
         self.scene.add_sprite("Player", self.player.sprite)
         self.scene.add_sprite("Ghost", self.ghost.sprite)
+        self.handle_collisions_action = Handle_Collisions_Action(self.player, self.ghost)
 
     def on_draw(self):
         """Render the screen."""
@@ -127,6 +131,16 @@ class setup(arcade.View):
 
         # Activate the GUI camera before drawing GUI elements
         self.gui_camera.use()
+
+        #draw the sanity box
+        sanity_text = f"Sanity: {self.player.sanity}%"
+        arcade.draw_text(
+            sanity_text,
+            10,
+            10,
+            arcade.csscolor.WHITE,
+            18,
+        )
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
@@ -179,4 +193,9 @@ class setup(arcade.View):
         self.player_light.position = self.player.sprite.position
         self.center_camera_to_player()
         self.ghost.execute(self.player.sanity)
+        if self.handle_collisions_action.check_collision():
+            self.game_over()
+
+    def game_over(self):
+        self.window.close()
         

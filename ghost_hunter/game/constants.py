@@ -1,13 +1,14 @@
 import os
 
-ROOM_LIST = ["Dining Room", "Bedroom", "Bathroom"]
-INTERACTIONS_DICTIONARY = {"Dining Room":["Sink","Television","Couch"], "Bedroom":["Bed","Computer","Dresser"], 
+ROOM_LIST = ["Dinning Room", "Bedroom", "Bathroom"]
+INTERACTIONS_DICTIONARY = {"Dinning Room":["Sink","Television","Couch"], "Bedroom":["Bed","Computer","Dresser"], 
 "Bathroom":["Sink","Bathtub","Toilet"]}
 DINNING_INTERACTIONS = ["Sink", "Television", "Couch"]
 BEDROOM_INTERACTIONS = ["Bed", "Computer", "Dresser"],
 BATHROOM_INTERACTIONS = ["Sink", "Bathtub", "Toilet"]
 OBJECT_COORDINATES = {"Sink":[196,800], "Television":[400,600], "Couch":[700,1400], "Bed":[964,1500], 
 "Computer":[1500,1400], "Dresser":[1500,1000], "Sink":[964,576], "Bathtub":[1500,576], "Toilet":[1500,900]}
+INSTRUMENTS = ["Vaccum", "Ghost Thermo", "Bible"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
 DINING_MAX_COORDINATES = [192, 576, 704, 1600]
 BEDROOM_MAX_COORDINATES = [960, 1088, 1472, 1600]
