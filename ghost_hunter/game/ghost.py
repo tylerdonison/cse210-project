@@ -42,44 +42,47 @@ class Ghost(Entity):
         self.timer = 0
         self.hunt_mode_on = False
         self.hunt_mode = Hunt_Mode()
-        self.action_mode = Action_Mode("ghost_type1")
-        self.hunt_duration = 15
-        self.max_cooldown_time = 30
+        self.action_mode = Action_Mode("poltergeist")
+        self.hunt_duration = 15 * 0
+        self.max_cooldown_time = 30 * 60
+        self.ghost_type = "poltergeist"
 
 
-    def execute(self,sanity):
+    def execute(self,sanity,scene):
         """This executes all of the updates and actions that the ghost object should have during
         each cycle.
 
         Args: 
             self (Ghost): An instance of Ghost
             sanity (int): the players current sanity
+            scene (obj): The scene object
         """
-        self.update_time_and_status(sanity)
+        self.update_time_and_status(sanity,scene)
         self.do_hunt()
-        emf_reading = self.action_mode.adjust_emf_reading()
-        temp_reading = self.action_mode.adjust_temp_reading()
+        #emf_reading = self.action_mode.adjust_emf_reading()
+        #temp_reading = self.action_mode.adjust_temp_reading()
 
-    def update_time_and_status(self,sanity):
+    def update_time_and_status(self,sanity,scene):
         """This method updates the cooldown time or, if the ghost is hunging, the hunt time.
 
         Args: 
             self (Ghost): An instance of Ghost
             sanity (int): the player's current sanity
+            scene (obj): The scene object
         """
         if self.hunt_mode_on == True:
             self.hunt_time += 1
             self.cooldown_time = 0
         else:
             self.cooldown_time +=1
-            self.choose_ghost_action(sanity)
+            self.choose_ghost_action(sanity,scene)
  
 
         if self.hunt_time > self.hunt_duration:
             self.hunt_mode_on == False
             self.hunt_time = 0
 
-    def choose_ghost_action(self,sanity):
+    def choose_ghost_action(self,sanity,scene):
         """This method causes the ghost to do one of three things. There is a 20 percent chance that it will
         cause a hunt check, a 40 percent chance it will do nothing, and a 40 percent chance that it will leave 
         a clue. This method is executed every 10 seconds. The ghost will not hunt if the cooldown timer has not
@@ -87,16 +90,17 @@ class Ghost(Entity):
         Args:
             self (Ghost): An instance of Ghost                    
             sanity (int): the player's current sanity
+            scene (obj): the scene object
         """
         self.timer += 1
         probability = [1,2,3,4,5,6,7,8,9,10]
 
-        if self.timer % 10 == 0:
+        if (self.timer) % 10 == 0:
             random_decision = random.choice(probability)
             if (random_decision < 3) and (self.cooldown_time > self.max_cooldown_time) and (sanity < 51):
                 self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
             elif (random_decision > 6):
-                self.action_mode.cause_ghost_interaction()
+                self.action_mode.cause_ghost_interaction(self.ghost_type,scene)
         
 
     def do_hunt(self):

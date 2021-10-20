@@ -155,5 +155,5 @@ class setup(arcade.View):
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
         self.center_camera_to_player()
-        self.ghost.execute(self.player.sanity)
+        self.ghost.execute(self.player.sanity, self.scene)
         

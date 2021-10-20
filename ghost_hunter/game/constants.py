@@ -3,8 +3,8 @@ import os
 ROOM_LIST = ["Dining Room", "Bedroom", "Bathroom"]
 INTERACTIONS_DICTIONARY = {"Dining Room":["Sink","Television","Couch"], "Bedroom":["Bed","Computer","Dresser"], 
 "Bathroom":["Sink","Bathtub","Toilet"]}
-OBJECT_COORDINATES = {"Sink":[196,800], "Television":[400,600], "Couch":[700,1400], "Bed":[964,1500], 
-"Computer":[1500,1400], "Dresser":[1500,1000], "Sink":[964,576], "Bathtub":[1500,576], "Toilet":[1500,900]}
+OBJECT_COORDINATES = {"Sink":[196,800], "Television":[384,600], "Couch":[700,1400], "Bed":[896,1500], 
+"Computer":[1280,1400], "Dresser":[1280,1000], "Sink":[896,576], "Bathtub":[1280,576], "Toilet":[1280,900]}
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
