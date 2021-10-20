@@ -1,13 +1,17 @@
 import arcade
 from arcade import camera
+from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
 from game.constants import PLAYER_MOVEMENT_SPEED, PLAYER_START_X, PLAYER_START_Y
+from game.constants import ROOM_LIST
 from game import images
 from game.player import Player
 from arcade.experimental.lights import Light, LightLayer
 from game.ghost import Ghost
 from game.image_loader import Image_Loader
+from game.room import Room
+from random import randint
 
 AMBIENT_COLOR = (10, 10, 10)
 
@@ -45,7 +49,10 @@ class setup(arcade.View):
 
         self.clock = 0
         self.ghost = Ghost(self.player)
+        self.room_map = None
 
+        self.room_name = ROOM_LIST[randint(0, len(ROOM_LIST) - 1)]
+        print(self.room_name)
 
         arcade.set_background_color(arcade.csscolor.BLACK)
 
@@ -91,7 +98,10 @@ class setup(arcade.View):
         self.tile_map = arcade.load_tilemap(
             map_name, TILE_SCALING, layer_options)
         self.scene = arcade.Scene.from_tilemap(self.tile_map)
-        # Set the background color
+        room_layer = self.tile_map.get_tilemap_layer(self.room_name)
+        room_map = Room(room_layer)
+        ghost_position = room_map.generate_random()
+        self.ghost.sprite.set_position(ghost_position.x, ghost_position.y)
         if self.tile_map.tiled_map.background_color:
             arcade.set_background_color(self.tile_map.tiled_map.background_color)
     
