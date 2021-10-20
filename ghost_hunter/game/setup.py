@@ -4,7 +4,7 @@ from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
 from game.constants import PLAYER_MOVEMENT_SPEED, PLAYER_START_X, PLAYER_START_Y
-from game.constants import ROOM_LIST
+from game.constants import ROOM_LIST, INSTRUMENTS
 from game import images
 from game.player import Player
 from arcade.experimental.lights import Light, LightLayer
@@ -51,6 +51,7 @@ class setup(arcade.View):
         self.clock = 0
         self.ghost = Ghost(self.player)
         self.room_map = None
+        self.instruments = []
 
         self.handle_collisions_action = None
 
@@ -83,6 +84,26 @@ class setup(arcade.View):
         
         self.camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.gui_camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
+    
+    def setup_instruments(self):
+        """
+        Sets up the instruments that are used to capture the ghost
+        """
+        instrument = arcade.Sprite(
+                ":resources:images/topdown_tanks/tankRed_barrel3.png", CHARACTER_SCALING)
+        instrument.set_position(850, 160)
+        self.instruments.append(instrument)
+        self.scene.add_sprite(INSTRUMENTS[0], self.instruments[0])
+        instrument = arcade.Sprite(
+            ":resources:images/topdown_tanks/tankGreen_barrel1.png", CHARACTER_SCALING)
+        instrument.set_position(900, 160) 
+        self.instruments.append(instrument)
+        self.scene.add_sprite(INSTRUMENTS[1], self.instruments[1])
+        instrument = arcade.Sprite(
+            ":resources:images/topdown_tanks/tankDark_barrel3_outline.png", CHARACTER_SCALING)
+        instrument.set_position(950, 160) 
+        self.instruments.append(instrument)
+        self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
 
     def draw_map(self):
         map_name = Image_Loader().get_map_name()
@@ -107,11 +128,14 @@ class setup(arcade.View):
         self.ghost.sprite.set_position(ghost_position.x, ghost_position.y)
         if self.tile_map.tiled_map.background_color:
             arcade.set_background_color(self.tile_map.tiled_map.background_color)
+
+        self.setup_instruments()
     
     def player_setup(self):
         self.scene.add_sprite("Player", self.player.sprite)
         self.scene.add_sprite("Ghost", self.ghost.sprite)
-        self.handle_collisions_action = Handle_Collisions_Action(self.player, self.ghost)
+        self.handle_collisions_action = Handle_Collisions_Action(
+            self.player, self.ghost, self.instruments)
 
     def on_draw(self):
         """Render the screen."""
@@ -191,10 +215,38 @@ class setup(arcade.View):
     def on_update(self, delta_time):
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
+        if self.player.has_instrument:
+            new_position = self.player.sprite.position
+            index_of_instrument = self.player.index_of_instrument
+            self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
+            self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
+        if self.player.has_instrument:
+            self.instruments
         self.center_camera_to_player()
         self.ghost.execute(self.player.sanity)
-        if self.handle_collisions_action.check_collision():
-            self.game_over()
+        self.collisions_update()
+
+    def collisions_update(self):
+        if self.handle_collisions_action.check_collision_between_player_and_user():
+                self.game_over()
+        index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
+        if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
+            if self.player.has_instrument == True :
+                self.reposition_instrument(self.player.instrument)
+            self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
+            x_position = self.player.sprite.center_x + 35
+            y_position = self.player.sprite.center_y - 50
+            self.instruments[index_of_instrument].center_x = x_position
+            self.instruments[index_of_instrument].center_y = y_position
+            #set_position(x_position, y_position)
+            self.player.instrument.center_x = x_position
+            self.player.instrument.center_y = y_position
+            self.handle_collisions_action.instrument_to_ignore = index_of_instrument
+
+    def reposition_instrument(self, instrument):
+        self.instruments[0].set_position(850, 160)
+        self.instruments[1].set_position(900, 160)
+        self.instruments[2].set_position(950, 160)
 
     def game_over(self):
         self.window.close()
