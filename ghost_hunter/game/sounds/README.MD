@@ -1,18 +1,19 @@
 a document to credit those whom we are using our sounds from
 
-Archive.org, Heart Beat: https://archive.org/details/01OriginalRadioAdvertisements/Haunted+Mansion+Disc+3/29+Heart+Beat.mp3
+Archive.org, Heart Beat: 
 https://ia600205.us.archive.org/7/items/01OriginalRadioAdvertisements/Haunted%20Mansion%20Disc%203/29%20Heart%20Beat.mp3
 
-Archive.org, Attic Stream https://archive.org/details/01OriginalRadioAdvertisements/Haunted+Mansion+Disc+3/29+Heart+Beat.mp3
+Archive.org, Attic Stream 
 https://ia600205.us.archive.org/7/items/01OriginalRadioAdvertisements/Haunted%20Mansion%20Disc%203/25%20Attic%20Heat%20Beat%20and%20Screams.mp3
 
-Archive.org, Attic Stream https://archive.org/details/01OriginalRadioAdvertisements/Haunted+Mansion+Disc+3/28+Attic+Scream+3.mp3 
+Archive.org, Attic Stream 
 https://ia800205.us.archive.org/7/items/01OriginalRadioAdvertisements/Haunted%20Mansion%20Disc%203/27%20Attic%20Scream%202.mp3
 
-Archive.org, Harp: https://archive.org/details/01OriginalRadioAdvertisements/Haunted+Mansion+Disc+3/24+Harp.mp3
+Archive.org, Harp: 
 https://ia600205.us.archive.org/7/items/01OriginalRadioAdvertisements/Haunted%20Mansion%20Disc%203/24%20Harp.mp3
 
-Archive.org, Ballroom Guests: https://archive.org/details/01OriginalRadioAdvertisements/Haunted+Mansion+Disc+3/23+Ballroom+Guests.mp3
+Archive.org, Ballroom Guests: 
+https://ia800205.us.archive.org/7/items/01OriginalRadioAdvertisements/Haunted%20Mansion%20Disc%203/23%20Ballroom%20Guests.mp3
 
 SoundBible.com, creaking door https://soundbible.com/mp3/Creaking%20Door%20Spooky-SoundBible.com-1909842345.mp3
 
