@@ -44,7 +44,7 @@ class setup(arcade.View):
         self.light_layer = None
 
         self.clock = 0
-        self.ghost = Ghost()
+        self.ghost = Ghost(self.player)
 
 
         arcade.set_background_color(arcade.csscolor.BLACK)
@@ -62,6 +62,10 @@ class setup(arcade.View):
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
         self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
+
+        #choose random ghost type
+        #choose random ghost location
+        #call ghost to begin random actions, pass in player
 
 
     def setup_camera(self):
@@ -126,17 +130,26 @@ class setup(arcade.View):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
 
+
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = 0
+            #walking sounds
+            #player animation
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.player.sprite.change_y = 0
+            #walking sounds
+            #player animation
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.sprite.change_x = 0
+            #walking sounds
+            #player animation
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
+            #walking sounds
+            #player animation
 
     def center_camera_to_player(self):
         screen_center_x = self.player.sprite.center_x - (self.camera.viewport_width / 2)

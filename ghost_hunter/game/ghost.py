@@ -24,7 +24,7 @@ class Ghost(Entity):
         hunt_duration (int): The duration of a hunt
         max_cooldown_time (int): The maximum a cooldown can last. 
     """
-    def __init__(self):
+    def __init__(self, player):
         """The class constructor
 
         Args:
@@ -35,16 +35,17 @@ class Ghost(Entity):
         self.sprite = arcade.Sprite(path, CHARACTER_SCALING)
         #need to change its position to be a random one inside one of the rooms
         Entity.setup(
-            self, path, 192, 576)
+            self, path, 1216, 1344)
         
         self.cooldown_time = 0
         self.hunt_time = 0
         self.timer = 0
         self.hunt_mode_on = False
-        self.hunt_mode = Hunt_Mode()
+        self.hunt_mode = Hunt_Mode(player)
         self.action_mode = Action_Mode()
         self.hunt_duration = 15
         self.max_cooldown_time = 30
+        self.target = player
 
 
     def execute(self,sanity):
@@ -104,7 +105,7 @@ class Ghost(Entity):
             self (Ghost): An instance of Ghost
         """
         if self.hunt_mode_on == True:
-            self.hunt_mode.hunt()
+            self.hunt_mode.hunt(self.target, self.sprite)
 
     def move_ghost(self):
         pass
