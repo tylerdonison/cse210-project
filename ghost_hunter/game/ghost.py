@@ -143,5 +143,5 @@ class Ghost(Entity):
 
             # Taking into account the angle, calculate our change_x
             # and change_y. Velocity is how fast the Ghost travels.
-            self.change_x = math.cos(angle) * COIN_SPEED
-            self.change_y = math.sin(angle) * COIN_SPEED
+            self.change_x = math.cos(angle) * GHOST_SPEED
+            self.change_y = math.sin(angle) * GHOST_SPEED
