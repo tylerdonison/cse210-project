@@ -224,7 +224,6 @@ class setup(arcade.View):
         if self.player.has_instrument:
             self.instruments
         self.center_camera_to_player()
-        self.ghost.execute(self.player.sanity, self.scene.get_sprite_list("Walls"))
 
         self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map)
         self.collisions_update()
