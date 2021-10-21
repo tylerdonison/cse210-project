@@ -1,6 +1,7 @@
 """This is the module in charge of controlling the ghost
 """
 from game.image_loader import Image_Loader
+import math
 import random
 import arcade
 from game.ghost_mode_action import Action_Mode
@@ -8,6 +9,10 @@ from game.ghost_mode_hunt import Hunt_Mode
 import os
 from game.constants import CHARACTER_SCALING
 from game.entity import Entity
+
+#constants
+GHOST_SPEED = 0.5
+SPRITE_SPEED = 0.5
 
 class Ghost(Entity):
     """The ghost is a spooky being who leaves clues and hunts the player.
@@ -49,19 +54,19 @@ class Ghost(Entity):
         self.ghost_type = "poltergeist"
         self.target = player
 
+    def execute(self, sanity, wall_list):
 
-
-    def execute(self,sanity,scene):
         """This executes all of the updates and actions that the ghost object should have during
         each cycle.
 
         Args: 
             self (Ghost): An instance of Ghost
             sanity (int): the players current sanity
-            scene (obj): The scene object
+            wall_list(list): the wall list
         """
-        self.update_time_and_status(sanity,scene)
-        self.do_hunt()
+        self.update_time_and_status(sanity)
+        self.do_hunt(wall_list)
+
         #emf_reading = self.action_mode.adjust_emf_reading()
         #temp_reading = self.action_mode.adjust_temp_reading()
 
@@ -106,19 +111,17 @@ class Ghost(Entity):
                 self.action_mode.cause_ghost_interaction(self.ghost_type,scene)
         
 
-    def do_hunt(self):
+    def do_hunt(self, wall_list):
         """If hunt_mode is active, this will cause the ghost to hunt the player.
 
         Args:
             self (Ghost): An instance of Ghost
         """
         if self.hunt_mode_on == True:
-            self.hunt_mode.hunt(self.target, self.sprite)
-
-    def move_ghost(self):
-        pass
+            self.hunt_mode.hunt(self.target, self.sprite, wall_list)
 
     def check_correct_instrument(self, instrument):
         """
         Checks if the given instrument index is the correct one for catching the ghost"""
         return True
+
