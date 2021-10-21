@@ -1,17 +1,25 @@
 """This module is in charge of controlling the hunt mode of the ghost"""
 import random
+import arcade
 
 class Hunt_Mode:
-    def __init__(self):
-        pass
+    def __init__(self, player):
+        self.physics_engine = None
+        self.scene = None
+        self.target = player
 
-    def hunt(self):
+    def hunt(self, ghost_sprite):
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         """
-        #lock front door
-        #make ghost visible
+        self.physics_engine = arcade.PhysicsEngineSimple(
+            self.target.sprite, self.scene.get_sprite_list("Front Door")) #lock front door
+        #add sound to indicate locked door
+
+
+
+        #make ghost appear
         #move towards person if in line of sight
-        #if the person is not in line of sight. Mov
+        #if the person is not in line of sight. Move randomly
 
 
 

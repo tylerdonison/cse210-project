@@ -17,11 +17,16 @@ class Action_Mode():
             self (Action_Mode): an instance of Action Mode
             ghost_type (string): The type of ghost for the current game
         """
+
         self.room = random.choice(constants.ROOM_LIST)
         self.ghost_type = ghost_type
         self.emf_position = [0,0]
         self.freezing_position = [0,0]
-        self.interaction_types = {"poltergeist":["fingerprints","emf"], "wraith":['emf',"writing"], "demon":["writing, fingerprints"]}
+        self.interaction_types = {"poltergeist":["fingerprints","emf"], "wraith":['emf',"writing"], "demon":["writing, fingerprints"]      
+        self.possible_objects = {f"{constants.ROOM_LIST[0]}": constants.INTERACTIONS_DICTIONARY["Dinning Room"],
+                                 f'{constants.ROOM_LIST[1]}': constants.INTERACTIONS_DICTIONARY["Bedroom"],
+                                 f'{constants.ROOM_LIST[2]}': constants.INTERACTIONS_DICTIONARY["Bathroom"]}
+
 
     def cause_ghost_interaction(self, ghost_type,scene):
         """This method causes there to be a ghost interaction in a randomly selected room on a random object
