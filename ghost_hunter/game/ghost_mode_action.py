@@ -14,10 +14,10 @@ class Action_Mode():
             self (Action_Mode): an instance of Action Mode
         """
         
-        self.possible_objects = {f"{constants.ROOM_LIST[0]}" : constants.DINNING_INTERACTIONS, 
-        f'{constants.ROOM_LIST[1]}' : constants.BEDROOM_INTERACTIONS,
-        f'{constants.ROOM_LIST[2]}' : constants.BATHROOM_INTERACTIONS}
-
+        self.possible_objects = {f"{constants.ROOM_LIST[0]}": constants.INTERACTIONS_DICTIONARY["Dinning Room"],
+                                 f'{constants.ROOM_LIST[1]}': constants.INTERACTIONS_DICTIONARY["Bedroom"],
+                                 f'{constants.ROOM_LIST[2]}': constants.INTERACTIONS_DICTIONARY["Bathroom"]}
+    
         self.interaction_types = {"ghost_type1":["fingerprints"]}
 
     def cause_ghost_interaction(self):

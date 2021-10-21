@@ -109,3 +109,8 @@ class Ghost(Entity):
 
     def move_ghost(self):
         pass
+
+    def check_correct_instrument(self, instrument):
+        """
+        Checks if the given instrument index is the correct one for catching the ghost"""
+        return True
