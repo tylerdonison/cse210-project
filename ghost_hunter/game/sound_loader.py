@@ -6,6 +6,7 @@ class Sound_Loader:
     """The Sound_Load class declares the path to the sounds folder also gives names to all the sound clips """
     def __init__(self):
         """class constructor """
+        
         self.root = Path(__file__).parent
         self.map_path = self.root / "sounds"
         self.attic_heart_beat_screams = self.root / \
@@ -41,144 +42,150 @@ class Sound_Loader:
         """
         return self.map_path
 
-############################################
-    def play_attic_heart_beat_path(self):
+        ####################################
+    def play_attic_heart_beat(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) attic_heart_beat_screams: The sound clips.
+        Args: (self) instance of soundclip
         """
         sound = arcade.load_sound(self.attic_heart_beat_screams)
         arcade.play_sound(sound)
-############################################
+        ###################################
 
-    def play_attic_screams_1_path(self):
+    def play_attic_screams_1(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) attic_screams_1: The sound clips.
+        Args: (self) instance of soundclip
         """
-        return self.attic_screams_1
-
-    def play_attic_screams_2_path(self):
+        sound = arcade.load_sound(self.self.attic_screams_1)
+        arcade.play_sound(sound)
+        ####################################
+    def play_attic_screams_2(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) attic_screams_2: The sound clips.
+        Args: (self) instance of soundclip
         """
-        return self.attic_screams_2
-
-    def play_attic_screams_3_path(self):
+        sound = arcade.load_sound(self.attic_screams_2)
+        arcade.play_sound(sound)
+        ###################################
+    def play_attic_screams_3(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) attic_screams_3: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.attic_screams_3
+        sound = arcade.load_sound(self.attic_screams_3)
+        arcade.play_sound(sound)
+        #################################
 
-    def play_Backward_Souls_path(self):
+    def play_Backward_Souls(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) Backward_Souls: The sound clips.
+           Args: (self) instance of soundclip
         """
-        return self.Backward_Souls
-
-    def play_ballroom_guests_path(self):
+        sound = arcade.load_sound(self.attic_screams_3)
+        arcade.play_sound(sound)
+        ####################################
+    def play_ballroom_guests(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) ballroom_guests: The sound clips.
+           Args: (self) instance of soundclip
         """
-        return self.ballroom_guests
-
-    def play_chains_path(self):
+        sound = arcade.load_sound(self.attic_screams_3)
+        arcade.play_sound(sound)
+        ######################################
+    def play_chains(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) chains: The sound clips.
+           Args: (self) instance of soundclip
         """
-        return self.chains
-
-    def play_creaking_door_path(self):
+        sound = arcade.load_sound(self.attic_screams_3)
+        arcade.play_sound(sound)
+        ######################################
+    def play_creaking_door(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) creaking_door: The sound clips.
+           Args: (self) instance of soundclip
         """
-        return self.creaking_door
+        sound = arcade.load_sound(self.attic_screams_3)
+        arcade.play_sound(sound)
+        #####################################
 
-    def play_evil_laugh_path(self):
+    def play_evil_laugh(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) self.evil_laugh: The sound clips.
+           Args: (self) instance of soundclip
         """
-        return self.evil_laugh
+        sound = arcade.load_sound(self.attic_screams_3)
+        arcade.play_sound(sound)
 
-################################################
-    def play_footsteps_on_cement_path(self):
+        ######################################
+    def play_footsteps_on_cement(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) footsteps_on_cement: The sound clips.
+          Args: (self) instance of soundclip
         """
         sound = arcade.load_sound(self.footsteps_on_cement)
         arcade.play_sound(sound)
-################################################
+        ########################################
 
-    def play_footsteps_on_trail_path(self):
+    def play_footsteps_on_trail(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) footsteps_on_trail: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.footsteps_on_trail
+        sound = arcade.load_sound(self.footsteps_on_trail)
+        arcade.play_sound(sound)
+        ##################################
 
-    def play_hall_clock_path(self):
+    def play_hall_clock(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) hall_clock: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.hall_clock
+        sound = arcade.load_sound(self.hall_clock)
+        arcade.play_sound(sound)
+        ##################################
 
-    def play_heart_beat_path(self):
+    def play_heart_beat(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) heart_beat: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.heart_beat
+        sound = arcade.load_sound(self.heart_beat)
+        arcade.play_sound(sound)
+        ####################################
 
-    def play_scary_path(self):
+    def play_scary(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) scary: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.scary
+        sound = arcade.load_sound(self.scary)
+        arcade.play_sound(sound)
+        #############################
 
-    def play_thunder_path(self):
+    def play_thunder(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) thunder: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.thunder
+        sound = arcade.load_sound(self.thunder)
+        arcade.play_sound(sound)
+        #############################
 
-    def play_witch_path(self):
+    def play_witch(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) witch: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.witch
+        sound = arcade.load_sound(self.witch)
+        arcade.play_sound(sound)
+        #############################
 
-    def play_zombie_path(self):
+    def play_zombie(self):
         """Gets the selected sound clip.
 
-        Returns:
-            (self) zombie: The sound clips.
+          Args: (self) instance of soundclip
         """
-        return self.zombie
+        sound = arcade.load_sound(self.zombie)
+        arcade.play_sound(sound)
