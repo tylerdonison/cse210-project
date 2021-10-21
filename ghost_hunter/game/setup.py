@@ -223,7 +223,8 @@ class setup(arcade.View):
         if self.player.has_instrument:
             self.instruments
         self.center_camera_to_player()
-        self.ghost.execute(self.player.sanity)
+
+        self.ghost.execute(self.player.sanity, self.scene)
         self.collisions_update()
 
     def collisions_update(self):
@@ -258,3 +259,4 @@ class setup(arcade.View):
         """The game has ended because the ghost was caught.
         """
         self.window.close()
+
