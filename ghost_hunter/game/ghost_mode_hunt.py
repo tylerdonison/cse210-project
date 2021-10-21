@@ -6,6 +6,7 @@ import math
 from game.room import Room
 
 class Hunt_Mode:
+
     def __init__(self, ghost):
         # self.target = ghost.target
         # self.ghost = ghost
@@ -14,6 +15,7 @@ class Hunt_Mode:
         self.ghost_change_y = 0
 
     def hunt(self, wall_list, player, ghost_sprite):
+
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         """
         #physics(player_sprite, front_door_list) #lock front door
@@ -31,6 +33,7 @@ class Hunt_Mode:
             self.follow_sprite(player, ghost_sprite)
         else:
             self.random_search
+
     
     def hunt_check(self, sanity, room_map, ghost_sprite):
         """Checks to see if the ghost will hunt the player. There is a 1 in 20 chance of being hunted if they have 100 sanity
@@ -66,6 +69,7 @@ class Hunt_Mode:
         return ghost_hunt_mode #This will probably need to be changed to an object that is passed in
 
     def follow_sprite(self, player_sprite, ghost):
+
         """
         This function will move the current sprite towards whatever
         other sprite is specified as a parameter.
