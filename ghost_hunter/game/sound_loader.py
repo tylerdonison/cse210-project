@@ -82,7 +82,7 @@ class Sound_Loader:
 
            Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.attic_screams_3)
+        sound = arcade.load_sound(self.Backward_Souls)
         arcade.play_sound(sound)
         ####################################
     def play_ballroom_guests(self):
@@ -90,7 +90,7 @@ class Sound_Loader:
 
            Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.attic_screams_3)
+        sound = arcade.load_sound(self.ballroom_guests)
         arcade.play_sound(sound)
         ######################################
     def play_chains(self):
@@ -98,7 +98,7 @@ class Sound_Loader:
 
            Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.attic_screams_3)
+        sound = arcade.load_sound(self.chains)
         arcade.play_sound(sound)
         ######################################
     def play_creaking_door(self):
@@ -106,7 +106,7 @@ class Sound_Loader:
 
            Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.attic_screams_3)
+        sound = arcade.load_sound(self.creaking_door)
         arcade.play_sound(sound)
         #####################################
 
@@ -115,7 +115,7 @@ class Sound_Loader:
 
            Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.attic_screams_3)
+        sound = arcade.load_sound(self.evil_laugh)
         arcade.play_sound(sound)
 
         ######################################
