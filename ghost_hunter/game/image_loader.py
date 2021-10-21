@@ -6,6 +6,7 @@ class Image_Loader:
         self.map_path = self.root / "images" / "Apartment_3.0.json"
         self.ghost_front_path = self.root / "images" / "ghost_front_sprite.png"
         self.title_screen = self.root / "images" / "title_screen.png"
+        self.fingerprints = self.root / "images" / "gemGreen.png"
         
         
     def get_map_name(self):
@@ -16,4 +17,7 @@ class Image_Loader:
 
     def get_title_screen(self):
         return self.title_screen
+
+    def get_fingerprints(self):
+        return self.fingerprints
 
