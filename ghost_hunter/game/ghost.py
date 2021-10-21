@@ -29,32 +29,34 @@ class Ghost(Entity):
         hunt_duration (int): The duration of a hunt
         max_cooldown_time (int): The maximum a cooldown can last. 
     """
-    def __init__(self, player):
+    def __init__(self, player, room):
         """The class constructor
 
         Args:
             self (Ghost): An instance of Ghost
         """
         Entity.__init__(self)
-        path = Image_Loader().ghost_front_path
-        self.sprite = arcade.Sprite(path, CHARACTER_SCALING)
-        #need to change its position to be a random one inside one of the rooms
+        self.path = Image_Loader().ghost_front_path
+        self.sprite = arcade.Sprite(self.path, CHARACTER_SCALING)
         Entity.setup(
-            self, path, 1216, 1344)
-        
+            self, self.path, 1856, 64)
+
+
+        # self.room = room
         self.cooldown_time = 0
         self.hunt_time = 0
         self.timer = 0
         self.hunt_mode_on = False
 
-        self.hunt_mode = Hunt_Mode(player)
         self.action_mode = Action_Mode("poltergeist")
-        self.hunt_duration = 15 * 0
+        self.hunt_duration = 15 * 600
         self.max_cooldown_time = 30 * 60
         self.ghost_type = "poltergeist"
         self.target = player
+        self.hunt_mode = Hunt_Mode(self)
 
-    def execute(self, sanity, wall_list):
+
+    def execute(self,sanity,scene, wall_list, room):
 
         """This executes all of the updates and actions that the ghost object should have during
         each cycle.
@@ -64,13 +66,14 @@ class Ghost(Entity):
             sanity (int): the players current sanity
             wall_list(list): the wall list
         """
-        self.update_time_and_status(sanity)
+
+        self.update_time_and_status(sanity,scene, room)
         self.do_hunt(wall_list)
 
         #emf_reading = self.action_mode.adjust_emf_reading()
         #temp_reading = self.action_mode.adjust_temp_reading()
 
-    def update_time_and_status(self,sanity,scene):
+    def update_time_and_status(self,sanity,scene, room):
         """This method updates the cooldown time or, if the ghost is hunging, the hunt time.
 
         Args: 
@@ -83,14 +86,14 @@ class Ghost(Entity):
             self.cooldown_time = 0
         else:
             self.cooldown_time +=1
-            self.choose_ghost_action(sanity,scene)
- 
+            self.choose_ghost_action(sanity,scene, room)
+            #self.sprite.set_position(1856, 320)
 
         if self.hunt_time > self.hunt_duration:
             self.hunt_mode_on == False
             self.hunt_time = 0
 
-    def choose_ghost_action(self,sanity,scene):
+    def choose_ghost_action(self,sanity,scene, room):
         """This method causes the ghost to do one of three things. There is a 20 percent chance that it will
         cause a hunt check, a 40 percent chance it will do nothing, and a 40 percent chance that it will leave 
         a clue. This method is executed every 10 seconds. The ghost will not hunt if the cooldown timer has not
@@ -100,17 +103,16 @@ class Ghost(Entity):
             sanity (int): the player's current sanity
             scene (obj): the scene object
         """
-        self.timer += 1
-        probability = [1,2,3,4,5,6,7,8,9,10]
+        self.timer += 10 #1
+        probability = [1,2] #[1,2,3,4,5,6,7,8,9,10]
 
         if (self.timer) % 10 == 0:
             random_decision = random.choice(probability)
             if (random_decision < 3) and (self.cooldown_time > self.max_cooldown_time) and (sanity < 51):
-                self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
+                self.hunt_mode_on = self.hunt_mode.hunt_check(sanity, room, self.sprite)
             elif (random_decision > 6):
                 self.action_mode.cause_ghost_interaction(self.ghost_type,scene)
         
-
     def do_hunt(self, wall_list):
         """If hunt_mode is active, this will cause the ghost to hunt the player.
 
@@ -118,7 +120,8 @@ class Ghost(Entity):
             self (Ghost): An instance of Ghost
         """
         if self.hunt_mode_on == True:
-            self.hunt_mode.hunt(self.target, self.sprite, wall_list)
+            self.hunt_mode.hunt(wall_list, self.target, self.sprite)
+
 
     def check_correct_instrument(self, instrument):
         """

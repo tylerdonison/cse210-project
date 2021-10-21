@@ -1,36 +1,41 @@
 """This module is in charge of controlling the hunt mode of the ghost"""
 import random
 import arcade
+from game.constants import GHOST_MOVEMENT_SPEED
+import math
+from game.room import Room
 
 class Hunt_Mode:
-    def __init__(self, player):
-        self.physics_engine = None
-        self.scene = None
-        self.target = player
-        
 
-    def hunt(self, player_sprite, ghost_sprite, wall_list):
+    def __init__(self, ghost):
+        # self.target = ghost.target
+        # self.ghost = ghost
+        # self.sprite = ghost.sprite
+        self.ghost_change_x = 0
+        self.ghost_change_y = 0
+
+    def hunt(self, wall_list, player, ghost_sprite):
+
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         """
-        self.physics_engine = arcade.PhysicsEngineSimple(
-            self.target.sprite, self.scene.get_sprite_list("Front Door")) #lock front door
+        #physics(player_sprite, front_door_list) #lock front door
         #add sound to indicate locked door
         
-        if arcade.has_line_of_sight(player_sprite.position,
-                                            ghost_sprite.position,
-                                            wall_list):
-           self.follow_sprite()
-       
-        #make ghost appear
-        #move towards person if in line of sight
-        #if the person is not in line of sight. Move randomly
+        #generate random coordinates in room
+        object_x = 1216
+        object_y = 1344
+                
+        player_position = (player.sprite._get_center_x(), player.sprite._get_center_y())
+        ghost_position = (ghost_sprite._get_center_x(), ghost_sprite._get_center_y())
 
 
-
-
+        if arcade.has_line_of_sight(player_position, ghost_position, wall_list):
+            self.follow_sprite(player, ghost_sprite)
+        else:
+            self.random_search
 
     
-    def hunt_check(self, sanity):
+    def hunt_check(self, sanity, room_map, ghost_sprite):
         """Checks to see if the ghost will hunt the player. There is a 1 in 20 chance of being hunted if they have 100 sanity
         and a 1 in 1 chance if their sanity gets to 5
 
@@ -43,7 +48,7 @@ class Hunt_Mode:
         if sanity < 5:
             sanity = 5 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
 
-        
+        sanity = 5
         chance_of_being_hunted_inverse = int(sanity / 5)
         round(chance_of_being_hunted_inverse) #ensures that the chance of being hunted will be an int
 
@@ -56,11 +61,15 @@ class Hunt_Mode:
         random_number_in_chance_list = random.choice(chance_list)
         if random_number_in_chance_list == 1:
             ghost_hunt_mode = True
+            ghost_position = room_map.generate_random()
+            ghost_sprite.set_position(ghost_position.x, ghost_position.y)
+            print(f"Set position! x:{ghost_position.x}, y:{ghost_position.y} ")
         else:
             ghost_hunt_mode = False
         return ghost_hunt_mode #This will probably need to be changed to an object that is passed in
-    
-    def follow_sprite(self, player_sprite):
+
+    def follow_sprite(self, player_sprite, ghost):
+
         """
         This function will move the current sprite towards whatever
         other sprite is specified as a parameter.
@@ -70,18 +79,18 @@ class Hunt_Mode:
         an exact multiple of SPRITE_SPEED.
         """
 
-        self.center_x += self.change_x
-        self.center_y += self.change_y
-
         # Random 1 in 100 chance that we'll change from our old direction and
         # then re-aim toward the player
-        if random.randrange(100) == 0:
-            start_x = self.center_x
-            start_y = self.center_y
+        ghost.center_x += self.ghost_change_x
+        ghost.center_y += self.ghost_change_y
+        
+        if random.randrange(2) == 0:
+            start_x = ghost.center_x
+            start_y = ghost.center_y
 
             # Get the destination location for the Ghost
-            dest_x = player_sprite.center_x
-            dest_y = player_sprite.center_y
+            dest_x = player_sprite.sprite.center_x
+            dest_y = player_sprite.sprite.center_y
 
             # Do math to calculate how to get the Ghost to the destination.
             # Calculate the angle in radians between the start points
@@ -92,5 +101,8 @@ class Hunt_Mode:
 
             # Taking into account the angle, calculate our change_x
             # and change_y. Velocity is how fast the Ghost travels.
-            self.change_x = math.cos(angle) * GHOST_SPEED
-            self.change_y = math.sin(angle) * GHOST_SPEED
+            self.ghost_change_x = math.cos(angle) * GHOST_MOVEMENT_SPEED
+            self.ghost_change_y = math.sin(angle) * GHOST_MOVEMENT_SPEED    
+
+    def random_search():
+        pass

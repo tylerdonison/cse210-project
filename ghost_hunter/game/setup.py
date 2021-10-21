@@ -13,6 +13,7 @@ from game.image_loader import Image_Loader
 from game.room import Room
 from game.handle_collisions_action import Handle_Collisions_Action
 from random import randint
+import sys
 
 AMBIENT_COLOR = (10, 10, 10)
 
@@ -49,13 +50,15 @@ class setup(arcade.View):
         self.light_layer = None
 
         self.clock = 0
-        self.ghost = Ghost(self.player)
+        
         self.room_map = None
         self.instruments = []
 
         self.handle_collisions_action = None
 
         self.room_name = ROOM_LIST[randint(0, len(ROOM_LIST) - 1)]
+
+        self.ghost = Ghost(self.player, self.room_name)
         print(self.room_name)
 
         arcade.set_background_color(arcade.csscolor.BLACK)
@@ -72,7 +75,7 @@ class setup(arcade.View):
         
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
-        self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
+        self.player_light = Light(0, 0, 1150,  arcade.csscolor.WHITE, 'soft')
 
         #choose random ghost type
         #choose random ghost location
@@ -123,9 +126,7 @@ class setup(arcade.View):
             map_name, TILE_SCALING, layer_options)
         self.scene = arcade.Scene.from_tilemap(self.tile_map)
         room_layer = self.tile_map.get_tilemap_layer(self.room_name)
-        room_map = Room(room_layer)
-        ghost_position = room_map.generate_random()
-        self.ghost.sprite.set_position(ghost_position.x, ghost_position.y)
+        self.room_map = Room(room_layer)
         if self.tile_map.tiled_map.background_color:
             arcade.set_background_color(self.tile_map.tiled_map.background_color)
 
@@ -225,15 +226,17 @@ class setup(arcade.View):
         self.center_camera_to_player()
         self.ghost.execute(self.player.sanity, self.scene.get_sprite_list("Walls"))
 
-        self.ghost.execute(self.player.sanity, self.scene)
+        self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map)
         self.collisions_update()
 
+    """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
                 self.game_end()
             else:
-                self.game_over()
+                #self.game_over()
+                sys.exit
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
             if self.player.has_instrument == True :

@@ -26,10 +26,11 @@ class Player(Entity):
         Entity.__init__(self)
         Entity.setup(
             self,  ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png", PLAYER_START_X, PLAYER_START_Y)
-        self.sanity = 100
+        self.sanity = 50
         self.has_instrument = False
         self.instrument = Sprite()
         self.index_of_instrument = None
+        self.position = (0,0)
 
         #needs to be set up to be lower, but it will trigger hunting mode too fast
         #while we are still working on it
@@ -39,7 +40,7 @@ class Player(Entity):
     def decrease_sanity(self):
         self.sanity -= 5
         if self.sanity > 0:
-            timer = Timer(40.0, self.decrease_sanity)
+            timer = Timer(2.0, self.decrease_sanity)
             timer.start()
 
     def set_instrument(self, instrument, index):
