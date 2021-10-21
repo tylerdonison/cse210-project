@@ -1,3 +1,8 @@
+"""This file keeps track of the constants for the game, such as the rooms, speed of Sprites, 
+coordinates of furniture, demensions of the rooms, screen size, title, instruments used to capture the ghost,
+for the area of play.
+
+"""
 import os
 
 ROOM_LIST = ["Dining Room", "Bedroom", "Bathroom"]
