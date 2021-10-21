@@ -10,6 +10,10 @@ import os
 from game.constants import CHARACTER_SCALING
 from game.entity import Entity
 
+#constants
+GHOST_SPEED = 0.5
+SPRITE_SPEED = 0.5
+
 class Ghost(Entity):
     """The ghost is a spooky being who leaves clues and hunts the player.
 
