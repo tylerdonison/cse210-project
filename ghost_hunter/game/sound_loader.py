@@ -1,5 +1,6 @@
 """ Sound Loader houses the paths for all the sound files. Defines the path to the sound resources """
 from pathlib import Path
+import arcade
 
 class Sound_Loader:
     """The Sound_Load class declares the path to the sounds folder also gives names to all the sound clips """
@@ -40,13 +41,16 @@ class Sound_Loader:
         """
         return self.map_path
 
+############################################
     def play_attic_heart_beat_path(self):
         """Gets the selected sound clip.
 
         Returns:
             (self) attic_heart_beat_screams: The sound clips.
         """
-        return self.attic_heart_beat_screams
+        sound = arcade.load_sound(self.attic_heart_beat_screams)
+        arcade.play_sound(sound)
+############################################
 
     def play_attic_screams_1_path(self):
         """Gets the selected sound clip.
@@ -81,7 +85,7 @@ class Sound_Loader:
         return self.Backward_Souls
 
     def play_ballroom_guests_path(self):
-         """Gets the selected sound clip.
+        """Gets the selected sound clip.
 
         Returns:
             (self) ballroom_guests: The sound clips.
@@ -89,7 +93,7 @@ class Sound_Loader:
         return self.ballroom_guests
 
     def play_chains_path(self):
-         """Gets the selected sound clip.
+        """Gets the selected sound clip.
 
         Returns:
             (self) chains: The sound clips.
@@ -97,7 +101,7 @@ class Sound_Loader:
         return self.chains
 
     def play_creaking_door_path(self):
-         """Gets the selected sound clip.
+        """Gets the selected sound clip.
 
         Returns:
             (self) creaking_door: The sound clips.
@@ -105,23 +109,26 @@ class Sound_Loader:
         return self.creaking_door
 
     def play_evil_laugh_path(self):
-         """Gets the selected sound clip.
+        """Gets the selected sound clip.
 
         Returns:
             (self) self.evil_laugh: The sound clips.
         """
         return self.evil_laugh
 
+################################################
     def play_footsteps_on_cement_path(self):
-         """Gets the selected sound clip.
+        """Gets the selected sound clip.
 
         Returns:
             (self) footsteps_on_cement: The sound clips.
         """
-        return self.footsteps_on_cement
+        sound = arcade.load_sound(self.footsteps_on_cement)
+        arcade.play_sound(sound)
+################################################
 
     def play_footsteps_on_trail_path(self):
-         """Gets the selected sound clip.
+        """Gets the selected sound clip.
 
         Returns:
             (self) footsteps_on_trail: The sound clips.

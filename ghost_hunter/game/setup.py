@@ -10,6 +10,7 @@ from game.player import Player
 from arcade.experimental.lights import Light, LightLayer
 from game.ghost import Ghost
 from game.image_loader import Image_Loader
+from game.sound_loader import Sound_Loader
 from game.room import Room
 from game.handle_collisions_action import Handle_Collisions_Action
 from random import randint
@@ -62,6 +63,8 @@ class setup(arcade.View):
         print(self.room_name)
 
         arcade.set_background_color(arcade.csscolor.BLACK)
+        self.sound_loader = Sound_Loader()
+
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -75,7 +78,7 @@ class setup(arcade.View):
         
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
-        self.player_light = Light(0, 0, 1150,  arcade.csscolor.WHITE, 'soft')
+        self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
 
         #choose random ghost type
         #choose random ghost location
@@ -185,19 +188,19 @@ class setup(arcade.View):
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = 0
-            #walking sounds
+            self.sound_loader.play_footsteps_on_cement_path()
             #player animation
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.player.sprite.change_y = 0
-            #walking sounds
+            self.sound_loader.play_footsteps_on_cement_path()
             #player animation
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.sprite.change_x = 0
-            #walking sounds
+            self.sound_loader.play_footsteps_on_cement_path()
             #player animation
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
-            #walking sounds
+            self.sound_loader.play_footsteps_on_cement_path()
             #player animation
 
     def center_camera_to_player(self):
@@ -253,6 +256,7 @@ class setup(arcade.View):
         self.instruments[0].set_position(850, 160)
         self.instruments[1].set_position(900, 160)
         self.instruments[2].set_position(950, 160)
+        #writing book
 
     def game_over(self):
         """The game is over"""
