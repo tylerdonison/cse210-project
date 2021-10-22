@@ -69,6 +69,7 @@ class setup(arcade.View):
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
         self.setup_camera()
+        #Need to pick ghost room before draw_map
         self.draw_map()   
         self.player_setup()
         # Create the 'physics engine'
