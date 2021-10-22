@@ -15,7 +15,8 @@ class Image_Loader:
         self.instruction_screen = self.root / "images" / "instruction_screen_controls_v2.png"
         self.ghost_types_screen = self.root / "images" / "ghost_types_screen.png"
         self.pause_screen = self.root / "images" / "pause_screen.png"
-        
+        self.fingerprints = self.root / "images" / "fingerprints.png"
+
         
     def get_map_name(self):
         """gets the map name
@@ -72,3 +73,6 @@ class Image_Loader:
             self: returns pause screen
         """
         return self.pause_screen
+
+    def get_fingerprints(self):
+        return self.fingerprints

@@ -10,7 +10,7 @@ class Action_Mode():
 
     Stereotype: Service Provider
     """
-    def __init__(self, ghost_type):
+    def __init__(self, ghost_type, room_name):
         """The class constructor
 
         Args:
@@ -18,7 +18,7 @@ class Action_Mode():
             ghost_type (string): The type of ghost for the current game
         """
 
-        self.room = random.choice(constants.ROOM_LIST)
+        self.room = room_name
         self.ghost_type = ghost_type
         self.emf_position = [0,0]
         self.freezing_position = [0,0]
@@ -132,7 +132,7 @@ class Action_Mode():
         """
 
         if self.freezing_position == [0,0]:
-            emf_reading = random.random()
+            emf_reading = random.random() + random.randint(2,3)
         else:
             x_of_player = player.sprite._get_center_y()
             y_of_player = player.sprite._get_center_y()
