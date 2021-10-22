@@ -82,7 +82,7 @@ class MenuDirector(arcade.View):
         """on click button event show how to play the game
 
         Args:
-            event (self): instance of Director
+            event (arcade): instance of Arcade view
         """
         if self.button1._text == "How to Play":
             self.texture = arcade.load_texture(Image_Loader().get_instruction_screen())
@@ -99,7 +99,7 @@ class MenuDirector(arcade.View):
         """on click button event  Starts the game
 
         Args:
-            event (self): instance of Director
+            event (arcade): instance of Director
         """
         game_view = setup()
         game_view.setup()
