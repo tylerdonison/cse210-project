@@ -6,8 +6,14 @@ import math
 from game.room import Room
 
 class Hunt_Mode:
-
+"""Class Hunt_Mode allows the ghost to hunt for the player in the room. When in hunt mode ghost can hunt for player 
+"""
     def __init__(self, ghost):
+        """Class constructor
+
+        Args:
+            ghost (Sprite): Ghost will go into hunt_mode to hunt the player.
+        """
         # self.target = ghost.target
         # self.ghost = ghost
         # self.sprite = ghost.sprite
@@ -17,6 +23,11 @@ class Hunt_Mode:
     def hunt(self, wall_list, player, ghost_sprite):
 
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
+        
+        Args:
+            wall_list (Sprite): player interacts with walls sprite
+            player (Sprite): Player Sprite
+            ghost_sprite (Sprite): Ghost sprite
         """
         #physics(player_sprite, front_door_list) #lock front door
         #add sound to indicate locked door
@@ -43,7 +54,6 @@ class Hunt_Mode:
             sanity (int): The ammount of sanity that the player has.
 
         """
-
         #This ensures that the chance of being hunted will never be greater than a 1 in 1 chance (prevent bugs)
         if sanity < 5:
             sanity = 5 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
@@ -68,7 +78,6 @@ class Hunt_Mode:
         return ghost_hunt_mode #This will probably need to be changed to an object that is passed in
 
     def follow_sprite(self, player_sprite, ghost):
-
         """
         This function will move the current sprite towards whatever
         other sprite is specified as a parameter.
@@ -76,8 +85,11 @@ class Hunt_Mode:
         We use the 'min' function here to get the sprite to line up with
         the target sprite, and not jump around if the sprite is not off
         an exact multiple of SPRITE_SPEED.
+        
+        Args:
+            player_sprite (Sprite): Player Sprite
+            ghost (Sprite): Ghost Sprite
         """
-
         # Random 1 in 100 chance that we'll change from our old direction and
         # then re-aim toward the player
         ghost.center_x += self.ghost_change_x
