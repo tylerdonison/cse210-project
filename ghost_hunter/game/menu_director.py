@@ -1,3 +1,5 @@
+"""menu director for the screen that starts the game allows visitors
+"""
 import arcade
 import arcade.gui
 from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH
@@ -6,7 +8,14 @@ from game.setup import setup
 
 
 class MenuDirector(arcade.View):
+"""MenuDirector class is a of arcade view superclass. 
+
+    Args:
+        arcade (superclass): viewport window
+    """
     def __init__(self):
+               """The class constructor
+        """
         super().__init__()
         self.texture = arcade.load_texture(Image_Loader().get_title_screen())
 
@@ -70,6 +79,11 @@ class MenuDirector(arcade.View):
         self.manager.draw() 
 
     def on_click_button1(self, event):
+        """on click button event show how to play the game
+
+        Args:
+            event (self): instance of Director
+        """
         if self.button1._text == "How to Play":
             self.texture = arcade.load_texture(Image_Loader().get_instruction_screen())
             self.button1._text = "Ghost Types"
@@ -82,9 +96,19 @@ class MenuDirector(arcade.View):
             self.window.show_view(self)
 
     def on_click_button2(self, event):
+        """on click button event  Starts the game
+
+        Args:
+            event (self): instance of Director
+        """
         game_view = setup()
         game_view.setup()
         self.window.show_view(game_view)
 
     def on_click_button3(self, event):
+        """On click event button 3 ends the game
+
+        Args:
+            event (arcade): exists the game
+        """
         arcade.exit()
