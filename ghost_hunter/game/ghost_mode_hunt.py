@@ -1,7 +1,7 @@
 """This module is in charge of controlling the hunt mode of the ghost"""
 import random
 import arcade
-from game.constants import GHOST_MOVEMENT_SPEED
+from game import constants
 import math
 from game.room import Room
 
@@ -14,7 +14,7 @@ class Hunt_Mode:
         self.ghost_change_x = 0
         self.ghost_change_y = 0
 
-    def hunt(self, wall_list, player, ghost_sprite):
+    def hunt(self, wall_list, player, ghost_sprite,time):
 
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         """
@@ -22,19 +22,17 @@ class Hunt_Mode:
         #add sound to indicate locked door
         
         #generate random coordinates in room
-        object_x = 1216
-        object_y = 1344
                 
         player_position = (player.sprite._get_center_x(), player.sprite._get_center_y())
         ghost_position = (ghost_sprite._get_center_x(), ghost_sprite._get_center_y())
 
+        if time >4:
+            if arcade.has_line_of_sight(player_position, ghost_position, wall_list):
+                self.follow_sprite(player, ghost_sprite)
+            else:
+                self.random_search(ghost_sprite)
 
-        if arcade.has_line_of_sight(player_position, ghost_position, wall_list):
-            self.follow_sprite(player, ghost_sprite)
-        else:
-            self.random_search
-
-    
+        
     def hunt_check(self, sanity, room_map, ghost_sprite):
         """Checks to see if the ghost will hunt the player. There is a 1 in 20 chance of being hunted if they have 100 sanity
         and a 1 in 1 chance if their sanity gets to 5
@@ -68,7 +66,6 @@ class Hunt_Mode:
         return ghost_hunt_mode #This will probably need to be changed to an object that is passed in
 
     def follow_sprite(self, player_sprite, ghost):
-
         """
         This function will move the current sprite towards whatever
         other sprite is specified as a parameter.
@@ -100,8 +97,40 @@ class Hunt_Mode:
 
             # Taking into account the angle, calculate our change_x
             # and change_y. Velocity is how fast the Ghost travels.
-            self.ghost_change_x = math.cos(angle) * GHOST_MOVEMENT_SPEED
-            self.ghost_change_y = math.sin(angle) * GHOST_MOVEMENT_SPEED    
+            self.ghost_change_x = math.cos(angle) * constants.GHOST_MOVEMENT_SPEED
+            self.ghost_change_y = math.sin(angle) * constants.GHOST_MOVEMENT_SPEED    
 
-    def random_search():
-        pass
+    def random_search(self,ghost):
+        """
+        This function will move the current sprite towards whatever
+        other sprite is specified as a parameter.
+
+        We use the 'min' function here to get the sprite to line up with
+        the target sprite, and not jump around if the sprite is not off
+        an exact multiple of SPRITE_SPEED.
+        """
+
+
+        ghost.center_x += self.ghost_change_x
+        ghost.center_y += self.ghost_change_y
+        
+        ghost_turn_probability = 500 #higher should take the ghost longer to turn
+        if random.randrange(ghost_turn_probability) == 0:
+            start_x = ghost.center_x
+            start_y = ghost.center_y
+
+            # Get the destination location for the Ghost
+            dest_x = random.randint(constants.TOTAL_MAX_COORDINATES[0], constants.TOTAL_MAX_COORDINATES[2])
+            dest_y = random.randint(constants.TOTAL_MAX_COORDINATES[1], constants.TOTAL_MAX_COORDINATES[3])
+
+            # Do math to calculate how to get the Ghost to the destination.
+            # Calculate the angle in radians between the start points
+            # and end points. This is the angle the Ghost will travel.
+            x_diff = dest_x - start_x
+            y_diff = dest_y - start_y
+            angle = math.atan2(y_diff, x_diff)
+
+            # Taking into account the angle, calculate our change_x
+            # and change_y. Velocity is how fast the Ghost travels.
+            self.ghost_change_x = math.cos(angle) * constants.GHOST_MOVEMENT_SPEED
+            self.ghost_change_y = math.sin(angle) * constants.GHOST_MOVEMENT_SPEED 

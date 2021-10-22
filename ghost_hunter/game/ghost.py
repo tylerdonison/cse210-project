@@ -48,7 +48,7 @@ class Ghost(Entity):
         self.timer = 0
         self.hunt_mode_on = False
 
-        self.action_mode = Action_Mode("poltergeist")
+        self.action_mode = Action_Mode("poltergeist", room)
         self.hunt_duration = 15 * 600
         self.max_cooldown_time = 30 * 60
         self.ghost_type = "poltergeist"
@@ -103,8 +103,8 @@ class Ghost(Entity):
             sanity (int): the player's current sanity
             scene (obj): the scene object
         """
-        self.timer += 10 #1
-        probability = [1,2] #[1,2,3,4,5,6,7,8,9,10]
+        self.timer += 1 
+        probability = [1,2,3,4,5,6,7,8,9,10]
 
         if (self.timer) % 10 == 0:
             random_decision = random.choice(probability)
@@ -120,7 +120,7 @@ class Ghost(Entity):
             self (Ghost): An instance of Ghost
         """
         if self.hunt_mode_on == True:
-            self.hunt_mode.hunt(wall_list, self.target, self.sprite)
+            self.hunt_mode.hunt(wall_list, self.target, self.sprite,self.hunt_time)
 
 
     def check_correct_instrument(self, instrument):
