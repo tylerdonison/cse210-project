@@ -23,7 +23,7 @@ class Room():
         self.get_polygon()
     
     def get_polygon(self):
-         """gets the polygon dimensions
+        """gets the polygon dimensions
          Args:
              self: instance of Room
         """
