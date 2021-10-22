@@ -13,7 +13,7 @@ INTERACTIONS_DICTIONARY = { "Dining Room":["Sink","Television","Couch"],
 OBJECT_COORDINATES = {"Sink":[196,800], "Television":[384,600], "Couch":[700,1400], "Bed":[896,1500], 
 "Computer":[1280,1400], "Dresser":[1280,1000], "Sink":[896,576], "Bathtub":[1280,576], "Toilet":[1280,900]}
 
-INSTRUMENTS = ["Vacuum", "Ghost Thermo", "Bible"]
+INSTRUMENTS = ["Vacuum", "Ghost Thermo", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
 DINING_MAX_COORDINATES = [192, 576, 704, 1600]
 BEDROOM_MAX_COORDINATES = [960, 1088, 1472, 1600]

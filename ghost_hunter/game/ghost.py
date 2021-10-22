@@ -49,7 +49,7 @@ class Ghost(Entity):
         self.hunt_mode_on = False
 
         self.action_mode = Action_Mode("poltergeist")
-        self.hunt_duration = 15 * 600
+        self.hunt_duration = 15 * 60
         self.max_cooldown_time = 30 * 60
         self.ghost_type = "poltergeist"
         self.target = player
@@ -84,14 +84,16 @@ class Ghost(Entity):
         if self.hunt_mode_on == True:
             self.hunt_time += 1
             self.cooldown_time = 0
+
+            if self.hunt_time > self.hunt_duration:
+                self.hunt_mode_on = False
+                self.hunt_time = 0
+                self.choose_ghost_action(sanity, scene, room)
         else:
             self.cooldown_time +=1
             self.choose_ghost_action(sanity,scene, room)
             #self.sprite.set_position(1856, 320)
 
-        if self.hunt_time > self.hunt_duration:
-            self.hunt_mode_on == False
-            self.hunt_time = 0
 
     def choose_ghost_action(self,sanity,scene, room):
         """This method causes the ghost to do one of three things. There is a 20 percent chance that it will
