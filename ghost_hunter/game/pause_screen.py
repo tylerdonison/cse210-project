@@ -1,3 +1,4 @@
+""" Pause screen gives players options to pause the game,quit,exit the game, or get instructions."""
 from PIL import Image
 import arcade
 import arcade.gui
@@ -13,6 +14,8 @@ class PauseScreen(arcade.View):
     """
 
     def __init__(self):
+        """Class Constructor
+        """
         super().__init__()
         self.texture = arcade.load_texture(Image_Loader().get_pause_screen())
 
@@ -60,19 +63,39 @@ class PauseScreen(arcade.View):
         self.manager.draw() 
 
     def on_click_start(self, event):
+        """On click start event
+
+        Args:
+            event (Arcade.view): instance of PauseScreen ???
+        """
         game_view = setup()
         game_view.setup()
         self.window.show_view(game_view)
     
     def on_click_instruction(self, event):
+        """On click instructions event
+
+        Args:
+            event (arcade.view): On click instructions
+        """
         game_view = InstructionScreen()
         game_view.on_draw()
         self.window.show_view(game_view)
 
     def on_click_exit(self, event):
+        """On Click exit event
+
+        Args:
+            event (arcade.view): On Click exits
+        """
         game_view = TitleScreen()
         game_view.on_draw()
         self.window.show_view(game_view)
 
     def on_click_quit(self, event):
+        """On Click quit
+
+        Args:
+            event (arcade.view): On click quit the game
+        """
         arcade.exit()
