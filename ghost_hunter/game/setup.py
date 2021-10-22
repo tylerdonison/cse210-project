@@ -66,6 +66,8 @@ class setup(arcade.View):
         arcade.set_background_color(arcade.csscolor.BLACK)
         self.sound_loader = Sound_Loader()
 
+        self.emf = 1
+
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -113,6 +115,12 @@ class setup(arcade.View):
         instrument.set_position(950, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
+        instrument = arcade.Sprite(
+            ":resources:images/enemies/slimeBlock.png", CHARACTER_SCALING)
+        instrument.set_position(950, 160)
+        self.instruments.append(instrument)
+        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
+
 
     def draw_map(self):
         map_name = Image_Loader().get_map_name()
@@ -165,13 +173,10 @@ class setup(arcade.View):
 
         #draw the sanity box
         sanity_text = f"Sanity: {self.player.sanity}%"
-        arcade.draw_text(
-            sanity_text,
-            10,
-            10,
-            arcade.csscolor.WHITE,
-            18,
-        )
+        arcade.draw_text(sanity_text, 10, 10, arcade.csscolor.WHITE, 18,)
+
+        emf_text = f"Emf: {self.emf}"
+        arcade.draw_text(emf_text, SCREEN_WIDTH - 110,  10, arcade.csscolor.WHITE, 18,)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
