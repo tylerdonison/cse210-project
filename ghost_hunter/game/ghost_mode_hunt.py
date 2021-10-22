@@ -6,8 +6,8 @@ import math
 from game.room import Room
 
 class Hunt_Mode:
-"""Class Hunt_Mode allows the ghost to hunt for the player in the room. When in hunt mode ghost can hunt for player 
-"""
+    """Class Hunt_Mode allows the ghost to hunt for the player in the room. When in hunt mode ghost can hunt for player 
+    """
     def __init__(self, ghost):
         """Class constructor
 
