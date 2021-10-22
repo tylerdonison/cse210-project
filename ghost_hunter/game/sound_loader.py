@@ -33,6 +33,7 @@ class Sound_Loader:
         self.witch = self.root / "sounds" / \
             "Maniacal_Witches_Laugh-SoundBible.com-262127569.mp3"
         self.zombie = self.root / "sounds"/"Mummy_Zombie-SoundBible.com-1966938763.mp3"
+        self.single_footstep = self.root / "sounds" / "single_footstep_sound.wav"
 
     def get_map_name(self):
         """Gets the selected path for the sound clip.
@@ -119,12 +120,12 @@ class Sound_Loader:
         arcade.play_sound(sound)
 
         ######################################
-    def play_footsteps_on_cement_path(self):
+    def play_single_footstep_sound(self):
         """Gets the selected sound clip.
 
           Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.footsteps_on_cement)
+        sound = arcade.load_sound(self.single_footstep)
         arcade.play_sound(sound)
         ########################################
 
