@@ -1,3 +1,5 @@
+"""Rooms include dining, bedroom and bathroom. Generates a random room for the ghost.
+"""
 import arcade
 from pytiled_parser.layer import Layer
 from pytiled_parser.tiled_object import Polygon
@@ -7,13 +9,24 @@ from random import *
 from game.constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Room():
+    """Class Room generates the coordinates for the room which displays as Polygons and sets up layers for these rooms.
+    """
     def __init__(self, layer):
+        """Class Constructor
+
+        Args:
+            layer (self): creates room layers
+        """
         self.layer = layer
         self.polygon = Polygon
         self.points = []
         self.get_polygon()
     
     def get_polygon(self):
+        """gets the polygon dimensions
+         Args:
+             self: instance of Room
+        """
         points = []
         data = self.layer.data
        
@@ -29,6 +42,11 @@ class Room():
         self.polygon = Polygon(self.points)
 
     def generate_random(self):
+        """Generates a random selection of room
+
+        Returns:
+            self: while in bounds returns pnt 
+        """
         minx, miny, maxx, maxy = self.polygon.bounds
         while True:
             pnt = Point(uniform(minx, maxx), uniform(miny, maxy))

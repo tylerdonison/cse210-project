@@ -119,7 +119,7 @@ class Sound_Loader:
         arcade.play_sound(sound)
 
         ######################################
-    def play_footsteps_on_cement(self):
+    def play_footsteps_on_cement_path(self):
         """Gets the selected sound clip.
 
           Args: (self) instance of soundclip

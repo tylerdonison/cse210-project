@@ -24,7 +24,8 @@ class setup(arcade.View):
     """
 
     def __init__(self):
-
+        """The Class Constructor
+        """
         # Call the parent class and set up the window
         super().__init__()
         
@@ -49,6 +50,7 @@ class setup(arcade.View):
         #Layers that will cover the tiled map
         self.player_light = None
         self.light_layer = None
+        self.red_light_layer = None
 
         self.clock = 0
         
@@ -65,6 +67,8 @@ class setup(arcade.View):
         arcade.set_background_color(arcade.csscolor.BLACK)
         self.sound_loader = Sound_Loader()
 
+        self.emf = 1
+
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -80,6 +84,8 @@ class setup(arcade.View):
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
         self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
+
+        self.red_light_layer = Light(0, 0, 150, arcade.csscolor.RED, 'soft')
 
         #choose random ghost type
         #choose random ghost location
@@ -98,21 +104,29 @@ class setup(arcade.View):
         """
         instrument = arcade.Sprite(
                 ":resources:images/topdown_tanks/tankRed_barrel3.png", CHARACTER_SCALING)
-        instrument.set_position(850, 160)
+        instrument.set_position(800, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[0], self.instruments[0])
         instrument = arcade.Sprite(
             ":resources:images/topdown_tanks/tankGreen_barrel1.png", CHARACTER_SCALING)
-        instrument.set_position(900, 160) 
+        instrument.set_position(860, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[1], self.instruments[1])
         instrument = arcade.Sprite(
             ":resources:images/topdown_tanks/tankDark_barrel3_outline.png", CHARACTER_SCALING)
-        instrument.set_position(950, 160) 
+        instrument.set_position(920, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
+        instrument = arcade.Sprite(
+            ":resources:images/enemies/slimeBlock.png", CHARACTER_SCALING / 4.5)
+        instrument.set_position(980, 160)
+        self.instruments.append(instrument)
+        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
+
 
     def draw_map(self):
+        """This function draws the map using the image loader
+        """
         map_name = Image_Loader().get_map_name()
         # Layer specific options are defined based on Layer names in a dictionary
         # Doing this will make the SpriteList for the platforms layer
@@ -137,10 +151,10 @@ class setup(arcade.View):
         self.setup_instruments()
     
     def player_setup(self):
+        """ This function sets up the player and ghost sprites
+        """
         self.scene.add_sprite("Player", self.player.sprite)
         self.scene.add_sprite("Ghost", self.ghost.sprite)
-        self.handle_collisions_action = Handle_Collisions_Action(
-            self.player, self.ghost, self.instruments)
 
     def on_draw(self):
         """Render the screen."""
@@ -163,13 +177,10 @@ class setup(arcade.View):
 
         #draw the sanity box
         sanity_text = f"Sanity: {self.player.sanity}%"
-        arcade.draw_text(
-            sanity_text,
-            10,
-            10,
-            arcade.csscolor.WHITE,
-            18,
-        )
+        arcade.draw_text(sanity_text, 10, 10, arcade.csscolor.WHITE, 18,)
+
+        emf_text = f"Emf: {self.emf}"
+        arcade.draw_text(emf_text, SCREEN_WIDTH - 110,  10, arcade.csscolor.WHITE, 18,)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
@@ -182,8 +193,14 @@ class setup(arcade.View):
             self.player.sprite.change_x = -PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
-
-
+        elif key == arcade.key.SPACE:
+            #could pick or leave 
+            if self.player.has_instrument:
+                self.player.has_instrument = False
+                self.player.index_of_instrument = None
+            else:
+                self.collisions_update()
+                
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
@@ -205,6 +222,8 @@ class setup(arcade.View):
             #player animation
 
     def center_camera_to_player(self):
+        """This function centers the camera on the player
+        """
         screen_center_x = self.player.sprite.center_x - (self.camera.viewport_width / 2)
         screen_center_y = self.player.sprite.center_y - (
             self.camera.viewport_height / 2
@@ -218,6 +237,7 @@ class setup(arcade.View):
         self.camera.move_to(player_centered)
     
     def on_update(self, delta_time):
+        """Updates the screen with players new position and the light position."""
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
         if self.player.has_instrument:
@@ -225,15 +245,28 @@ class setup(arcade.View):
             index_of_instrument = self.player.index_of_instrument
             self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
             self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
-        if self.player.has_instrument:
-            self.instruments
         self.center_camera_to_player()
 
         self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map)
-        self.collisions_update()
+
+        #light change for hunting mode on
+        if self.ghost.hunt_mode_on:
+            if self.player_light._color == arcade.csscolor.WHITE:
+                if randint(0,2):
+                    self.player_light._color = arcade.csscolor.RED
+            else:
+                if randint(0, 2):
+                    self.player_light._color = arcade.csscolor.WHITE
+        elif self.player_light._color == arcade.csscolor.RED:
+            self.player_light._color = arcade.csscolor.WHITE
+
 
     """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
+        """Handles capturing the ghost and updates the collisions 
+        """
+        self.handle_collisions_action = Handle_Collisions_Action(
+            self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
                 self.game_end()
@@ -242,22 +275,11 @@ class setup(arcade.View):
                 sys.exit
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
-            if self.player.has_instrument == True :
-                self.reposition_instrument(self.player.instrument)
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
-            x_position = self.player.sprite.center_x + 35
-            y_position = self.player.sprite.center_y - 50
-            self.instruments[index_of_instrument].center_x = x_position
-            self.instruments[index_of_instrument].center_y = y_position
-            self.player.instrument.center_x = x_position
-            self.player.instrument.center_y = y_position
+            self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
+            self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
             self.handle_collisions_action.instrument_to_ignore = index_of_instrument
 
-    def reposition_instrument(self, instrument):
-        self.instruments[0].set_position(850, 160)
-        self.instruments[1].set_position(900, 160)
-        self.instruments[2].set_position(950, 160)
-        #writing book
 
     def game_over(self):
         """The game is over"""
