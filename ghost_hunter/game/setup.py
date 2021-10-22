@@ -24,7 +24,8 @@ class setup(arcade.View):
     """
 
     def __init__(self):
-
+        """The Class Constructor
+        """
         # Call the parent class and set up the window
         super().__init__()
         
@@ -124,6 +125,8 @@ class setup(arcade.View):
 
 
     def draw_map(self):
+        """This function draws the map using the image loader
+        """
         map_name = Image_Loader().get_map_name()
         # Layer specific options are defined based on Layer names in a dictionary
         # Doing this will make the SpriteList for the platforms layer
@@ -148,6 +151,8 @@ class setup(arcade.View):
         self.setup_instruments()
     
     def player_setup(self):
+        """ This function sets up the player and ghost sprites
+        """
         self.scene.add_sprite("Player", self.player.sprite)
         self.scene.add_sprite("Ghost", self.ghost.sprite)
 
@@ -217,6 +222,8 @@ class setup(arcade.View):
             #player animation
 
     def center_camera_to_player(self):
+        """This function centers the camera on the player
+        """
         screen_center_x = self.player.sprite.center_x - (self.camera.viewport_width / 2)
         screen_center_y = self.player.sprite.center_y - (
             self.camera.viewport_height / 2
@@ -230,6 +237,7 @@ class setup(arcade.View):
         self.camera.move_to(player_centered)
     
     def on_update(self, delta_time):
+        """Updates the screen with players new position and the light position."""
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
         if self.player.has_instrument:
@@ -255,6 +263,8 @@ class setup(arcade.View):
 
     """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
+        """Handles capturing the ghost and updates the collisions 
+        """
         self.handle_collisions_action = Handle_Collisions_Action(
             self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
