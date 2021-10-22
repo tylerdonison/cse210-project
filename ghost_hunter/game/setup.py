@@ -49,6 +49,7 @@ class setup(arcade.View):
         #Layers that will cover the tiled map
         self.player_light = None
         self.light_layer = None
+        self.red_light_layer = None
 
         self.clock = 0
         
@@ -79,6 +80,8 @@ class setup(arcade.View):
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
         self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
+
+        self.red_light_layer = Light(0, 0, 150, arcade.csscolor.RED, 'soft')
 
         #choose random ghost type
         #choose random ghost location
@@ -230,6 +233,18 @@ class setup(arcade.View):
 
         self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map)
         self.collisions_update()
+
+        #light change for hunting mode on
+        if self.ghost.hunt_mode_on:
+            if self.player_light._color == arcade.csscolor.WHITE:
+                if randint(0,2):
+                    self.player_light._color = arcade.csscolor.RED
+            else:
+                if randint(0, 2):
+                    self.player_light._color = arcade.csscolor.WHITE
+        elif self.player_light._color == arcade.csscolor.RED:
+            self.player_light._color = arcade.csscolor.WHITE
+
 
     """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
