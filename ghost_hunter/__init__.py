@@ -1,2 +1,2 @@
- """This game package contains specific classes for play the Ghostbuster game
+ """This game package contains specific classes for playing the Ghostbuster game
     """
