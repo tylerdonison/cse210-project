@@ -42,7 +42,7 @@ class Room():
         self.polygon = Polygon(self.points)
 
     def generate_random(self):
-         """Generates a random selection of room
+        """Generates a random selection of room
 
         Returns:
             self: while in bounds returns pnt 
