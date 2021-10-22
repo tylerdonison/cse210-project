@@ -68,8 +68,6 @@ class setup(arcade.View):
 
         self.emf = 1
 
-        self.journal = None
-
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -151,8 +149,6 @@ class setup(arcade.View):
     def player_setup(self):
         self.scene.add_sprite("Player", self.player.sprite)
         self.scene.add_sprite("Ghost", self.ghost.sprite)
-        self.handle_collisions_action = Handle_Collisions_Action(
-            self.player, self.ghost, self.instruments)
 
     def on_draw(self):
         """Render the screen."""
@@ -195,14 +191,10 @@ class setup(arcade.View):
             #could pick or leave 
             if self.player.has_instrument:
                 self.player.has_instrument = False
-                self.player.instrument = None
                 self.player.index_of_instrument = None
             else:
                 self.collisions_update()
                 
-            
-
-
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
@@ -273,12 +265,8 @@ class setup(arcade.View):
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
-            x_position = self.player.sprite.center_x + 35
-            y_position = self.player.sprite.center_y - 50
-            self.instruments[index_of_instrument].center_x = x_position
-            self.instruments[index_of_instrument].center_y = y_position
-            self.player.instrument.center_x = x_position
-            self.player.instrument.center_y = y_position
+            self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
+            self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
             self.handle_collisions_action.instrument_to_ignore = index_of_instrument
 
 

@@ -28,7 +28,6 @@ class Player(Entity):
             self,  ":resources:images/animated_characters/female_adventurer/femaleAdventurer_idle.png", PLAYER_START_X, PLAYER_START_Y)
         self.sanity = 50
         self.has_instrument = False
-        self.instrument = Sprite()
         self.index_of_instrument = None
         self.position = (0,0)
 
@@ -45,5 +44,4 @@ class Player(Entity):
 
     def set_instrument(self, instrument, index):
         self.has_instrument = True
-        self.index_of_instrument = index
         self.instrument = instrument
