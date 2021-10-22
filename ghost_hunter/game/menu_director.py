@@ -8,7 +8,7 @@ from game.setup import setup
 
 
 class MenuDirector(arcade.View):
-"""MenuDirector class is a of arcade view superclass. 
+    """MenuDirector class is a of arcade view superclass. 
 
     Args:
         arcade (superclass): viewport window
