@@ -68,6 +68,8 @@ class setup(arcade.View):
 
         self.emf = 1
 
+        self.journal = None
+
 
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
@@ -102,22 +104,22 @@ class setup(arcade.View):
         """
         instrument = arcade.Sprite(
                 ":resources:images/topdown_tanks/tankRed_barrel3.png", CHARACTER_SCALING)
-        instrument.set_position(850, 160)
+        instrument.set_position(800, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[0], self.instruments[0])
         instrument = arcade.Sprite(
             ":resources:images/topdown_tanks/tankGreen_barrel1.png", CHARACTER_SCALING)
-        instrument.set_position(900, 160) 
+        instrument.set_position(860, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[1], self.instruments[1])
         instrument = arcade.Sprite(
             ":resources:images/topdown_tanks/tankDark_barrel3_outline.png", CHARACTER_SCALING)
-        instrument.set_position(950, 160) 
+        instrument.set_position(920, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
         instrument = arcade.Sprite(
-            ":resources:images/enemies/slimeBlock.png", CHARACTER_SCALING)
-        instrument.set_position(950, 160)
+            ":resources:images/enemies/slimeBlock.png", CHARACTER_SCALING / 4.5)
+        instrument.set_position(980, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
 
@@ -189,6 +191,16 @@ class setup(arcade.View):
             self.player.sprite.change_x = -PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.SPACE:
+            #could pick or leave 
+            if self.player.has_instrument:
+                self.player.has_instrument = False
+                self.player.instrument = None
+                self.player.index_of_instrument = None
+            else:
+                self.collisions_update()
+                
+            
 
 
     def on_key_release(self, key, modifiers):
@@ -232,12 +244,9 @@ class setup(arcade.View):
             index_of_instrument = self.player.index_of_instrument
             self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
             self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
-        if self.player.has_instrument:
-            self.instruments
         self.center_camera_to_player()
 
         self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map)
-        self.collisions_update()
 
         #light change for hunting mode on
         if self.ghost.hunt_mode_on:
@@ -253,6 +262,8 @@ class setup(arcade.View):
 
     """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
+        self.handle_collisions_action = Handle_Collisions_Action(
+            self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
                 self.game_end()
@@ -261,8 +272,6 @@ class setup(arcade.View):
                 sys.exit
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
-            if self.player.has_instrument == True :
-                self.reposition_instrument(self.player.instrument)
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
             x_position = self.player.sprite.center_x + 35
             y_position = self.player.sprite.center_y - 50
@@ -272,11 +281,6 @@ class setup(arcade.View):
             self.player.instrument.center_y = y_position
             self.handle_collisions_action.instrument_to_ignore = index_of_instrument
 
-    def reposition_instrument(self, instrument):
-        self.instruments[0].set_position(850, 160)
-        self.instruments[1].set_position(900, 160)
-        self.instruments[2].set_position(950, 160)
-        #writing book
 
     def game_over(self):
         """The game is over"""
