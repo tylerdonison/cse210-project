@@ -14,7 +14,7 @@ class MenuDirector(arcade.View):
         arcade (superclass): viewport window
     """
     def __init__(self):
-               """The class constructor
+        """The class constructor
         """
         super().__init__()
         self.texture = arcade.load_texture(Image_Loader().get_title_screen())
