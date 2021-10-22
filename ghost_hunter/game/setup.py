@@ -187,12 +187,16 @@ class setup(arcade.View):
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = PLAYER_MOVEMENT_SPEED
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.player.sprite.change_y = -PLAYER_MOVEMENT_SPEED
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.sprite.change_x = -PLAYER_MOVEMENT_SPEED
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.SPACE:
             #could pick or leave 
             if self.player.has_instrument:
@@ -206,19 +210,19 @@ class setup(arcade.View):
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = 0
-            self.sound_loader.play_footsteps_on_cement_path()
+            
             #player animation
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.player.sprite.change_y = 0
-            self.sound_loader.play_footsteps_on_cement_path()
+            self.sound_loader.play_single_footstep_sound()
             #player animation
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.sprite.change_x = 0
-            self.sound_loader.play_footsteps_on_cement_path()
+            self.sound_loader.play_single_footstep_sound()
             #player animation
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
-            self.sound_loader.play_footsteps_on_cement_path()
+            self.sound_loader.play_single_footstep_sound()
             #player animation
 
     def center_camera_to_player(self):
