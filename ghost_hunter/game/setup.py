@@ -1,5 +1,6 @@
 import arcade
 from arcade import camera
+from arcade import sprite_list
 from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
@@ -38,6 +39,8 @@ class setup(arcade.View):
         
         # Separate variable that holds the player sprite
         self.player = Player()
+        self.player.center_x = PLAYER_START_X
+        self.player.center_y = PLAYER_START_Y
 
         # Our physics engine
         self.physics_engine = None
@@ -74,7 +77,6 @@ class setup(arcade.View):
         self.red_timer = 0
         self.white_timer = 0
 
-
     def setup(self):
         """Set up the game here. Call this function to restart the game."""
         self.setup_camera()
@@ -96,7 +98,6 @@ class setup(arcade.View):
         #choose random ghost type
         #choose random ghost location
         #call ghost to begin random actions, pass in player
-
 
     def setup_camera(self):
         """Setup the Cameras"""
@@ -166,6 +167,8 @@ class setup(arcade.View):
         """ This function sets up the player and ghost sprites
         """
         self.scene.add_sprite("Player", self.player.sprite)
+        self.player._set_center_x(PLAYER_START_X)
+        self.player._set_center_y(PLAYER_START_Y)
         self.scene.add_sprite("Ghost", self.ghost.sprite)
 
     def on_draw(self):
@@ -198,17 +201,21 @@ class setup(arcade.View):
         """Called whenever a key is pressed."""
 
         if key == arcade.key.UP or key == arcade.key.W:
+            self.sound_loader.play_single_footstep_sound()
+            self.player.character_direction = 0
             self.player.sprite.change_y = PLAYER_MOVEMENT_SPEED
-            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.DOWN or key == arcade.key.S:
+            self.sound_loader.play_single_footstep_sound()
+            self.player.character_direction = 1
             self.player.sprite.change_y = -PLAYER_MOVEMENT_SPEED
-            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.LEFT or key == arcade.key.A:
+            self.sound_loader.play_single_footstep_sound()
+            self.player.character_direction = 3
             self.player.sprite.change_x = -PLAYER_MOVEMENT_SPEED
-            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
-            self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
             self.sound_loader.play_single_footstep_sound()
+            self.player.character_direction = 2
+            self.player.sprite.change_x = PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.SPACE:
             #could pick or leave 
             if self.player.has_instrument:
@@ -235,7 +242,10 @@ class setup(arcade.View):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
             #player animation
+        else:
+            self.player.sprite.change_x = 0
             self.sound_loader.play_single_footstep_sound()
+
 
     def center_camera_to_player(self):
         """This function centers the camera on the player
@@ -274,6 +284,7 @@ class setup(arcade.View):
                     if randint(0,2):
                         self.player_light._color = arcade.csscolor.BLACK
                         self.sound_loader.play_attic_heart_beat_screams()
+
             else:
                 if randint(0, 2):
                     self.player_light._color = arcade.csscolor.WHITE
@@ -281,8 +292,10 @@ class setup(arcade.View):
             self.white_timer += 1
             if self.white_timer % 120 == 0:
                 self.player_light._color = arcade.csscolor.WHITE
+        
+        # Update animations
+        self.scene.update_animation(delta_time, ["Player"])
 
-    """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
         """Handles capturing the ghost and updates the collisions 
         """
@@ -292,15 +305,13 @@ class setup(arcade.View):
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
                 self.game_end()
             else:
-                #self.game_over()
-                sys.exit
+                self.game_over()
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
             self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
             self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
             self.handle_collisions_action.instrument_to_ignore = index_of_instrument
-
 
     def game_over(self):
         """The game is over"""
