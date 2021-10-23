@@ -66,6 +66,8 @@ class setup(arcade.View):
         print(self.room_name)
 
         arcade.set_background_color(arcade.csscolor.BLACK)
+        
+        #Load sound loader
         self.sound_loader = Sound_Loader()
 
         self.emf = 1
@@ -220,15 +222,19 @@ class setup(arcade.View):
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = 0
             #player animation
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.player.sprite.change_y = 0
             #player animation
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.sprite.change_x = 0
             #player animation
+            self.sound_loader.play_single_footstep_sound()
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
             #player animation
+            self.sound_loader.play_single_footstep_sound()
 
     def center_camera_to_player(self):
         """This function centers the camera on the player
@@ -251,8 +257,6 @@ class setup(arcade.View):
         self.player_light.position = self.player.sprite.position
         if self.player.has_instrument:
             new_position = self.player.sprite.position
-            self.sound_loader.play_beast1()
-
 
             index_of_instrument = self.player.index_of_instrument
             self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
@@ -285,11 +289,9 @@ class setup(arcade.View):
             self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
-                self.sound_loader.play_swoosh1()
                 self.game_end()
             else:
                 #self.game_over()
-                self.sound_loader.play_swoosh1()
                 sys.exit
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
