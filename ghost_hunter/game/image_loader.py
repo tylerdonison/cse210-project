@@ -16,6 +16,7 @@ class Image_Loader:
         self.ghost_types_screen = self.root / "images" / "ghost_types_screen.png"
         self.pause_screen = self.root / "images" / "pause_screen.png"
         self.fingerprints = self.root / "images" / "fingerprints.png"
+        self.writing = self.root / "images" / "gemGreen.png"
 
         #Player Character
         self.player_root            = self.root / "images" / "ghost_hunter_player"
@@ -99,3 +100,14 @@ class Image_Loader:
     
     def get_player_front(self):
         return self.player_front_neutral
+
+    def get_fingerprints(self):
+        return self.fingerprints
+
+    def get_writing(self):
+        """ gets pause screen
+
+        Returns:
+            self: returns pause screen
+        """
+        return self.writing
