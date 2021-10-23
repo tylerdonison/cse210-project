@@ -41,8 +41,11 @@ class Hunt_Mode:
             try:
                 ghost_position = room_map.generate_random()
                 ghost_sprite.set_position(ghost_position)
+                print("hunted without errors")
             except:
-                ghost_sprite.set_position(700,1500)
+                ghost_x = random.randint(constants.TOTAL_MAX_COORDINATES[0], constants.TOTAL_MAX_COORDINATES[2])
+                ghost_y = random.randint(constants.TOTAL_MAX_COORDINATES[1], constants.TOTAL_MAX_COORDINATES[3])
+                ghost_sprite.set_position(ghost_x,ghost_y)
                 print("sweeping errors under the rug again...")
             
 

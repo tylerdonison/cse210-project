@@ -130,6 +130,7 @@ class setup(arcade.View):
         self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
         
         
+        
 
     def draw_map(self):
         """This function draws the map using the image loader
