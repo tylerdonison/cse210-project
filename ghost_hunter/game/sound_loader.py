@@ -77,7 +77,7 @@ class Sound_Loader:
         arcade.play_sound(sound)
 
         ####################################
-    def play_attic_heart_beat(self):
+    def play_attic_heart_beat_screams(self):
         """Gets the selected sound clip.
 
         Args: (self) instance of soundclip
