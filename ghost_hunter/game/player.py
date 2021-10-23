@@ -45,3 +45,4 @@ class Player(Entity):
     def set_instrument(self, instrument, index):
         self.has_instrument = True
         self.instrument = instrument
+        self.index_of_instrument = index
