@@ -14,7 +14,7 @@ class Sound_Loader:
         self.attic_screams_1 = self.root / "sounds"/"Attic_Scream_1.mp3"
         self.attic_screams_2 = self.root / "sounds"/"Attic_Scream_2.mp3"
         self.attic_screams_3 = self.root / "sounds"/"Attic_Scream_3.mp3"
-        self.Backward_Souls = self.root / "sounds" / \
+        self.backward_souls = self.root / "sounds" / \
             "Backwards_Souls-SoundBible.com-87826574.mp3"
         self.Ballroom_guests = self.root / "sounds"/"Ballroom_Guests.mp3"
         self.chains = self.root / "sounds"/"Chains_Rattling-SoundBible.com-1923614227.mp3"
@@ -34,7 +34,13 @@ class Sound_Loader:
             "Maniacal_Witches_Laugh-SoundBible.com-262127569.mp3"
         self.zombie = self.root / "sounds"/"Mummy_Zombie-SoundBible.com-1966938763.mp3"
         self.single_footstep = self.root / "sounds" / "single_footstep_sound.wav"
+        self.sweep1 = self.root / "sounds" / \
+            "mixkit-fast-small-sweep-transition-166.wav"
+        self.beast1 = self.root / "sounds" / \
+            "mixkit-agressive-beast-roar-13.wav"
+        self.swoosh1 = self.root / "sounds" / "mixkit-woosh-wind-1168.wav"
 
+        
     def get_map_name(self):
         """Gets the selected path for the sound clip.
 
@@ -42,6 +48,33 @@ class Sound_Loader:
             (self) map_path: The path to clips.
         """
         return self.map_path
+        ####################################
+    
+    def play_swoosh1(self):
+        """Gets the selected sound clip.
+
+        Args: (self) instance of soundclip
+        """
+        sound = arcade.load_sound(self.swoosh1)
+        arcade.play_sound(sound)
+        ####################################
+
+    def play_beast1(self):
+        """Gets the selected sound clip.
+
+        Args: (self) instance of soundclip
+        """
+        sound = arcade.load_sound(self.beast1)
+        arcade.play_sound(sound)
+        ####################################
+
+    def play_sweep1(self):
+        """Gets the selected sound clip.
+
+        Args: (self) instance of soundclip
+        """
+        sound = arcade.load_sound(self.sweep1)
+        arcade.play_sound(sound)
 
         ####################################
     def play_attic_heart_beat(self):
@@ -58,7 +91,7 @@ class Sound_Loader:
 
         Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.self.attic_screams_1)
+        sound = arcade.load_sound(self.attic_screams_1)
         arcade.play_sound(sound)
         ####################################
     def play_attic_screams_2(self):
@@ -78,12 +111,12 @@ class Sound_Loader:
         arcade.play_sound(sound)
         #################################
 
-    def play_Backward_Souls(self):
+    def play_backward_souls(self):
         """Gets the selected sound clip.
 
            Args: (self) instance of soundclip
         """
-        sound = arcade.load_sound(self.Backward_Souls)
+        sound = arcade.load_sound(self.backward_souls)
         arcade.play_sound(sound)
         ####################################
     def play_ballroom_guests(self):
