@@ -17,6 +17,20 @@ class Image_Loader:
         self.pause_screen = self.root / "images" / "pause_screen.png"
         self.fingerprints = self.root / "images" / "fingerprints.png"
 
+        #Player Character
+        self.player_root            = self.root / "images" / "ghost_hunter_player"
+        self.player_back_neutral    = self.player_root / "player_back.png"
+        self.player_back_left       = self.player_root / "player_back_step_left.png"
+        self.player_back_right      = self.player_root / "player_back_step_right.png"
+        self.player_front_neutral   = self.player_root / "player_front.png"
+        self.player_front_left      = self.player_root / "player_front_step_left.png"
+        self.player_front_right     = self.player_root / "player_front_step_right.png"
+        self.player_left_neutral    = self.player_root / "player_left.png"
+        self.player_left_left       = self.player_root / "player_left_step_left.png"
+        self.player_left_right      = self.player_root / "player_left_step_right.png"
+        self.player_right_neutral   = self.player_root / "player_right.png"
+        self.player_right_left      = self.player_root / "player_right_step_left.png"
+        self.player_right_right     = self.player_root / "player_right_step_right.png"
         
     def get_map_name(self):
         """gets the map name
@@ -73,6 +87,15 @@ class Image_Loader:
             self: returns pause screen
         """
         return self.pause_screen
-
-    def get_fingerprints(self):
-        return self.fingerprints
+    
+    def get_player_animations(self):
+        player_animations = [self.player_back_neutral,  self.player_back_left, 
+                            self.player_back_right,     self.player_front_neutral,
+                            self.player_front_left,     self.player_front_right,
+                            self.player_right_neutral,  self.player_right_left,
+                            self.player_right_right,    self.player_left_neutral,
+                            self.player_left_left,      self.player_left_right]
+        return player_animations 
+    
+    def get_player_front(self):
+        return self.player_front_neutral
