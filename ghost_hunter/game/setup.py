@@ -251,6 +251,7 @@ class setup(arcade.View):
         self.player_light.position = self.player.sprite.position
         if self.player.has_instrument:
             new_position = self.player.sprite.position
+            self.sound_loader.play_beast1()
 
 
             index_of_instrument = self.player.index_of_instrument
@@ -262,13 +263,12 @@ class setup(arcade.View):
 
         #light change for hunting mode on
         if self.ghost.hunt_mode_on:
-            
             if self.player_light._color == arcade.csscolor.WHITE:
                 self.red_timer += 1
                 if self.red_timer % 30 == 0:
                     if randint(0,2):
                         self.player_light._color = arcade.csscolor.BLACK
-                        self.sound_loader.play_attic_heart_beat()
+                        self.sound_loader.play_attic_heart_beat_screams()
             else:
                 if randint(0, 2):
                     self.player_light._color = arcade.csscolor.WHITE
@@ -285,9 +285,11 @@ class setup(arcade.View):
             self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
+                self.sound_loader.play_swoosh1()
                 self.game_end()
             else:
                 #self.game_over()
+                self.sound_loader.play_swoosh1()
                 sys.exit
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
