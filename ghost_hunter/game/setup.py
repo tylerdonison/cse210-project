@@ -266,10 +266,9 @@ class setup(arcade.View):
             if self.player_light._color == arcade.csscolor.WHITE:
                 self.red_timer += 1
                 if self.red_timer % 30 == 0:
-                
                     if randint(0,2):
                         self.player_light._color = arcade.csscolor.BLACK
-                
+                        self.sound_loader.play_attic_heart_beat()
             else:
                 if randint(0, 2):
                     self.player_light._color = arcade.csscolor.WHITE
