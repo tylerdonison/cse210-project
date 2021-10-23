@@ -61,7 +61,7 @@ class setup(arcade.View):
 
         self.room_name = ROOM_LIST[randint(0, len(ROOM_LIST) - 1)]
 
-        self.ghost = Ghost(self.player, self.room_name)
+        self.ghost = None
         print(self.room_name)
 
         arcade.set_background_color(arcade.csscolor.BLACK)
@@ -74,18 +74,21 @@ class setup(arcade.View):
         """Set up the game here. Call this function to restart the game."""
         self.setup_camera()
         #Need to pick ghost room before draw_map
-        self.draw_map()   
+        self.draw_map()  
+        self.ghost = Ghost(self.player, self.room_name, self.instruments[3])
         self.player_setup()
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEngineSimple(
             self.player.sprite, self.scene.get_sprite_list("Walls"))
-        
+    
         
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
         self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
 
         self.red_light_layer = Light(0, 0, 150, arcade.csscolor.RED, 'soft')
+
+        
 
         #choose random ghost type
         #choose random ghost location
@@ -122,7 +125,8 @@ class setup(arcade.View):
         instrument.set_position(980, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
-
+        
+        
 
     def draw_map(self):
         """This function draws the map using the image loader
@@ -144,7 +148,11 @@ class setup(arcade.View):
             map_name, TILE_SCALING, layer_options)
         self.scene = arcade.Scene.from_tilemap(self.tile_map)
         room_layer = self.tile_map.get_tilemap_layer(self.room_name)
-        self.room_map = Room(room_layer)
+
+        try:
+            self.room_map = Room(room_layer)
+        except AttributeError:
+            print("start error swept under the rug")
         if self.tile_map.tiled_map.background_color:
             arcade.set_background_color(self.tile_map.tiled_map.background_color)
 
@@ -242,12 +250,14 @@ class setup(arcade.View):
         self.player_light.position = self.player.sprite.position
         if self.player.has_instrument:
             new_position = self.player.sprite.position
+
+
             index_of_instrument = self.player.index_of_instrument
             self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
             self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
         self.center_camera_to_player()
 
-        self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map)
+        self.emf = self.ghost.execute(self.player.sanity, self.scene, self.scene.get_sprite_list("Walls"), self.room_map, self.instruments)
 
         #light change for hunting mode on
         if self.ghost.hunt_mode_on:

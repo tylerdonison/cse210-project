@@ -1,6 +1,7 @@
 """This module is in charge of controlling the hunt mode of the ghost"""
 import random
 import arcade
+from pytiled_parser.tiled_object import Point
 from game import constants
 import math
 from game.room import Room
@@ -20,7 +21,7 @@ class Hunt_Mode:
         self.ghost_change_x = 0
         self.ghost_change_y = 0
 
-    def hunt(self, wall_list, player, ghost_sprite,time):
+    def hunt(self, wall_list, player, ghost_sprite,time, room_map):
 
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         
@@ -31,20 +32,28 @@ class Hunt_Mode:
         """
         #physics(player_sprite, front_door_list) #lock front door
         #add sound to indicate locked door
-        
         #generate random coordinates in room
                 
         player_position = (player.sprite._get_center_x(), player.sprite._get_center_y())
         ghost_position = (ghost_sprite._get_center_x(), ghost_sprite._get_center_y())
 
-        if time >4:
+        if time == constants.INTERVAL_BEFORE_HUNT:
+            try:
+                ghost_position = room_map.generate_random()
+                ghost_sprite.set_position(ghost_position)
+            except:
+                ghost_sprite.set_position(700,1500)
+                print("sweeping errors under the rug again...")
+            
+
+        if time > constants.INTERVAL_BEFORE_HUNT * 60:
             if arcade.has_line_of_sight(player_position, ghost_position, wall_list):
                 self.follow_sprite(player, ghost_sprite)
             else:
                 self.random_search(ghost_sprite)
 
         
-    def hunt_check(self, sanity, room_map, ghost_sprite):
+    def hunt_check(self, sanity):
         """Checks to see if the ghost will hunt the player. There is a 1 in 20 chance of being hunted if they have 100 sanity
         and a 1 in 1 chance if their sanity gets to 5
 
@@ -56,7 +65,7 @@ class Hunt_Mode:
         if sanity < 5:
             sanity = 5 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
 
-        chance_of_being_hunted_inverse = int(sanity / 5)
+        chance_of_being_hunted_inverse = int(sanity / 4)
         round(chance_of_being_hunted_inverse) #ensures that the chance of being hunted will be an int
 
         #creates a list from 1 to the inverse of the chance of being hunted. (A greater number is better for the player). Then randomly chooses a number
@@ -68,9 +77,6 @@ class Hunt_Mode:
         random_number_in_chance_list = random.choice(chance_list)
         if random_number_in_chance_list == 1:
             ghost_hunt_mode = True
-            ghost_position = room_map.generate_random()
-            ghost_sprite.set_position(ghost_position.x, ghost_position.y)
-            print(f"Set position! x:{ghost_position.x}, y:{ghost_position.y} ")
         else:
             ghost_hunt_mode = False
         return ghost_hunt_mode #This will probably need to be changed to an object that is passed in
@@ -127,7 +133,7 @@ class Hunt_Mode:
         ghost.center_x += self.ghost_change_x
         ghost.center_y += self.ghost_change_y
         
-        ghost_turn_probability = 500 #higher should take the ghost longer to turn
+        ghost_turn_probability = 240 #higher should take the ghost longer to turn. This should be every 4 seconds now
         if random.randrange(ghost_turn_probability) == 0:
             start_x = ghost.center_x
             start_y = ghost.center_y
