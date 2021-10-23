@@ -4,6 +4,7 @@ import arcade
 import arcade.gui
 from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 from game.image_loader import Image_Loader
+from game.sound_loader import Sound_Loader
 from game.setup import setup
 
 
@@ -32,6 +33,8 @@ class MenuDirector(arcade.View):
         self.v_box2 = arcade.gui.UIBoxLayout()
         self.v_box3 = arcade.gui.UIBoxLayout()
         
+        # Load Sound
+        self.sound_loader = Sound_Loader()
 
         # Create the buttons
         self.button1 = arcade.gui.UIFlatButton(text="How to Play", width=200)
@@ -104,6 +107,9 @@ class MenuDirector(arcade.View):
         game_view = setup()
         game_view.setup()
         self.window.show_view(game_view)
+        self.sound_loader.play_evil_laugh()
+        self.sound_loader.play_creaking_door()
+        self.sound_loader.play_thunder()
 
     def on_click_button3(self, event):
         """On click event button 3 ends the game
@@ -111,4 +117,5 @@ class MenuDirector(arcade.View):
         Args:
             event (arcade): exists the game
         """
+        self.sound_loader.play_swoosh1()
         arcade.exit()
