@@ -20,16 +20,18 @@ class Action_Mode():
 
         self.room = room_name
         self.ghost_type = ghost_type
+        print(self.ghost_type)
         self.emf_position = [0,0]
         self.freezing_position = [0,0]
-        self.interaction_types = {"poltergeist":["fingerprints","emf","writing"], "wraith":['emf',"writing"], "demon":["writing, fingerprints"]}      
+        self.interaction_types = {"poltergeist":["fingerprints","emf"], "wraith":['emf',"writing"], "demon":["writing", "fingerprints"]}      
         self.possible_objects = {f"{constants.ROOM_LIST[0]}": constants.INTERACTIONS_DICTIONARY["Dining Room"],
                                  f'{constants.ROOM_LIST[1]}': constants.INTERACTIONS_DICTIONARY["Bedroom"],
                                  f'{constants.ROOM_LIST[2]}': constants.INTERACTIONS_DICTIONARY["Bathroom"]}
         self.emf_reading = 1
         self.book_location = [0,0]
+        self.writing_already = False
 
-    def cause_ghost_interaction(self, ghost_type,scene,book, instruments_list):
+    def cause_ghost_interaction(self, scene,book, instruments_list):
         """This method causes there to be a ghost interaction in a randomly selected room on a random object
         in the room. The ghost interaction is randomly selected from a list containing the possible interactions for 
         the given type of ghost
@@ -44,7 +46,7 @@ class Action_Mode():
         target_object = random.choice(possible_objects_for_room)
 
         #choose the type of interaction
-        possible_interactions = self.interaction_types[ghost_type]
+        possible_interactions = self.interaction_types[self.ghost_type]
         interaction = random.choice(possible_interactions)
 
         if interaction == "fingerprints":
@@ -154,14 +156,18 @@ class Action_Mode():
         """
         """
         print("writing placed")
+        room_coordinates = constants.COORINATE_DICTIONARY[self.room]
         book_x = book._get_center_x()
         book_y = book._get_center_y()
-        
-        book.kill()
 
-        book_with_writing = arcade.Sprite(Image_Loader().get_writing(), 1)
-        book_with_writing.set_position(book_x, book_y)
-        instruments_list.append(book_with_writing)
-        scene.add_sprite(constants.INSTRUMENTS[3] ,instruments_list[3])
+        if book_x in range(room_coordinates[0], room_coordinates [2]):
+            if book_y in range(room_coordinates[1], room_coordinates[3]) and self.writing_already == False:
+                book.remove_from_sprite_lists()
+
+                book_with_writing = arcade.Sprite(Image_Loader().get_writing(), 1)
+                book_with_writing.set_position(book_x, book_y)
+                instruments_list[3] = book_with_writing
+                scene.add_sprite(constants.INSTRUMENTS[3], instruments_list[3])
+                self.writing_already = True
 
 

@@ -50,12 +50,12 @@ class Ghost(Entity):
         self.hunt_time = 0
         self.timer = 0
         self.hunt_mode_on = False
-
-        self.action_mode = Action_Mode("poltergeist", room)
+        self.ghost_type = random.choice(constants.GHOST_TYPES)    
+        self.action_mode = Action_Mode(self.ghost_type, room)
         self.hunt_duration = constants.HUNT_DURATION * 60
 
         self.max_cooldown_time = constants.MAX_COOLDOWN_TIME * 60
-        self.ghost_type = "poltergeist"
+
         self.target = player
         self.book = book
         self.hunt_mode = Hunt_Mode(self)
@@ -117,7 +117,7 @@ class Ghost(Entity):
                 self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
                 self.timer = 0
             elif (random_decision > 6):
-                self.action_mode.cause_ghost_interaction(self.ghost_type,scene,self.book, instruments_list)
+                self.action_mode.cause_ghost_interaction(scene,self.book, instruments_list)
         
     def do_hunt(self, wall_list, room):
         """If hunt_mode is active, this will cause the ghost to hunt the player.

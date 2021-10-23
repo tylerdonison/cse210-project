@@ -37,7 +37,7 @@ class Sound_Loader:
         self.sweep1 = self.root / "sounds" / \
             "mixkit-fast-small-sweep-transition-166.wav"
         self.beast1 = self.root / "sounds" / \
-            "mixkit-agressive-beast-roar-13.wav"
+            "mixkit-aggressive-beast-roar-13.wav"
         self.swoosh1 = self.root / "sounds" / "mixkit-woosh-wind-1168.wav"
 
         
@@ -77,7 +77,7 @@ class Sound_Loader:
         arcade.play_sound(sound)
 
         ####################################
-    def play_attic_heart_beat(self):
+    def play_attic_heart_beat_screams(self):
         """Gets the selected sound clip.
 
         Args: (self) instance of soundclip
