@@ -5,8 +5,8 @@ for the area of play.
 """
 import os
 
-ROOM_LIST = ["Dining Room", "Bedroom", "Bathroom"]
-INTERACTIONS_DICTIONARY = { "Dining Room":["Sink","Television","Couch"], 
+ROOM_LIST = ["Dinning Room", "Bedroom", "Bathroom"]
+INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Television","Couch"], 
                             "Bedroom":["Bed","Computer","Dresser"], 
                             "Bathroom":["Sink","Bathtub","Toilet"]}
                             
@@ -15,11 +15,11 @@ OBJECT_COORDINATES = {"Sink":[196,800], "Television":[384,600], "Couch":[700,140
 
 INSTRUMENTS = ["Vacuum", "Ghost Thermo", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
-DINING_MAX_COORDINATES = [192, 576, 704, 1600]
+DINNING_MAX_COORDINATES = [192, 576, 704, 1600]
 BEDROOM_MAX_COORDINATES = [960, 1088, 1472, 1600]
 BATHROOM_MAX_COORDINATES = [960, 576, 1472, 832]
 TOTAL_MAX_COORDINATES = [192, 575, 1472, 1600]
-COORINATE_DICTIONARY = {"Dining Room": [192, 576, 704, 1600], "Bedroom": [960, 1088, 1472, 1600], "Bathroom": [960, 576, 1472, 832]}
+COORINATE_DICTIONARY = {"Dinning Room": [192, 576, 704, 1600], "Bedroom": [960, 1088, 1472, 1600], "Bathroom": [960, 576, 1472, 832]}
 
 GHOST_TYPES = ["poltergeist", "wraith", "demon"]
 
