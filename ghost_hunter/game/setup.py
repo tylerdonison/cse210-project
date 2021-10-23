@@ -283,7 +283,7 @@ class setup(arcade.View):
                 if self.red_timer % 30 == 0:
                     if randint(0,2):
                         self.player_light._color = arcade.csscolor.BLACK
-                        self.sound_loader.play_attic_heart_beat_screams()
+                        
 
             else:
                 if randint(0, 2):
@@ -292,6 +292,7 @@ class setup(arcade.View):
             self.white_timer += 1
             if self.white_timer % 120 == 0:
                 self.player_light._color = arcade.csscolor.WHITE
+                self.sound_loader.play_attic_heart_beat_screams()
         
         # Update animations
         self.scene.update_animation(delta_time, ["Player"])
