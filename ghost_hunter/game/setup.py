@@ -15,6 +15,7 @@ from game.room import Room
 from game.handle_collisions_action import Handle_Collisions_Action
 from random import randint
 import sys
+from threading import Timer
 
 AMBIENT_COLOR = (10, 10, 10)
 
@@ -68,6 +69,8 @@ class setup(arcade.View):
         self.sound_loader = Sound_Loader()
 
         self.emf = 1
+        self.red_timer = 0
+        self.white_timer = 0
 
 
     def setup(self):
@@ -87,6 +90,7 @@ class setup(arcade.View):
 
         self.red_light_layer = Light(0, 0, 150, arcade.csscolor.RED, 'soft')
 
+        
         #choose random ghost type
         #choose random ghost location
         #call ghost to begin random actions, pass in player
@@ -210,19 +214,15 @@ class setup(arcade.View):
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = 0
-            
             #player animation
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.player.sprite.change_y = 0
-            self.sound_loader.play_single_footstep_sound()
             #player animation
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.sprite.change_x = 0
-            self.sound_loader.play_single_footstep_sound()
             #player animation
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.sprite.change_x = 0
-            self.sound_loader.play_single_footstep_sound()
             #player animation
 
     def center_camera_to_player(self):
@@ -255,15 +255,21 @@ class setup(arcade.View):
 
         #light change for hunting mode on
         if self.ghost.hunt_mode_on:
+            
             if self.player_light._color == arcade.csscolor.WHITE:
-                if randint(0,2):
-                    self.player_light._color = arcade.csscolor.RED
+                self.red_timer += 1
+                if self.red_timer % 30 == 0:
+                
+                    if randint(0,2):
+                        self.player_light._color = arcade.csscolor.BLACK
+                
             else:
                 if randint(0, 2):
                     self.player_light._color = arcade.csscolor.WHITE
-        elif self.player_light._color == arcade.csscolor.RED:
-            self.player_light._color = arcade.csscolor.WHITE
-
+        elif self.player_light._color == arcade.csscolor.BLACK:
+            self.white_timer += 1
+            if self.white_timer % 120 == 0:
+                self.player_light._color = arcade.csscolor.WHITE
 
     """capture ghost via the room, not the physical ghost's presence"""
     def collisions_update(self):
@@ -290,6 +296,6 @@ class setup(arcade.View):
         self.window.close()
     
     def game_end(self):
-        """The game has ended because the ghost was caught.
+        """The game has ended because the ghost was caught. w
         """
         self.window.close()
