@@ -71,7 +71,7 @@ class Action_Mode():
         object_y = constants.OBJECT_COORDINATES[target_object][1]
         path = Image_Loader().get_fingerprints()
         
-        self.fingerprints = arcade.Sprite(path,center_x=object_x, center_y=object_y)
+        self.fingerprints = arcade.Sprite(path, 0.25, center_x=object_x, center_y=object_y)
         scene.add_sprite("fingerprints", self.fingerprints)
 
     def set_emf(self,target_object):
@@ -145,7 +145,7 @@ class Action_Mode():
                 x_of_emf = self.emf_position[0]
                 y_of_emf = self.emf_position[1]
                 distance = arcade.get_distance(x1=x_of_player, y1=y_of_player, x2=x_of_emf, y2=y_of_emf)
-                if distance < 150:
+                if distance < 300:
                     self.emf_reading = 5.00
                 else: 
                     self.emf_reading = random.random() + 2
