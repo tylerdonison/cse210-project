@@ -113,10 +113,10 @@ class Ghost(Entity):
         probability = [1,2,3,4,5,6,7,8,9,10]
         if (self.timer) % self.time_between_probability == 0:
             random_decision = random.choice(probability)
-            if (random_decision < 6) and (self.cooldown_time > self.max_cooldown_time) and (sanity < 51):
+            if (random_decision < 7) and (self.cooldown_time > self.max_cooldown_time) and (sanity < constants.MAX_SANITY_BEFORE_HUNT):
                 self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
                 self.timer = 0
-            elif (random_decision > 6):
+            elif (random_decision > 7):
                 self.action_mode.cause_ghost_interaction(scene,self.book, instruments_list)
         
     def do_hunt(self, wall_list, room):
