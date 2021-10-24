@@ -1,4 +1,4 @@
-"""Rooms include dining, bedroom and bathroom. Generates a random room for the ghost.
+"""Rooms include dinning, bedroom and bathroom. Generates a random room for the ghost.
 """
 import arcade
 from pytiled_parser.layer import Layer

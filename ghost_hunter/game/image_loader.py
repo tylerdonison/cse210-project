@@ -17,6 +17,8 @@ class Image_Loader:
         self.pause_screen = self.root / "images" / "pause_screen.png"
         self.fingerprints = self.root / "images" / "fingerprints.png"
         self.writing = self.root / "images" / "gemGreen.png"
+        self.open_book = self.root / "images" / "open_book.png"
+        self.written_book = self.root / "images" / "book_with_writing.png"
 
         #Player Character
         self.player_root            = self.root / "images" / "ghost_hunter_player"

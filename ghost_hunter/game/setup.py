@@ -125,11 +125,10 @@ class setup(arcade.View):
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
         instrument = arcade.Sprite(
-            ":resources:images/enemies/slimeBlock.png", CHARACTER_SCALING / 4.5)
+            Image_Loader().open_book, CHARACTER_SCALING / 4.5)
         instrument.set_position(980, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
-        
         
         
 
@@ -222,7 +221,7 @@ class setup(arcade.View):
                 self.player.has_instrument = False
                 self.player.index_of_instrument = None
             else:
-                self.collisions_update()
+                self.collision_with_instruments()
                 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
@@ -292,27 +291,36 @@ class setup(arcade.View):
             self.white_timer += 1
             if self.white_timer % 120 == 0:
                 self.player_light._color = arcade.csscolor.WHITE
-                self.sound_loader.play_attic_heart_beat_screams()
         
-        # Update animations
-        self.scene.update_animation(delta_time, ["Player"])
+        self.collision_with_ghost()
 
-    def collisions_update(self):
+    """capture ghost via the room, not the physical ghost's presence"""
+    def collision_with_instruments(self):
+
         """Handles capturing the ghost and updates the collisions 
         """
         self.handle_collisions_action = Handle_Collisions_Action(
             self.player, self.ghost, self.instruments)
-        if self.handle_collisions_action.check_collision_between_player_and_ghost():
-            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
-                self.game_end()
-            else:
-                self.game_over()
+
+
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
             self.instruments[index_of_instrument].center_x = self.player.sprite.center_x + 35
             self.instruments[index_of_instrument].center_y = self.player.sprite.center_y - 50
             self.handle_collisions_action.instrument_to_ignore = index_of_instrument
+
+
+    def collision_with_ghost(self):
+        self.handle_collisions_action = Handle_Collisions_Action(
+            self.player, self.ghost, self.instruments)
+        if self.handle_collisions_action.check_collision_between_player_and_ghost():
+            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
+                self.game_end()
+            else:
+                #self.game_over()
+                sys.exit
+
 
     def game_over(self):
         """The game is over"""
