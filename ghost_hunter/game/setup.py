@@ -91,9 +91,9 @@ class setup(arcade.View):
         
         self.light_layer = LightLayer(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.light_layer.set_background_color(arcade.color.BLACK)
-        self.player_light = Light(0, 0, 150,  arcade.csscolor.WHITE, 'soft')
+        self.player_light = Light(0, 0, 180,  arcade.csscolor.WHITE, 'soft')
 
-        self.red_light_layer = Light(0, 0, 150, arcade.csscolor.RED, 'soft')
+        self.red_light_layer = Light(0, 0, 180, arcade.csscolor.RED, 'soft')
         
         #choose random ghost type
         #choose random ghost location

@@ -33,14 +33,14 @@ class Player(arcade.Sprite):
         self.sprite._set_center_x(PLAYER_START_X)
         self.sprite._set_center_y(PLAYER_START_Y)
         
-        self.sanity = 50
+        self.sanity = 100
         self.has_instrument = False
         self.index_of_instrument = None
         
 
         #needs to be set up to be lower, but it will trigger hunting mode too fast
         #while we are still working on it
-        timer = Timer(40.0, self.decrease_sanity)
+        timer = Timer(5.0, self.decrease_sanity)
         timer.start()
         self.cur_texture = 0
         self.character_direction = 1 #0 is up, 1 is down, 2 is right, 3 is left
@@ -74,7 +74,7 @@ class Player(arcade.Sprite):
         self.texture = walking_animation_list[self.cur_texture]
     
     def decrease_sanity(self):
-        self.sanity -= 5
+        self.sanity -= 1
         if self.sanity > 0:
             timer = Timer(2.0, self.decrease_sanity)
             timer.start()
