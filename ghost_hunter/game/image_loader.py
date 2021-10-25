@@ -92,6 +92,11 @@ class Image_Loader:
         return self.pause_screen
     
     def get_player_animations(self):
+        """Get player animations sets up the player animations list so the player Sprite animates.
+
+        Returns:
+           self: returns the player_animations: animations for the player movement
+        """
         player_animations = [self.player_back_neutral,  self.player_back_left, 
                             self.player_back_right,     self.player_front_neutral,
                             self.player_front_left,     self.player_front_right,
@@ -101,9 +106,19 @@ class Image_Loader:
         return player_animations 
     
     def get_player_front(self):
+        """Get player front is the Sprite with the neutral postion
+
+        Returns:
+            self: returns the player_front_neutral
+        """
         return self.player_front_neutral
 
     def get_fingerprints(self):
+        """Fingerprints are used to identify the ghost. This gets the fingerprints 
+
+        Returns:
+            self: returns the fingerprints
+        """
         return self.fingerprints
 
     def get_writing(self):
