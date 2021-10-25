@@ -153,7 +153,12 @@ class Action_Mode():
         return self.emf_reading
 
     def place_writing(self, book, instruments_list, scene):
-        """
+        """Places the writing book and the instrament list on the screen.
+
+        Args:
+            book (sprite): image used for interaction to identify ghost
+            instruments_list (list): shows a list to identify what instraments will take out the Ghost
+            scene (sprite): adds the instrament list to the scene
         """
         print("writing placed")
         room_coordinates = constants.COORINATE_DICTIONARY[self.room]
