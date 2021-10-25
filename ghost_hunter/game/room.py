@@ -10,46 +10,55 @@ from game.constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Room():
     """Class Room generates the coordinates for the room which displays as Polygons and sets up layers for these rooms.
+
+    Args:
+        layer(MapLayer): the layer that contains the room.
+        polygon(Polygon): the polygon that contains the room.
+        name(string): the name of the room
     """
-    def __init__(self, layer):
+
+    def __init__(self, layer, name):
         """Class Constructor
 
         Args:
-            layer (self): creates room layers
+            self (Room): an instance of Room
+            layer (Layer): a layer for the room
+            name (string): the name of the room
         """
         self.layer = layer
+        self.name = name
         self.polygon = Polygon
-        self.points = []
         self.get_polygon()
-    
+
     def get_polygon(self):
-        """gets the polygon dimensions
+        """Gets the polygon dimensions of the room
+
          Args:
              self: instance of Room
         """
         points = []
         data = self.layer.data
-       
+
         for i in range(1, len(data)-1):
-           
+
             for j in range(1, len(data[i]) - 1):
                 if data[i][j] != 0:
                     if data[i-1][j] == 0 or data[i-1][j-1] == 0 or data[i][j-1] == 0 or data[i+1][j] == 0 or data[i][j+1] == 0 or data[i+1][j+1] == 0:
-                        #print(f"i: {i} j: {j} value: {data[i][j]}")
-                        #print(f"x: {j*128 + 45} y: {1792 - (i-1) * 128 + 85}")
-                        self.points.append(
+                        points.append(
                             Point(j*128 + 64, 1792 - (i-1) * 128 + 64))
-        self.polygon = Polygon(self.points)
+        self.polygon = Polygon(points)
 
     def generate_random(self):
-        """Generates a random selection of room
+        """Generates a random selection from room
+
+        Args:
+            self(Room): a Room instance
 
         Returns:
-            self: while in bounds returns pnt 
+            Point: a random point inside the room
         """
         minx, miny, maxx, maxy = self.polygon.bounds
         while True:
             pnt = Point(uniform(minx, maxx), uniform(miny, maxy))
             if self.polygon.contains(pnt):
                 return pnt
-

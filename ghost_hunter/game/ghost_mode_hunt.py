@@ -9,10 +9,11 @@ from game.room import Room
 class Hunt_Mode:
     """Class Hunt_Mode allows the ghost to hunt for the player in the room. When in hunt mode ghost can hunt for player 
     """
-    def __init__(self, ghost):
+    def __init__(self):
         """Class constructor
 
         Args:
+            self (Hunt_Mode): an instance of Hunt_Mode
             ghost (Sprite): Ghost will go into hunt_mode to hunt the player.
         """
         # self.target = ghost.target
@@ -26,9 +27,12 @@ class Hunt_Mode:
         """Causes the ghost to hunt the player. This means that the ghost moves towards the player
         
         Args:
-            wall_list (Sprite): player interacts with walls sprite
-            player (Sprite): Player Sprite
-            ghost_sprite (Sprite): Ghost sprite
+            self (Hunt_Mode): an instance of Hunt_Mode
+            wall_list (Array): array of wall sprites
+            player (Player): the player the ghost hunts
+            ghost_sprite (Sprite): the ghost sprite
+            time (int): time since the hunt started
+            room_map (Room): the room the ghost starts to hunt in
         """
         #physics(player_sprite, front_door_list) #lock front door
         #add sound to indicate locked door
@@ -38,17 +42,11 @@ class Hunt_Mode:
         ghost_position = (ghost_sprite._get_center_x(), ghost_sprite._get_center_y())
 
         if time == constants.INTERVAL_BEFORE_HUNT:
-            try:
-                ghost_position = room_map.generate_random()
-                ghost_sprite.set_position(ghost_position)
-                print("hunted without errors")
-            except:
-                ghost_x = random.randint(constants.TOTAL_MAX_COORDINATES[0], constants.TOTAL_MAX_COORDINATES[2])
-                ghost_y = random.randint(constants.TOTAL_MAX_COORDINATES[1], constants.TOTAL_MAX_COORDINATES[3])
-                ghost_sprite.set_position(ghost_x,ghost_y)
-                print("sweeping errors under the rug again...")
             
-
+            point_to_position = room_map.generate_random()
+            ghost_sprite.set_position(point_to_position.x, point_to_position.y)
+            print("hunted without errors")
+            
         if time > constants.INTERVAL_BEFORE_HUNT * 60:
             if arcade.has_line_of_sight(player_position, ghost_position, wall_list):
                 self.follow_sprite(player, ghost_sprite)
@@ -61,6 +59,7 @@ class Hunt_Mode:
         and a 1 in 1 chance if their sanity gets to 5
 
         Args:
+            self (Hunt_Mode): an instance of Hunt_Mode
             sanity (int): The ammount of sanity that the player has.
 
         """
@@ -94,6 +93,7 @@ class Hunt_Mode:
         an exact multiple of SPRITE_SPEED.
         
         Args:
+            self (Hunt_Mode): an instance of Hunt_Mode
             player_sprite (Sprite): Player Sprite
             ghost (Sprite): Ghost Sprite
         """
@@ -130,6 +130,9 @@ class Hunt_Mode:
         We use the 'min' function here to get the sprite to line up with
         the target sprite, and not jump around if the sprite is not off
         an exact multiple of SPRITE_SPEED.
+
+        Args:
+            self (Hunt_Mode): an instance of Hunt_Mode
         """
 
 

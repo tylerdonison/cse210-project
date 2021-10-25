@@ -1,35 +1,45 @@
 """This module is in charge of controlling the actions of the ghost"""
 import random
 from game import constants
+from game.room import Room
 import arcade
 from game.image_loader import Image_Loader
+from game.constants import INTERACTION_TYPES, POSSIBLE_OBJECT
+from shapely.geometry import Point
 
 
 class Action_Mode():
     """This is the class that controls the actions of the ghost while they are not hunting.
 
     Stereotype: Service Provider
+
+    Attributes:
+        _room (Room): An instance of Room to keep track of the room the ghost is in.
+        _ghost_type (String): The type of ghost that is hunting.
+        _emf_position (Array): The coordinates of an emf point.
+        _freezing_position (Arrya): The coordinates of a freezing position.
+        _emf_reading (Int): The value of the emf reading.
+        _book_location (Array): The coordinates of the book.
+        _writing_already (Bool): The book is written on or not.
+
     """
-    def __init__(self, ghost_type, room_name):
+    def __init__(self, ghost_type, room):
         """The class constructor
 
         Args:
-            self (Action_Mode): an instance of Action Mode
-            ghost_type (string): The type of ghost for the current game
+            self (Action_Mode): An instance of Action_Mode.
+            ghost_type (string): The type of ghost for the current game.
+            room_name (string): The name of the room.
         """
-
-        self.room = room_name
-        self.ghost_type = ghost_type
-        print(self.ghost_type)
-        self.emf_position = [0,0]
-        self.freezing_position = [0,0]
-        self.interaction_types = {"poltergeist":["fingerprints","emf"], "wraith":['emf',"writing"], "demon":["writing", "fingerprints"]}      
-        self.possible_objects = {f"{constants.ROOM_LIST[0]}": constants.INTERACTIONS_DICTIONARY["Dinning Room"],
-                                 f'{constants.ROOM_LIST[1]}': constants.INTERACTIONS_DICTIONARY["Bedroom"],
-                                 f'{constants.ROOM_LIST[2]}': constants.INTERACTIONS_DICTIONARY["Bathroom"]}
-        self.emf_reading = 1
-        self.book_location = [0,0]
-        self.writing_already = False
+        self._room = room
+        self._ghost_type = ghost_type
+        print(self._ghost_type)
+        self._emf_position = [0,0]
+        self._freezing_position = [0,0]
+        self._emf_reading = 1
+        self._book_location = [0,0]
+        self._writing_already = False
+        self._freezing = [0, 0]
 
     def cause_ghost_interaction(self, scene,book, instruments_list):
         """This method causes there to be a ghost interaction in a randomly selected room on a random object
@@ -37,16 +47,17 @@ class Action_Mode():
         the given type of ghost
 
         Args: 
-            self (Action_Mode): an instance of Action Mode
-            ghost_type (str): The type of ghost
-            scene (obj): The scene object
+            self (Action_Mode): an instance of Action_Mode
+            scene (Scene): The scene for the game.
+            book 
+            instruments_list
         """
         #choose a room, and object
-        possible_objects_for_room = constants.INTERACTIONS_DICTIONARY[self.room]
+        possible_objects_for_room = constants.INTERACTIONS_DICTIONARY[self._room.name]
         target_object = random.choice(possible_objects_for_room)
 
         #choose the type of interaction
-        possible_interactions = self.interaction_types[self.ghost_type]
+        possible_interactions = INTERACTION_TYPES[self._ghost_type]
         interaction = random.choice(possible_interactions)
 
         if interaction == "fingerprints":
@@ -60,31 +71,32 @@ class Action_Mode():
 
 
     def place_fingerprints(self, target_object, scene):
-        """This method replaces an object in a room, with an object that has fingerprints on it from a ghost
+        """This method replaces an object in a room, with an object that has fingerprints
+        on it from a ghost.
+
         Args:
             self (Action_Mode): an instance of Action Mode
-            target_object: The object that will have the fingerprints placed on them
-            scene: The scene object
+            target_object(string): The name of the object that will have the fingerprints placed on them
+            scene(Scene): The scene object.
         """
-        
         object_x = constants.OBJECT_COORDINATES[target_object][0]
         object_y = constants.OBJECT_COORDINATES[target_object][1]
         path = Image_Loader().get_fingerprints()
         
-        self.fingerprints = arcade.Sprite(path, 0.25, center_x=object_x, center_y=object_y)
-        scene.add_sprite("fingerprints", self.fingerprints)
+        fingerprints = arcade.Sprite(path, 0.25, center_x=object_x, center_y=object_y)
+        scene.add_sprite("fingerprints", fingerprints)
 
     def set_emf(self,target_object):
         """Sets the location of an emf point
 
         Args:
             self (Action_Mode): an instance of Action Mode
-            target_object: the name of the object where the emf will be emitted from
+            target_object(string): the name of the object where the emf will be emitted from
         """
         
         emf_x = constants.OBJECT_COORDINATES[target_object][0]
         emf_y = constants.OBJECT_COORDINATES[target_object][1]
-        self.emf_position = [emf_x, emf_y]
+        self._emf_position = [emf_x, emf_y]
         print(f'emf set at{emf_x,emf_y}')
         
     def set_freezing(self, target_object):
@@ -92,12 +104,11 @@ class Action_Mode():
 
         Args:
             self (Action_Mode): an instance of Action Mode
-            target_object: the name of the object where the emf will be emitted from
+            target_object(string): the name of the object where the freezing will be emitted from
         """
-        pass
         freezing_x = constants.OBJECT_COORDINATES[target_object][0]
         freezing_y = constants.OBJECT_COORDINATES[target_object][1]
-        self.freezing = [freezing_x, freezing_y]
+        self._freezing_position = [freezing_x, freezing_y]
         
 
     def adjust_temp_reading(self, player):
@@ -111,8 +122,8 @@ class Action_Mode():
         Returns:
             (float) The termperature reading to display to the user
         """
-        pass
-        if self.freezing_position == [0,0]:
+        
+        if self._freezing_position == [0,0]:
             temperature_reading = float(random.randint(60-70)) + random.random()
         else:
             x_of_player = player.sprite._get_center_y()
@@ -131,43 +142,53 @@ class Action_Mode():
         Args:
             self (Action_Mode): an instance of Action Mode
             player (Player): an instance of the player class
+            timer (int): The timer to be set for changing the emf.
 
         Returns:
             (float) The emf reading to display to the user
         """
 
         if timer % 30 == 0:
-            if self.emf_position == [0,0]:
-                self.emf_reading = random.random() + 2
+            if self._emf_position == [0,0]:
+                self._emf_reading = random.random() + 2
             else:
                 x_of_player = player.sprite._get_center_y()
                 y_of_player = player.sprite._get_center_y()
-                x_of_emf = self.emf_position[0]
-                y_of_emf = self.emf_position[1]
+                x_of_emf = self._emf_position[0]
+                y_of_emf = self._emf_position[1]
                 distance = arcade.get_distance(x1=x_of_player, y1=y_of_player, x2=x_of_emf, y2=y_of_emf)
                 if distance < 300:
-                    self.emf_reading = 5.00
+                    self._emf_reading = 5.00
                 else: 
-                    self.emf_reading = random.random() + 2
+                    self._emf_reading = random.random() + 2
             
-        return self.emf_reading
+        return self._emf_reading
 
     def place_writing(self, book, instruments_list, scene):
+        """Writes in the book if
+
+        Args:
+            self (Action_Mode): an instance of Action Mode
+            player (Player): an instance of the player class
+            timer (int): The timer to be set for changing the emf.
+
+        Returns:
+            (float) The emf reading to display to the user
         """
-        """
-        print("writing placed")
-        room_coordinates = constants.COORINATE_DICTIONARY[self.room]
+        
+        room_coordinates = constants.COORDINATE_DICTIONARY[self._room.name]
         book_x = book._get_center_x()
         book_y = book._get_center_y()
 
-        if book_x in range(room_coordinates[0], room_coordinates [2]):
-            if book_y in range(room_coordinates[1], room_coordinates[3]) and self.writing_already == False:
+        if book_x in range(room_coordinates[0], room_coordinates[2]):
+            if book_y in range(room_coordinates[1], room_coordinates[3]) and self._writing_already == False:
                 book.remove_from_sprite_lists()
 
-                book_with_writing = arcade.Sprite(Image_Loader().get_writing(), 1)
+                book_with_writing = arcade.Sprite(
+                    Image_Loader().get_writing(), constants.CHARACTER_SCALING / 4.5)
                 book_with_writing.set_position(book_x, book_y)
                 instruments_list[3] = book_with_writing
                 scene.add_sprite(constants.INSTRUMENTS[3], instruments_list[3])
-                self.writing_already = True
+                self._writing_already = True
 
 

@@ -6,7 +6,6 @@ import arcade
 from arcade.sprite import Sprite
 from game.constants import CHARACTER_SCALING
 from game.constants import PLAYER_MOVEMENT_SPEED, PLAYER_START_X, PLAYER_START_Y
-from game.entity import Entity
 from threading import Timer
 from game.image_loader import Image_Loader
 
@@ -64,6 +63,12 @@ class Player(arcade.Sprite):
         #arcade.load_textures()
     
     def update_animation(self, delta_time: float = 1 / 60):
+        """Updates the animation of the player
+
+        Args:
+            self (Player): An instance of Player
+            delta_time (float): The delta time of the animation
+        """
         if self.change_x == 0 and self.change_y == 0:
             self.texture = self.player_idle_animations[self.character_direction]
         
@@ -74,12 +79,23 @@ class Player(arcade.Sprite):
         self.texture = walking_animation_list[self.cur_texture]
     
     def decrease_sanity(self):
+        """Decreases the player's sanity
+
+        Args:
+            self (Player): An instance of Player
+        """
         self.sanity -= 1
         if self.sanity > 0:
             timer = Timer(2.0, self.decrease_sanity)
             timer.start()
 
-    def set_instrument(self, instrument, index):
+    def set_instrument(self, index):
+        """Sets the instrument the player holds
+
+        Args:
+            self (Player): An instance of Player
+            index (int): the index of the instrument
+
+        """
         self.has_instrument = True
-        self.instrument = instrument
         self.index_of_instrument = index
