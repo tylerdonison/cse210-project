@@ -123,16 +123,16 @@ class Hunt_Mode:
             self.ghost_change_y = math.sin(angle) * constants.GHOST_MOVEMENT_SPEED    
 
     def random_search(self,ghost):
-        """
-        This function will move the current sprite towards whatever
+        """ This function will move the current sprite towards whatever
         other sprite is specified as a parameter.
 
         We use the 'min' function here to get the sprite to line up with
         the target sprite, and not jump around if the sprite is not off
         an exact multiple of SPRITE_SPEED.
+
+        Args:
+            ghost (Sprite): Ghost Sprite for random search
         """
-
-
         ghost.center_x += self.ghost_change_x
         ghost.center_y += self.ghost_change_y
         
