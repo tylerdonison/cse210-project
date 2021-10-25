@@ -169,7 +169,7 @@ class Action_Mode():
             if book_y in range(room_coordinates[1], room_coordinates[3]) and self.writing_already == False:
                 book.remove_from_sprite_lists()
 
-                book_with_writing = arcade.Sprite(Image_Loader().get_writing(), 1)
+                book_with_writing = arcade.Sprite(Image_Loader().get_writing(), 1 / 4.5)
                 book_with_writing.set_position(book_x, book_y)
                 instruments_list[3] = book_with_writing
                 scene.add_sprite(constants.INSTRUMENTS[3], instruments_list[3])
