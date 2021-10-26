@@ -1,7 +1,6 @@
 import arcade
 from arcade import camera
 from arcade import sprite_list
-from arcade.key import V
 from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
