@@ -11,8 +11,8 @@ INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Piano","Table"],
                             "Bedroom":["Bed","Penguin Plush","Dresser"], 
                             "Bathroom":["Bathroom Sink","Bathtub","Toilet"]}
                             
-OBJECT_COORDINATES = {"Sink":[476,735], "Piano":[320, 1472], "Table":[320, 1162], "Bed":[1408, 1280], 
-"Penguin Plush":[960, 1322], "Dresser":[1344, 1600], "Bathroom Sink":[908, 704], "Bathtub":[1392, 620], "Toilet":[1216, 862]}
+OBJECT_COORDINATES = {"Sink":[476,735], "Piano":[320, 1471], "Table":[320, 1162], "Bed":[1408, 1280], 
+"Penguin Plush":[960, 1322], "Dresser":[1344, 1600], "Bathroom Sink":[938, 654], "Bathtub":[1392, 620], "Toilet":[1216, 862]}
 
 INSTRUMENTS = ["Ghost Thermo", "Vacuum", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
@@ -23,7 +23,7 @@ TOTAL_MAX_COORDINATES = [192, 575, 1472, 1600]
 COORDINATE_DICTIONARY = {"Dinning Room": [192, 576, 704, 1600], "Bedroom": [960, 1088, 1472, 1600], "Bathroom": [960, 576, 1472, 832]}
 
 GHOST_TYPES = ["poltergeist", "wraith", "demon"]
-INTRUMENT_NEEDED = {"poltergeist": "Ghost_Thermo", "wraith":"Vacuum", "demon": "Bible"}
+INTRUMENT_NEEDED = {"poltergeist": "Ghost Thermo", "wraith":"Vacuum", "demon": "Bible"}
 INTERACTION_TYPES = {"poltergeist": ["fingerprints", "emf"], "wraith": [
     'emf', "writing"], "demon": ["writing", "fingerprints"]}
 POSSIBLE_OBJECT = {f"{ROOM_LIST[0]}": INTERACTIONS_DICTIONARY["Dinning Room"],

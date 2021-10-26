@@ -23,6 +23,7 @@ class Hunt_Mode:
         
         #Load sound loader
         self._sound_loader = Sound_Loader()
+        self.heart_beat = None
 
     def hunt(self, wall_list, player, ghost_sprite,time, room_map):
 
@@ -51,6 +52,8 @@ class Hunt_Mode:
                 self.follow_sprite(player, ghost_sprite)
             else:
                 self.random_search(ghost_sprite)
+        
+        return self.heart_beat
 
         
     def hunt_check(self, sanity):
@@ -74,10 +77,10 @@ class Hunt_Mode:
         chance_list = []
         for i in range(chance_of_being_hunted_inverse):
             chance_list.append(i + 1)
-            self._sound_loader.play_heart_beat()
         random_number_in_chance_list = random.choice(chance_list)
         if random_number_in_chance_list == 1:
             ghost_hunt_mode = True
+            self.heart_beat = self._sound_loader.play_heart_beat()
         else:
             ghost_hunt_mode = False
         return ghost_hunt_mode #This will probably need to be changed to an object that is passed in

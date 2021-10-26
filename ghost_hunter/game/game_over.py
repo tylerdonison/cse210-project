@@ -48,3 +48,4 @@ class GameOverScreen(arcade.View):
         """
         if key == arcade.key.ENTER:
             self.window.close()
+            arcade.exit()

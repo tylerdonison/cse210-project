@@ -36,6 +36,8 @@ class MenuDirector(arcade.View):
         # Load Sound
         self.sound_loader = Sound_Loader()
 
+        self.thunder = "pie"
+
         # Create the buttons
         self.button1 = arcade.gui.UIFlatButton(text="How to Play", width=200)
         self.v_box1.add(self.button1.with_space_around(bottom=20))
@@ -109,7 +111,7 @@ class MenuDirector(arcade.View):
         self.window.show_view(game_view)
         self.sound_loader.play_evil_laugh()
         self.sound_loader.play_creaking_door()
-        self.sound_loader.play_thunder()
+        self.thunder = self.sound_loader.play_thunder()
 
     def on_click_button3(self, event):
         """On click event button 3 ends the game
