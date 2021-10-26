@@ -6,12 +6,12 @@ for the area of play.
 import os
 
 ROOM_LIST = ["Dinning Room", "Bedroom", "Bathroom"]
-INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Television","Couch"], 
-                            "Bedroom":["Bed","Computer","Dresser"], 
-                            "Bathroom":["Sink","Bathtub","Toilet"]}
+INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Piano","Table"], 
+                            "Bedroom":["Bed","Penguin Plush","Dresser"], 
+                            "Bathroom":["Bathroom Sink","Bathtub","Toilet"]}
                             
-OBJECT_COORDINATES = {"Sink":[196,800], "Television":[384,600], "Couch":[700,1400], "Bed":[896,1500], 
-"Computer":[1280,1400], "Dresser":[1280,1000], "Sink":[896,576], "Bathtub":[1280,576], "Toilet":[1280,900]}
+OBJECT_COORDINATES = {"Sink":[480,768], "Piano":[320, 1472], "Table":[320, 1152], "Bed":[1408, 1280], 
+"Penguin Plush":[960, 1344], "Dresser":[1344, 1600], "Bathroom Sink":[960, 704], "Bathtub":[1312, 640], "Toilet":[1216, 832]}
 
 INSTRUMENTS = ["Vacuum", "Ghost Thermo", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]

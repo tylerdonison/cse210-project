@@ -65,8 +65,8 @@ class Hunt_Mode:
 
         """
         #This ensures that the chance of being hunted will never be greater than a 1 in 1 chance (prevent bugs)
-        if sanity < 5:
-            sanity = 5 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
+        if sanity < 25:
+            sanity = 25 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
 
         chance_of_being_hunted_inverse = int(sanity / 25)
         round(chance_of_being_hunted_inverse) #ensures that the chance of being hunted will be an int
