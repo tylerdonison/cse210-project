@@ -81,7 +81,17 @@ class setup(arcade.View):
         self.white_timer = 0
 
     def setup(self):
-        """Set up the game here. Call this function to restart the game."""
+        """Set up the game here. Call this function to restart the game.
+        
+        Args:
+            self: sets up the game
+            self: map
+            self: Ghost Sprite
+            self: Player
+            self: camera
+            self: physics engine
+            self: light layer
+         """
         self.setup_camera()
         #Need to pick ghost room before draw_map
         self.draw_map()  
@@ -103,40 +113,48 @@ class setup(arcade.View):
         #call ghost to begin random actions, pass in player
 
     def setup_camera(self):
-        """Setup the Cameras"""
+        """Setup the Cameras.
         
+        Args:
+            self: instance of camera
+        """
         self.camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.gui_camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
     
     def setup_instruments(self):
-        """
-        Sets up the instruments that are used to capture the ghost
+        """ Sets up the instruments that are used to capture the ghost.
+
+        Args:
+            self: instance of instrument Sprites
         """
         instrument = arcade.Sprite(
-                ":resources:images/topdown_tanks/tankRed_barrel3.png", CHARACTER_SCALING)
-        instrument.set_position(800, 160)
+                Image_Loader().get_thermos(), CHARACTER_SCALING / 16)
+        instrument.set_position(750, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[0], self.instruments[0])
         instrument = arcade.Sprite(
-            ":resources:images/topdown_tanks/tankGreen_barrel1.png", CHARACTER_SCALING)
-        instrument.set_position(860, 160) 
+            Image_Loader().get_vacuum(), CHARACTER_SCALING / 8)
+        instrument.set_position(830, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[1], self.instruments[1])
         instrument = arcade.Sprite(
-            ":resources:images/topdown_tanks/tankDark_barrel3_outline.png", CHARACTER_SCALING)
-        instrument.set_position(920, 160) 
+            Image_Loader().get_bible(), CHARACTER_SCALING / 60)
+        instrument.set_position(910, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
         instrument = arcade.Sprite(
             Image_Loader().open_book, CHARACTER_SCALING / 4.5)
-        instrument.set_position(980, 160)
+        instrument.set_position(990, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
         
         
 
     def draw_map(self):
-        """This function draws the map using the image loader
+        """This function draws the map using the image loader.
+
+        Args:
+            self: instance of map
         """
         map_name = Image_Loader().get_map_name()
         # Layer specific options are defined based on Layer names in a dictionary
@@ -167,6 +185,10 @@ class setup(arcade.View):
     
     def player_setup(self):
         """ This function sets up the player and ghost sprites
+        Args:
+            self: scene
+            player(Sprite): player
+            Ghost(Sprite): ghost
         """
         self.scene.add_sprite("Player", self.player.sprite)
         self.player._set_center_x(PLAYER_START_X)
@@ -174,7 +196,11 @@ class setup(arcade.View):
         self.scene.add_sprite("Ghost", self.ghost.sprite)
 
     def on_draw(self):
-        """Render the screen."""
+        """Render the screen.
+        
+        Args:
+            self: draw
+            """
 
         # Clear the screen to the background color
         arcade.start_render()
@@ -200,7 +226,12 @@ class setup(arcade.View):
         arcade.draw_text(emf_text, SCREEN_WIDTH - 110,  10, arcade.csscolor.WHITE, 18,)
 
     def on_key_press(self, key, modifiers):
-        """Called whenever a key is pressed."""
+        """Called whenever a key is pressed.
+        
+        Args:
+            self: key press
+            key: up,down,left,right, space       
+        """
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.sound_loader.play_single_footstep_sound()
@@ -231,7 +262,11 @@ class setup(arcade.View):
         #     self.window.show_view(game_view)
                 
     def on_key_release(self, key, modifiers):
-        """Called when the user releases a key."""
+        """Called when the user releases a key.
+        Args:
+            self: key releases
+            key: the inputs of up,down,left,right
+        """
 
         if key == arcade.key.UP or key == arcade.key.W:
             self.player.sprite.change_y = 0
@@ -254,7 +289,10 @@ class setup(arcade.View):
 
 
     def center_camera_to_player(self):
-        """This function centers the camera on the player
+        """This function centers the camera on the player.
+
+        Args:
+            self: centers the camera on the player
         """
         screen_center_x = self.player.sprite.center_x - (self.camera.viewport_width / 2)
         screen_center_y = self.player.sprite.center_y - (
@@ -269,7 +307,12 @@ class setup(arcade.View):
         self.camera.move_to(player_centered)
     
     def on_update(self, delta_time):
-        """Updates the screen with players new position and the light position."""
+        """Updates the screen with players new position and the light position.
+        
+        Args:
+            self: updates the screen 
+            delta_time(clock): keeps track of the time for adding instruments
+        """
         self.physics_engine.update()
         self.player_light.position = self.player.sprite.position
         if self.player.has_instrument:
@@ -303,8 +346,10 @@ class setup(arcade.View):
 
     """capture ghost via the room, not the physical ghost's presence"""
     def collision_with_instruments(self):
+        """Handles capturing the ghost and updates the collisions.
 
-        """Handles capturing the ghost and updates the collisions 
+        Args: 
+            self: updates the collisions with the instruments
         """
         self.handle_collisions_action = Handle_Collisions_Action(
             self.player, self.ghost, self.instruments)
@@ -322,6 +367,11 @@ class setup(arcade.View):
 
 
     def collision_with_ghost(self):
+        """Updates the collision with the ghost.
+
+        Args:
+            self: handles the collision action
+        """
         self.handle_collisions_action = Handle_Collisions_Action(
             self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
@@ -332,12 +382,22 @@ class setup(arcade.View):
 
 
     def game_over(self):
+        """The game is over and we close the window.
+        
+        Args:
+            self: window
+        """
         """The game is over"""
         game_over_screen = GameOverScreen()
         self.window.show_view(game_over_screen)
     
     def game_end(self):
-        """The game has ended because the ghost was caught.
+
+        """The game has ended because the ghost was caught. Closes the window.
+        
+        Args:
+            self: window
+
         """
         victory_screen = VictoryScreen()
         self.window.show_view(victory_screen)

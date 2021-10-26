@@ -64,6 +64,11 @@ class Player(arcade.Sprite):
         #arcade.load_textures()
     
     def update_animation(self, delta_time: float = 1 / 60):
+        """Updates the animations using delta time and a float index.
+
+        Args:
+            delta_time (float, optional): Animation based on time sequence. Defaults to 1/60.
+        """
         if self.change_x == 0 and self.change_y == 0:
             self.texture = self.player_idle_animations[self.character_direction]
         
@@ -74,12 +79,20 @@ class Player(arcade.Sprite):
         self.texture = walking_animation_list[self.cur_texture]
     
     def decrease_sanity(self):
+        """Decreases the sanity based on the timer. Ghost starts hunt based on decrease in sanity.
+        """
         self.sanity -= 1
         if self.sanity > 0:
             timer = Timer(2.0, self.decrease_sanity)
             timer.start()
 
     def set_instrument(self, instrument, index):
+        """Allows the player to set the instrument down.
+
+        Args:
+            instrument (Sprite): instruments are Sprites
+            index (int): the index is forthe instrument list 
+        """
         self.has_instrument = True
         self.instrument = instrument
         self.index_of_instrument = index
