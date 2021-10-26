@@ -11,7 +11,7 @@ INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Piano","Table"],
                             "Bathroom":["Bathroom Sink","Bathtub","Toilet"]}
                             
 OBJECT_COORDINATES = {"Sink":[480,768], "Piano":[320, 1472], "Table":[320, 1152], "Bed":[1408, 1280], 
-"Penguin Plush":[960, 1344], "Dresser":[1344, 1600], "Bathroom Sink":[960, 704], "Bathtub":[1312, 640], "Toilet":[1216, 832]}
+"Penguin Plush":[960, 1332], "Dresser":[1344, 1600], "Bathroom Sink":[928, 704], "Bathtub":[1402, 630], "Toilet":[1216, 832]}
 
 INSTRUMENTS = ["Vacuum", "Ghost Thermo", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
