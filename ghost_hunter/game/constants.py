@@ -6,6 +6,7 @@ for the area of play.
 import os
 
 ROOM_LIST = ["Dinning Room", "Bedroom", "Bathroom"]
+
 INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Piano","Table"], 
                             "Bedroom":["Bed","Penguin Plush","Dresser"], 
                             "Bathroom":["Bathroom Sink","Bathtub","Toilet"]}
@@ -19,9 +20,14 @@ DINNING_MAX_COORDINATES = [192, 576, 704, 1600]
 BEDROOM_MAX_COORDINATES = [960, 1088, 1472, 1600]
 BATHROOM_MAX_COORDINATES = [960, 576, 1472, 832]
 TOTAL_MAX_COORDINATES = [192, 575, 1472, 1600]
-COORINATE_DICTIONARY = {"Dinning Room": [192, 576, 704, 1600], "Bedroom": [960, 1088, 1472, 1600], "Bathroom": [960, 576, 1472, 832]}
+COORDINATE_DICTIONARY = {"Dinning Room": [192, 576, 704, 1600], "Bedroom": [960, 1088, 1472, 1600], "Bathroom": [960, 576, 1472, 832]}
 
 GHOST_TYPES = ["poltergeist", "wraith", "demon"]
+INTERACTION_TYPES = {"poltergeist": ["fingerprints", "emf"], "wraith": [
+    'emf', "writing"], "demon": ["writing", "fingerprints"]}
+POSSIBLE_OBJECT = {f"{ROOM_LIST[0]}": INTERACTIONS_DICTIONARY["Dinning Room"],
+                   f'{ROOM_LIST[1]}': INTERACTIONS_DICTIONARY["Bedroom"],
+                   f'{ROOM_LIST[2]}': INTERACTIONS_DICTIONARY["Bathroom"]}
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
@@ -34,9 +40,9 @@ SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = SPRITE_PIXEL_SIZE * TILE_SCALING
 PLAYER_MOVEMENT_SPEED = 5
 GHOST_MOVEMENT_SPEED = 2.6
-HUNT_DURATION = 15
+HUNT_DURATION = 30
 MAX_COOLDOWN_TIME = 10
-TIME_BETWEEN_PROBABILITES = 10 #number of seconds between when the "dice" are rolled for a ghost action
+TIME_BETWEEN_PROBABILITES = 0.5 #number of seconds between when the "dice" are rolled for a ghost action
 MAX_SANITY_BEFORE_HUNT = 90
 
 LEFT_VIEWPORT_MARGIN = 200
@@ -46,3 +52,4 @@ TOP_VIEWPORT_MARGIN = 100
 
 PLAYER_START_X = 550
 PLAYER_START_Y = 200
+

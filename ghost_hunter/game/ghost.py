@@ -8,13 +8,12 @@ from game.ghost_mode_action import Action_Mode
 from game.ghost_mode_hunt import Hunt_Mode
 import os
 from game import constants
-from game.entity import Entity
 
 #constants
 GHOST_SPEED = 0.5
 SPRITE_SPEED = 0.5
 
-class Ghost(Entity):
+class Ghost(arcade.Sprite):
     """The ghost is a spooky being who leaves clues and hunts the player.
 
     Stereotype: Information Holder, Controller
@@ -38,14 +37,18 @@ class Ghost(Entity):
             Room:
             Book: The book sprite
         """
-        Entity.__init__(self)
-        self.path = Image_Loader().ghost_front_path
-        self.sprite = arcade.Sprite(self.path, constants.CHARACTER_SCALING)
-        Entity.setup(
-            self, self.path, 1856, 64)
 
 
-        # self.room = room
+
+        super().__init__()
+
+        main_image = Image_Loader().ghost_front_path
+
+        self.sprite = arcade.Sprite(main_image, .75)
+        self.sprite._set_center_x(1856)
+        self.sprite._set_center_y(64)
+
+       
         self.cooldown_time = 0
         self.hunt_time = 0
         self.timer = 0
@@ -58,7 +61,7 @@ class Ghost(Entity):
 
         self.target = player
         self.book = book
-        self.hunt_mode = Hunt_Mode(self)
+        self.hunt_mode = Hunt_Mode()
         self.time_between_probability = constants.TIME_BETWEEN_PROBABILITES * 60 #time between checking to see if the ghost will hunt, do an action, or nothing
 
 
@@ -116,6 +119,7 @@ class Ghost(Entity):
             if (random_decision < 7) and (self.cooldown_time > self.max_cooldown_time) and (sanity < constants.MAX_SANITY_BEFORE_HUNT):
                 self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
                 self.timer = 0
+                print("I choose to hunt")
             elif (random_decision > 7):
                 self.action_mode.cause_ghost_interaction(scene,self.book, instruments_list)
         
