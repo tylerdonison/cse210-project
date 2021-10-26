@@ -1,4 +1,5 @@
 """This module is in charge of controlling the actions of the ghost"""
+from math import dist
 import random
 from game import constants
 from game.room import Room
@@ -152,12 +153,12 @@ class Action_Mode():
             if self._emf_position == [0,0]:
                 self._emf_reading = random.random() + 2
             else:
-                x_of_player = player.sprite._get_center_y()
+                x_of_player = player.sprite._get_center_x()
                 y_of_player = player.sprite._get_center_y()
                 x_of_emf = self._emf_position[0]
                 y_of_emf = self._emf_position[1]
                 distance = arcade.get_distance(x1=x_of_player, y1=y_of_player, x2=x_of_emf, y2=y_of_emf)
-                if distance < 300:
+                if distance < 200:
                     self._emf_reading = 5.00
                 else: 
                     self._emf_reading = random.random() + 2
