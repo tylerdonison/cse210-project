@@ -41,7 +41,6 @@ class Player(arcade.Sprite):
         self.cur_texture = 0
         self.character_direction = 1 #0 is up, 1 is down, 2 is right, 3 is left
         self.player_animations = Image_Loader().get_player_animations()
-        print(self.player_animations)
         self.player_idle_animations =       [arcade.load_texture(self.player_animations[0]), 
                                              arcade.load_texture(self.player_animations[3]), 
                                              arcade.load_texture(self.player_animations[6]),
