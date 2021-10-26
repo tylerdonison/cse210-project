@@ -184,7 +184,8 @@ class Image_Loader:
         Returns:
             self: returns pause screen
         """
-        return self.writing
+
+        return self.written_book
 
     def get_thermos(self):
         """Gets the path for the thermos image
