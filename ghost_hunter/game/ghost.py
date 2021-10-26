@@ -117,7 +117,6 @@ class Ghost(arcade.Sprite):
             if (random_decision < 7) and (self.cooldown_time > self.max_cooldown_time) and (sanity < constants.MAX_SANITY_BEFORE_HUNT):
                 self.hunt_mode_on = self.hunt_mode.hunt_check(sanity)
                 self.timer = 0
-                print("I choose to hunt")
             elif (random_decision > 7):
                 self.action_mode.cause_ghost_interaction(scene,self.book, instruments_list)
         
