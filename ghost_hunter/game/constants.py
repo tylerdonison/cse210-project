@@ -23,6 +23,7 @@ TOTAL_MAX_COORDINATES = [192, 575, 1472, 1600]
 COORDINATE_DICTIONARY = {"Dinning Room": [192, 576, 704, 1600], "Bedroom": [960, 1088, 1472, 1600], "Bathroom": [960, 576, 1472, 832]}
 
 GHOST_TYPES = ["poltergeist", "wraith", "demon"]
+INTRUMENT_NEEDED = {"poltergeist": "Ghost_Thermo", "wraith":"Vacuum", "demon": "Bible"}
 INTERACTION_TYPES = {"poltergeist": ["fingerprints", "emf"], "wraith": [
     'emf', "writing"], "demon": ["writing", "fingerprints"]}
 POSSIBLE_OBJECT = {f"{ROOM_LIST[0]}": INTERACTIONS_DICTIONARY["Dinning Room"],

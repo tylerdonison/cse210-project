@@ -21,6 +21,7 @@ from game.handle_collisions_action import Handle_Collisions_Action
 from random import randint
 import sys
 from threading import Timer
+from game import constants
 
 AMBIENT_COLOR = (10, 10, 10)
 
@@ -389,7 +390,7 @@ class setup(arcade.View):
         self.handle_collisions_action = Handle_Collisions_Action(
             self._player, self._ghost, self._instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
-            if self._ghost.check_correct_instrument(self._player.index_of_instrument):
+            if self.check_if_correct_instrument():
                 self.game_end(self._ghost.ghost_type)
             else:
                 self.game_over(self._ghost.ghost_type)
@@ -400,7 +401,10 @@ class setup(arcade.View):
         Args:
             self(setup): an instance of setup
         """
-        if self._player.index_of_instrument == GHOST_TYPES. index (self._ghost.ghost_type):
+        print('Instrument check executed')
+        print(constants.INSTRUMENTS[self._player.index_of_instrument])
+        print(constants.INTRUMENT_NEEDED[self._ghost.ghost_type])
+        if constants.INSTRUMENTS[self._player.index_of_instrument] == constants.INTRUMENT_NEEDED[self._ghost.ghost_type]:
             return True
         return False
 
