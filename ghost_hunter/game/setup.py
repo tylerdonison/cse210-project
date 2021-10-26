@@ -362,9 +362,16 @@ class setup(arcade.View):
         Args:
             self(setup): an instance of setup 
         """
+
+
         self._handle_collisions_action = Handle_Collisions_Action(
             self._player, self._ghost, self._instruments)
-
+        if self.handle_collisions_action.check_collision_between_player_and_ghost():
+            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
+                self.game_end(self.ghost.ghost_type)
+            else:
+                self.game_over(self.ghost.ghost_type)
+                
         index_of_instrument = self._handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self._player.index_of_instrument:
             self._player.set_instrument(index_of_instrument)
@@ -372,23 +379,20 @@ class setup(arcade.View):
             self._instruments[index_of_instrument].center_y = self._player.sprite.center_y - 50
             self._handle_collisions_action.instrument_to_ignore = index_of_instrument
 
-
     def collision_with_ghost(self):
         """Handles the collision with the ghost
 
         Args:
             self(setup): an instance of setup
         """
-        self._handle_collisions_action = Handle_Collisions_Action(
-            self._player, self._ghost, self._instruments)
-        if self._handle_collisions_action.check_collision_between_player_and_ghost():
-            if self.check_if_correct_instrument():
-
-                self.game_end()
-                print("Congrats")
+ 
+        self.handle_collisions_action = Handle_Collisions_Action(
+            self.player, self.ghost, self.instruments)
+        if self.handle_collisions_action.check_collision_between_player_and_ghost():
+            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
+                self.game_end(self.ghost.ghost_type)
             else:
-                self.game_over()
-                print("You lost.")
+                self.game_over(self.ghost.ghost_type)
 
     def check_if_correct_instrument(self):
         """Checks if the player has the correct instrument to catch the ghost
@@ -400,22 +404,21 @@ class setup(arcade.View):
             return True
         return False
 
-    def game_over(self):
+    def game_over(self, ghost_type = "Penguin"):
         """The game is over
-
         Args:
             self(setup): an instance of setup
         """
-        game_over_screen = GameOverScreen()
+        game_over_screen = GameOverScreen(ghost_type)
         self.window.show_view(game_over_screen)
     
-    def game_end(self):
-        """The game has ended because the ghost was caught. w
+    def game_end(self, ghost_type = "Penguin"):
+        """The game has ended because the ghost was caught.
 
         Args:
             self(setup): an instance of setup
         """
-        victory_screen = VictoryScreen()
+        victory_screen = VictoryScreen(ghost_type)
         self.window.show_view(victory_screen)
 
 # """ Pause screen gives players options to pause the game and close the game."""
