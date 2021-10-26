@@ -14,6 +14,8 @@ The project files and folders are organized as follows:
 root                    (project root folder)
 +-- ghost_hunter        (source code for game)
   +-- game              (specific game classes)
+  +-- images            (folder containing visual assets)
+  +-- sounds            (folder containing sound assets)
   +-- __init__.py       (python package file)
   +-- __main__.py       (entry point for program)
 +-- README.md           (general info)
