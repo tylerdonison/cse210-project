@@ -255,7 +255,7 @@ class setup(arcade.View):
                 self.player.has_instrument = False
                 self.player.index_of_instrument = None
             else:
-                self.collisions_update()
+                self.collision_with_instruments()
         # elif key == arcade.key.ESCAPE:
         #     game_view = PauseScreen()
         #     game_view.on_draw()
