@@ -47,7 +47,7 @@ def test_update_time_and_status(monkeypatch, initial_timer, expected_timer,Initi
     assert test_ghost.hunt_time == expected_hunt_time
     assert test_ghost.cooldown_time == expected_cooldown_time
     
-    @pytest.mark.parametrize("sanity, expected_output", [(100, False), (25, True)])
+@pytest.mark.parametrize("sanity, expected_output", [(100, False), (25, True)])
 def test_hunt_check(sanity, expected_output):
     test_player = Player()
     test_hunt_mode = Hunt_Mode(test_player)
