@@ -5,6 +5,7 @@ from pytiled_parser.tiled_object import Point
 from game import constants
 import math
 from game.room import Room
+from game.sound_loader import Sound_Loader
 
 class Hunt_Mode:
     """Class Hunt_Mode allows the ghost to hunt for the player in the room. When in hunt mode ghost can hunt for player 
@@ -19,6 +20,9 @@ class Hunt_Mode:
 
         self.ghost_change_x = 0
         self.ghost_change_y = 0
+        
+        #Load sound loader
+        self._sound_loader = Sound_Loader()
 
     def hunt(self, wall_list, player, ghost_sprite,time, room_map):
 
@@ -70,7 +74,7 @@ class Hunt_Mode:
         chance_list = []
         for i in range(chance_of_being_hunted_inverse):
             chance_list.append(i + 1)
-
+            self._sound_loader.play_heart_beat()
         random_number_in_chance_list = random.choice(chance_list)
         if random_number_in_chance_list == 1:
             ghost_hunt_mode = True
