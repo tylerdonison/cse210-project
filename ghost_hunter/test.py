@@ -1,3 +1,5 @@
+"""Test functions"""
+
 from _pytest.monkeypatch import monkeypatch
 import pytest
 from game.ghost_mode_hunt import Hunt_Mode
@@ -6,6 +8,7 @@ from game.ghost_mode_action import Action_Mode
 from game import constants
 from game.ghost import Ghost
 from game import ghost
+from game.setup import setup
 
 
 @pytest.mark.parametrize("sanity, expected_output",[(100,False), (25, True)])
@@ -45,3 +48,27 @@ def test_update_time_and_status(monkeypatch, initial_timer, expected_timer,Initi
     assert test_ghost.hunt_mode_on == expected_hunt_status
     assert test_ghost.hunt_time == expected_hunt_time
     assert test_ghost.cooldown_time == expected_cooldown_time
+
+
+@pytest.mark.parametrize("sanity, expected_output", [(100, False), (25, True)])
+def test_hunt_check(sanity, expected_output):
+    test_player = Player()
+    test_hunt_mode = Hunt_Mode(test_player)
+    test_sanity = sanity
+    assert test_hunt_mode.hunt_check(test_sanity) == expected_output
+
+
+def test_check_if_correct_instrument(self):
+    test_setup = setup()
+    test_setup._player.index_of_instrument = 0
+    test_setup._ghost.ghost_type = 0
+
+    assert test_setup.test_check_if_correct_instrument() == True
+
+    test_setup._ghost.ghost_type = 1
+    assert test_setup.test_check_if_correct_instrument() == False
+
+    test_setup._player.index_of_instrument = 1
+    test_setup._ghost.ghost_type = 2
+    assert test_setup.test_check_if_correct_instrument() == False
+

@@ -1,3 +1,5 @@
+"""Main function in the game"""
+
 import arcade
 from game.setup import setup
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH
