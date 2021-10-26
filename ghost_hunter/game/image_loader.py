@@ -12,7 +12,7 @@ class Image_Loader:
         self.map_path = self.root / "images" / "Apartment_3.0.json"
         self.ghost_front_path = self.root / "images" / "ghost_front_sprite.png"
         self.title_screen = self.root / "images" / "title_screen_v2.png"
-        self.instruction_screen = self.root / "images" / "instruction_screen_controls_v2.png"
+        self.instruction_screen = self.root / "images" / "instruction_screen_controls_v3.png"
         self.ghost_types_screen = self.root / "images" / "ghost_types_screen.png"
         self.pause_screen = self.root / "images" / "pause_screen_v2.png"
         self.demon_game_over_screen = self.root / "images" / "demon_game_over_screen.png"
