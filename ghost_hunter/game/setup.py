@@ -1,7 +1,6 @@
 import arcade
 from arcade import camera
 from arcade import sprite_list
-from arcade.key import V
 from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
@@ -93,7 +92,7 @@ class setup(arcade.View):
             self: light layer
          """
         self.setup_camera()
-        #Need to pick ghost room before draw_map
+
         self.draw_map()  
         self.ghost = Ghost(self.player, self.room_name, self.instruments[3])
         self.player_setup()
@@ -107,10 +106,6 @@ class setup(arcade.View):
         self.player_light = Light(0, 0, 180,  arcade.csscolor.WHITE, 'soft')
 
         self.red_light_layer = Light(0, 0, 180, arcade.csscolor.RED, 'soft')
-        
-        #choose random ghost type
-        #choose random ghost location
-        #call ghost to begin random actions, pass in player
 
     def setup_camera(self):
         """Setup the Cameras.
@@ -146,9 +141,7 @@ class setup(arcade.View):
             Image_Loader().open_book, CHARACTER_SCALING / 4.5)
         instrument.set_position(990, 160)
         self.instruments.append(instrument)
-        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
-        
-        
+        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])    
 
     def draw_map(self):
         """This function draws the map using the image loader.
@@ -255,7 +248,7 @@ class setup(arcade.View):
                 self.player.has_instrument = False
                 self.player.index_of_instrument = None
             else:
-                self.collisions_update()
+                self.collision_with_instruments()
         # elif key == arcade.key.ESCAPE:
         #     game_view = PauseScreen()
         #     game_view.on_draw()
