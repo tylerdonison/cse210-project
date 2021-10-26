@@ -125,23 +125,23 @@ class setup(arcade.View):
             self: instance of instrument Sprites
         """
         instrument = arcade.Sprite(
-                ":resources:images/topdown_tanks/tankRed_barrel3.png", CHARACTER_SCALING)
-        instrument.set_position(800, 160)
+                Image_Loader().get_thermos(), CHARACTER_SCALING / 16)
+        instrument.set_position(750, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[0], self.instruments[0])
         instrument = arcade.Sprite(
-            ":resources:images/topdown_tanks/tankGreen_barrel1.png", CHARACTER_SCALING)
-        instrument.set_position(860, 160) 
+            Image_Loader().get_vacuum(), CHARACTER_SCALING / 8)
+        instrument.set_position(830, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[1], self.instruments[1])
         instrument = arcade.Sprite(
-            ":resources:images/topdown_tanks/tankDark_barrel3_outline.png", CHARACTER_SCALING)
-        instrument.set_position(920, 160) 
+            Image_Loader().get_bible(), CHARACTER_SCALING / 60)
+        instrument.set_position(910, 160) 
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
         instrument = arcade.Sprite(
             Image_Loader().open_book, CHARACTER_SCALING / 4.5)
-        instrument.set_position(980, 160)
+        instrument.set_position(990, 160)
         self.instruments.append(instrument)
         self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
         
