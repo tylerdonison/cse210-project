@@ -24,7 +24,7 @@ constants.ROOM_LIST[1], "Bed", constants.OBJECT_COORDINATES["Bed"]), (constants.
 "Sink", constants.OBJECT_COORDINATES["Sink"])])
 def test_set_emf(ghost_type, room_name, target_object, expected_coordinates):
     test_action_mode = Action_Mode(ghost_type, room_name)
-    test_action_mode._set_emf(target_object)
+    test_action_mode.set_emf(target_object)
 
     assert test_action_mode._emf_position == expected_coordinates
 
@@ -50,7 +50,7 @@ def test_update_time_and_status(monkeypatch, initial_timer, expected_timer,Initi
 @pytest.mark.parametrize("sanity, expected_output", [(100, False), (25, True)])
 def test_hunt_check(sanity, expected_output):
     test_player = Player()
-    test_hunt_mode = Hunt_Mode(test_player)
+    test_hunt_mode = Hunt_Mode()
     test_sanity = sanity
     assert test_hunt_mode.hunt_check(test_sanity) == expected_output
 
