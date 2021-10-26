@@ -130,13 +130,6 @@ class Hunt_Mode:
         the target sprite, and not jump around if the sprite is not off
         an exact multiple of SPRITE_SPEED.
 
-
-        Args:
-            self (Hunt_Mode): an instance of Hunt_Mode
-        """
-
-
-
         Args:
             ghost (Sprite): Ghost Sprite for random search
         """
