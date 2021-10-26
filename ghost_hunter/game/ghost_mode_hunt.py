@@ -64,8 +64,8 @@ class Hunt_Mode:
 
         """
         #This ensures that the chance of being hunted will never be greater than a 1 in 1 chance (prevent bugs)
-        if sanity < 5:
-            sanity = 5 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
+        if sanity < 25:
+            sanity = 25 #Remember that this won't change sanity globally. Just don't pass in sanity as a number instead of accessing it through an object
 
         chance_of_being_hunted_inverse = int(sanity / 25)
         round(chance_of_being_hunted_inverse) #ensures that the chance of being hunted will be an int
@@ -123,19 +123,23 @@ class Hunt_Mode:
             self.ghost_change_y = math.sin(angle) * constants.GHOST_MOVEMENT_SPEED    
 
     def random_search(self,ghost):
-        """
-        This function will move the current sprite towards whatever
+        """ This function will move the current sprite towards whatever
         other sprite is specified as a parameter.
 
         We use the 'min' function here to get the sprite to line up with
         the target sprite, and not jump around if the sprite is not off
         an exact multiple of SPRITE_SPEED.
 
+
         Args:
             self (Hunt_Mode): an instance of Hunt_Mode
         """
 
 
+
+        Args:
+            ghost (Sprite): Ghost Sprite for random search
+        """
         ghost.center_x += self.ghost_change_x
         ghost.center_y += self.ghost_change_y
         

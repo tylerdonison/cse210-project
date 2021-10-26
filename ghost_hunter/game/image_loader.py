@@ -14,11 +14,16 @@ class Image_Loader:
         self.title_screen = self.root / "images" / "title_screen_v2.png"
         self.instruction_screen = self.root / "images" / "instruction_screen_controls_v2.png"
         self.ghost_types_screen = self.root / "images" / "ghost_types_screen.png"
-        self.pause_screen = self.root / "images" / "pause_screen.png"
+        self.pause_screen = self.root / "images" / "pause_screen_v2.png"
+        self.game_over_screen = self.root / "images" / "game_over_screen.png"
+        self.victory_screen = self.root / "images" / "victory_screen.png"
         self.fingerprints = self.root / "images" / "fingerprints.png"
         self.writing = self.root / "images" / "book_with_writing.png"
         self.open_book = self.root / "images" / "open_book.png"
         self.written_book = self.root / "images" / "book_with_writing.png"
+        self.thermos = self.root / "images" / "thermos.png"
+        self.vacuum = self.root / "images" / "vacuum.png"
+        self.bible = self.root / "images" / "bible.png"
 
         #Player Character
         self.player_root            = self.root / "images" / "ghost_hunter_player"
@@ -75,6 +80,22 @@ class Image_Loader:
         """
         return self.instruction_screen
 
+    def get_game_over_screen(self):
+        """gets the game over screen
+
+        Returns:
+            self: returns the game over screen
+        """
+        return self.game_over_screen
+
+    def get_victory_screen(self):
+        """gets the victory screen
+
+        Returns:
+            self: returns the victory screen
+        """
+        return self.victory_screen
+
     def get_ghost_types_screen(self):
         """gets ghost types screen 
 
@@ -92,6 +113,11 @@ class Image_Loader:
         return self.pause_screen
     
     def get_player_animations(self):
+        """Get player animations sets up the player animations list so the player Sprite animates.
+
+        Returns:
+           self: returns the player_animations: animations for the player movement
+        """
         player_animations = [self.player_back_neutral,  self.player_back_left, 
                             self.player_back_right,     self.player_front_neutral,
                             self.player_front_left,     self.player_front_right,
@@ -101,15 +127,50 @@ class Image_Loader:
         return player_animations 
     
     def get_player_front(self):
+        """Get player front is the Sprite with the neutral postion
+
+        Returns:
+            self: returns the player_front_neutral
+        """
         return self.player_front_neutral
 
     def get_fingerprints(self):
+        """Fingerprints are used to identify the ghost. This gets the fingerprints 
+
+        Returns:
+            self: returns the fingerprints
+        """
         return self.fingerprints
 
     def get_writing(self):
-        """ gets pause screen
+        """ gets writing screen
 
         Returns:
             self: returns pause screen
         """
+
         return self.written_book
+
+    def get_thermos(self):
+        """Gets the path for the thermos image
+
+        Returns:
+            self: returns thermos path
+        """
+        return self.thermos
+
+    def get_vacuum(self):
+        """Gets the path for the vacuum image
+
+        Returns:
+            self: returns vacuum path
+        """
+        return self.vacuum
+
+    def get_bible(self):
+        """Gets the path for the bible image
+
+        Returns:
+            self: returns bible path
+        """
+        return self.bible

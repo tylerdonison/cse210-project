@@ -63,11 +63,13 @@ class Player(arcade.Sprite):
         #arcade.load_textures()
     
     def update_animation(self, delta_time: float = 1 / 60):
+
         """Updates the animation of the player
 
         Args:
             self (Player): An instance of Player
             delta_time (float): The delta time of the animation
+
         """
         if self.change_x == 0 and self.change_y == 0:
             self.texture = self.player_idle_animations[self.character_direction]
@@ -79,6 +81,7 @@ class Player(arcade.Sprite):
         self.texture = walking_animation_list[self.cur_texture]
     
     def decrease_sanity(self):
+
         """Decreases the player's sanity
 
         Args:

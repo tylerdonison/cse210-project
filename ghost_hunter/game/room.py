@@ -36,6 +36,8 @@ class Room():
          Args:
              self: instance of Room
         """
+        if not self.layer:
+            return
         points = []
         data = self.layer.data
 

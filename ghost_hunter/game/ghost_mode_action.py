@@ -165,6 +165,7 @@ class Action_Mode():
         return self._emf_reading
 
     def place_writing(self, book, instruments_list, scene):
+
         """Writes in the book if
 
         Args:
@@ -177,6 +178,7 @@ class Action_Mode():
         """
         
         room_coordinates = constants.COORDINATE_DICTIONARY[self._room.name]
+
         book_x = book._get_center_x()
         book_y = book._get_center_y()
 
@@ -184,8 +186,8 @@ class Action_Mode():
             if book_y in range(room_coordinates[1], room_coordinates[3]) and self._writing_already == False:
                 book.remove_from_sprite_lists()
 
-                book_with_writing = arcade.Sprite(
-                    Image_Loader().get_writing(), constants.CHARACTER_SCALING / 4.5)
+                book_with_writing = arcade.Sprite(Image_Loader().get_writing(), 1 / 4.5)
+                
                 book_with_writing.set_position(book_x, book_y)
                 instruments_list[3] = book_with_writing
                 scene.add_sprite(constants.INSTRUMENTS[3], instruments_list[3])
