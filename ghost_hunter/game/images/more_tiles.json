@@ -8,37 +8,13 @@
  "margin":0,
  "name":"more_tiles",
  "spacing":0,
- "tilecount":32,
+ "tilecount":28,
  "tiledversion":"1.7.2",
  "tileheight":256,
  "tiles":[
         {
-         "id":0,
-         "image":"tiles\/boxCrate.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":60,
-         "image":"tiles\/planetCenter.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":102,
-         "image":"tiles\/snowCenter.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
          "id":121,
          "image":"tiles\/stoneCenter.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":148,
-         "image":"boxCrate.png",
          "imageheight":128,
          "imagewidth":128
         }, 
@@ -55,26 +31,8 @@
          "imagewidth":128
         }, 
         {
-         "id":152,
-         "image":"tiles\/stoneCenter.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":153,
-         "image":"brickTextureWhite.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
          "id":154,
          "image":"woodbrick.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":155,
-         "image":"woodbrick flipped.png",
          "imageheight":128,
          "imagewidth":128
         }, 
@@ -85,76 +43,16 @@
          "imagewidth":128
         }, 
         {
-         "id":157,
-         "image":"woodbrick floor.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":158,
-         "image":"tiles\/woodbrick floor.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
          "id":159,
          "image":"tiles\/floor thicker.png",
          "imageheight":128,
          "imagewidth":128
         }, 
         {
-         "id":160,
-         "image":"bed from Morlockhater's Ash's House.png",
-         "imageheight":256,
-         "imagewidth":256
-        }, 
-        {
          "id":161,
          "image":"bed from Morlockhater's Ash's House cropped.png",
          "imageheight":256,
          "imagewidth":256
-        }, 
-        {
-         "id":162,
-         "image":"counter.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":163,
-         "image":"penguin plush.png",
-         "imageheight":256,
-         "imagewidth":128
-        }, 
-        {
-         "id":164,
-         "image":"piano bottom.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":165,
-         "image":"piano top.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":166,
-         "image":"sink.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":167,
-         "image":"stove bottom.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":168,
-         "image":"stove top.png",
-         "imageheight":128,
-         "imagewidth":128
         }, 
         {
          "id":169,
@@ -175,18 +73,6 @@
          "imagewidth":128
         }, 
         {
-         "id":172,
-         "image":"table bottom.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
-         "id":173,
-         "image":"table top.png",
-         "imageheight":128,
-         "imagewidth":128
-        }, 
-        {
          "id":174,
          "image":"toilet.png",
          "imageheight":128,
@@ -203,6 +89,96 @@
          "image":"bathtub.png",
          "imageheight":128,
          "imagewidth":256
+        }, 
+        {
+         "id":187,
+         "image":"1.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":188,
+         "image":"2.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":189,
+         "image":"3.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":190,
+         "image":"4.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":191,
+         "image":"5.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":192,
+         "image":"6.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":193,
+         "image":"sink_counter_transparent.png",
+         "imageheight":256,
+         "imagewidth":128
+        }, 
+        {
+         "id":194,
+         "image":"piano_transparent.png",
+         "imageheight":256,
+         "imagewidth":128
+        }, 
+        {
+         "id":195,
+         "image":"stove_transparent.png",
+         "imageheight":256,
+         "imagewidth":128
+        }, 
+        {
+         "id":196,
+         "image":"table_transparent.png",
+         "imageheight":256,
+         "imagewidth":128
+        }, 
+        {
+         "id":197,
+         "image":"bathroom_sink_transparent.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":198,
+         "image":"bathroom_sink_stand_transparent.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":199,
+         "image":"left_chair_fallen.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":200,
+         "image":"right_chair_fallen.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":201,
+         "image":"piano_chair.png",
+         "imageheight":256,
+         "imagewidth":128
         }],
  "tilewidth":256,
  "type":"tileset",
