@@ -19,6 +19,9 @@ class Image_Loader:
         self.writing = self.root / "images" / "book_with_writing.png"
         self.open_book = self.root / "images" / "open_book.png"
         self.written_book = self.root / "images" / "book_with_writing.png"
+        self.thermos = self.root / "images" / "thermos.png"
+        self.vacuum = self.root / "images" / "vacuum.png"
+        self.bible = self.root / "images" / "bible.png"
 
         #Player Character
         self.player_root            = self.root / "images" / "ghost_hunter_player"
@@ -122,9 +125,33 @@ class Image_Loader:
         return self.fingerprints
 
     def get_writing(self):
-        """ gets pause screen
+        """ gets writing screen
 
         Returns:
             self: returns pause screen
         """
         return self.writing
+
+    def get_thermos(self):
+        """Gets the path for the thermos image
+
+        Returns:
+            self: returns thermos path
+        """
+        return self.thermos
+
+    def get_vacuum(self):
+        """Gets the path for the vacuum image
+
+        Returns:
+            self: returns vacuum path
+        """
+        return self.vacuum
+
+    def get_bible(self):
+        """Gets the path for the bible image
+
+        Returns:
+            self: returns bible path
+        """
+        return self.bible
