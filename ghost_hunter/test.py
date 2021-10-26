@@ -24,9 +24,9 @@ constants.ROOM_LIST[1], "Bed", constants.OBJECT_COORDINATES["Bed"]), (constants.
 "Sink", constants.OBJECT_COORDINATES["Sink"])])
 def test_set_emf(ghost_type, room_name, target_object, expected_coordinates):
     test_action_mode = Action_Mode(ghost_type, room_name)
-    test_action_mode.set_emf(target_object)
+    test_action_mode._set_emf(target_object)
 
-    assert test_action_mode.emf_position == expected_coordinates
+    assert test_action_mode._emf_position == expected_coordinates
 
 @pytest.mark.parametrize("initial_timer, expected_timer,Initial_hunt_status, expected_hunt_status, initial_hunt_time, expected_hunt_time, Initial_cooldown_time ,expected_cooldown_time", 
 [(2, 3, False, False, 0, 0, 5, 6), (5,6, True, False, constants.HUNT_DURATION * 60 + 1, 0, 5, 0),(785,786, False, False, constants.HUNT_DURATION * 60 + 1, constants.HUNT_DURATION * 60 + 1, 5, 6) ])
