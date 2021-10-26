@@ -92,7 +92,7 @@ class setup(arcade.View):
             self: light layer
          """
         self.setup_camera()
-        #Need to pick ghost room before draw_map
+
         self.draw_map()  
         self.ghost = Ghost(self.player, self.room_name, self.instruments[3])
         self.player_setup()
