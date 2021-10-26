@@ -48,7 +48,6 @@ class Sound_Loader:
             (self) map_path: The path to clips.
         """
         return self.map_path
-        ####################################
     
     def play_swoosh1(self):
         """Gets the selected sound clip.
@@ -57,7 +56,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.swoosh1)
         arcade.play_sound(sound)
-        ####################################
 
     def play_beast1(self):
         """Gets the selected sound clip.
@@ -66,7 +64,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.beast1)
         arcade.play_sound(sound)
-        ####################################
 
     def play_sweep1(self):
         """Gets the selected sound clip.
@@ -76,7 +73,6 @@ class Sound_Loader:
         sound = arcade.load_sound(self.sweep1)
         arcade.play_sound(sound)
 
-        ####################################
     def play_attic_heart_beat_screams(self):
         """Gets the selected sound clip.
 
@@ -84,7 +80,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.attic_heart_beat_screams)
         arcade.play_sound(sound)
-        ###################################
 
     def play_attic_screams_1(self):
         """Gets the selected sound clip.
@@ -93,7 +88,7 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.attic_screams_1)
         arcade.play_sound(sound)
-        ####################################
+
     def play_attic_screams_2(self):
         """Gets the selected sound clip.
 
@@ -101,7 +96,7 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.attic_screams_2)
         arcade.play_sound(sound)
-        ###################################
+
     def play_attic_screams_3(self):
         """Gets the selected sound clip.
 
@@ -109,7 +104,7 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.attic_screams_3)
         arcade.play_sound(sound)
-        #################################
+
 
     def play_backward_souls(self):
         """Gets the selected sound clip.
@@ -118,7 +113,7 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.backward_souls)
         arcade.play_sound(sound)
-        ####################################
+
     def play_ballroom_guests(self):
         """Gets the selected sound clip.
 
@@ -126,7 +121,7 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.ballroom_guests)
         arcade.play_sound(sound)
-        ######################################
+
     def play_chains(self):
         """Gets the selected sound clip.
 
@@ -134,7 +129,7 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.chains)
         arcade.play_sound(sound)
-        ######################################
+
     def play_creaking_door(self):
         """Gets the selected sound clip.
 
@@ -142,7 +137,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.creaking_door)
         arcade.play_sound(sound)
-        #####################################
 
     def play_evil_laugh(self):
         """Gets the selected sound clip.
@@ -152,7 +146,6 @@ class Sound_Loader:
         sound = arcade.load_sound(self.evil_laugh)
         arcade.play_sound(sound)
 
-        ######################################
     def play_single_footstep_sound(self):
         """Gets the selected sound clip.
 
@@ -160,7 +153,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.single_footstep)
         arcade.play_sound(sound)
-        ########################################
 
     def play_footsteps_on_trail(self):
         """Gets the selected sound clip.
@@ -169,7 +161,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.footsteps_on_trail)
         arcade.play_sound(sound)
-        ##################################
 
     def play_hall_clock(self):
         """Gets the selected sound clip.
@@ -178,7 +169,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.hall_clock)
         arcade.play_sound(sound)
-        ##################################
 
     def play_heart_beat(self):
         """Gets the selected sound clip.
@@ -186,8 +176,8 @@ class Sound_Loader:
           Args: (self) instance of soundclip
         """
         sound = arcade.load_sound(self.heart_beat)
-        arcade.play_sound(sound)
-        ####################################
+        player = arcade.play_sound(sound)
+        return player
 
     def play_scary(self):
         """Gets the selected sound clip.
@@ -196,7 +186,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.scary)
         arcade.play_sound(sound)
-        #############################
 
     def play_thunder(self):
         """Gets the selected sound clip.
@@ -204,8 +193,8 @@ class Sound_Loader:
           Args: (self) instance of soundclip
         """
         sound = arcade.load_sound(self.thunder)
-        arcade.play_sound(sound)
-        #############################
+        player = arcade.play_sound(sound)
+        return player
 
     def play_witch(self):
         """Gets the selected sound clip.
@@ -214,7 +203,6 @@ class Sound_Loader:
         """
         sound = arcade.load_sound(self.witch)
         arcade.play_sound(sound)
-        #############################
 
     def play_zombie(self):
         """Gets the selected sound clip.

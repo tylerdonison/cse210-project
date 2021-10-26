@@ -102,6 +102,7 @@ class setup(arcade.View):
         self._emf = 1
         self._red_timer = 0
         self._white_timer = 0
+        self.heart_beat = None
 
     def setup(self):
         """Set up the game here. Call this function to restart the game.
@@ -355,6 +356,7 @@ class setup(arcade.View):
                 self._player_light._color = arcade.csscolor.WHITE
         
         self.collision_with_ghost()
+        self.heart_beat = self._ghost.heart_beat
 
     def collision_with_instruments(self):
 
@@ -364,13 +366,14 @@ class setup(arcade.View):
             self(setup): an instance of setup 
         """
 
-
         self._handle_collisions_action = Handle_Collisions_Action(
             self._player, self._ghost, self._instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self._ghost.check_correct_instrument(self._player.index_of_instrument):
+                arcade.stop_sound(self.heart_beat)
                 self.game_end(self._ghost.ghost_type)
             else:
+                arcade.stop_sound(self.heart_beat)
                 self.game_over(self._ghost.ghost_type)
                 
         index_of_instrument = self._handle_collisions_action.check_collision_between_player_and_instruments() 
@@ -392,10 +395,15 @@ class setup(arcade.View):
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self._player.index_of_instrument == None:
                 self.game_over(self._ghost.ghost_type)
+                arcade.stop_sound(self.heart_beat)
+
             elif self.check_if_correct_instrument():
                 self.game_end(self._ghost.ghost_type)
+                arcade.stop_sound(self.heart_beat)
+
             else:
                 self.game_over(self._ghost.ghost_type)
+                arcade.stop_sound(self.heart_beat)
 
     def check_if_correct_instrument(self):
         """Checks if the player has the correct instrument to catch the ghost

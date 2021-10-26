@@ -38,8 +38,6 @@ class Ghost(arcade.Sprite):
             Book: The book sprite
         """
 
-
-
         super().__init__()
 
         main_image = Image_Loader().ghost_front_path
@@ -63,7 +61,7 @@ class Ghost(arcade.Sprite):
         self.book = book
         self.hunt_mode = Hunt_Mode()
         self.time_between_probability = constants.TIME_BETWEEN_PROBABILITES * 60 #time between checking to see if the ghost will hunt, do an action, or nothing
-
+        self.heart_beat = self.hunt_mode.heart_beat
 
     def execute(self,sanity,scene, wall_list, room, instruments_list):
 
@@ -130,8 +128,7 @@ class Ghost(arcade.Sprite):
             self (Ghost): An instance of Ghost
         """
         if self.hunt_mode_on == True:
-            self.hunt_mode.hunt(wall_list, self.target, self.sprite,self.hunt_time, room)
-
+            self.heart_beat = self.hunt_mode.hunt(wall_list, self.target, self.sprite,self.hunt_time, room)            
 
     def check_correct_instrument(self, instrument):
         """
