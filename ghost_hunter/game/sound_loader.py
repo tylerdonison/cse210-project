@@ -19,9 +19,9 @@ class Sound_Loader:
         self.Ballroom_guests = self.root / "sounds"/"Ballroom_Guests.mp3"
         self.chains = self.root / "sounds"/"Chains_Rattling-SoundBible.com-1923614227.mp3"
         self.creaking_door = self.root / "sounds" / \
-            "Creaking_Door_Spooky-SoundBible.com-1909842345.mp3"
+            "Creaking_Door_Spooky_quiet.wav"
         self.evil_laugh = self.root / "sounds" / \
-            "Evil_Laugh_Cackle-SoundBible.com-957382653.mp3"
+            "Evil_Laugh_Cackle_quiet.wav"
         self.footsteps_on_cement = self.root / "sounds" / \
             "Footsteps_on_Cement-Tim_Fryer-870410055.mp3"
         self.footsteps_on_trail = self.root / "sounds" / \
@@ -29,7 +29,7 @@ class Sound_Loader:
         self.hall_clock = self.root / "sounds"/"Hall_Clock.mp3"
         self.heart_beat = self.root / "sounds"/"Heart_Beat.mp3"
         self.scary = self.root / "sounds"/"Scary-Titus_Calen-1449371204.mp3"
-        self.thunder = self.root / "sounds"/"Portrait_Hall_Thunder.mp3"
+        self.thunder = self.root / "sounds"/"Portrait_Hall_Thunder_quiet.wav"
         self.witch = self.root / "sounds" / \
             "Maniacal_Witches_Laugh-SoundBible.com-262127569.mp3"
         self.zombie = self.root / "sounds"/"Mummy_Zombie-SoundBible.com-1966938763.mp3"
