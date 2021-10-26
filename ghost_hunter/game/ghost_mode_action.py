@@ -34,7 +34,6 @@ class Action_Mode():
         """
         self._room = room
         self._ghost_type = ghost_type
-        print(self._ghost_type)
         self._emf_position = [0,0]
         self._freezing_position = [0,0]
         self._emf_reading = 1
@@ -98,7 +97,6 @@ class Action_Mode():
         emf_x = constants.OBJECT_COORDINATES[target_object][0]
         emf_y = constants.OBJECT_COORDINATES[target_object][1]
         self._emf_position = [emf_x, emf_y]
-        print(f'emf set at{emf_x,emf_y}')
         
     def set_freezing(self, target_object):
         """Sets the location of a freezing point
