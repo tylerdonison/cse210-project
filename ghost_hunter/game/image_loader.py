@@ -15,8 +15,12 @@ class Image_Loader:
         self.instruction_screen = self.root / "images" / "instruction_screen_controls_v2.png"
         self.ghost_types_screen = self.root / "images" / "ghost_types_screen.png"
         self.pause_screen = self.root / "images" / "pause_screen_v2.png"
-        self.game_over_screen = self.root / "images" / "game_over_screen.png"
-        self.victory_screen = self.root / "images" / "victory_screen.png"
+        self.demon_game_over_screen = self.root / "images" / "demon_game_over_screen.png"
+        self.wraith_game_over_screen = self.root / "images" / "wraith_game_over_screen.png"
+        self.poltergeist_game_over_screen = self.root / "images" / "poltergeist_game_over_screen.png"
+        self.demon_victory_screen = self.root / "images" / "demon_victory_screen.png"
+        self.wraith_victory_screen = self.root / "images" / "wraith_victory_screen.png"
+        self.poltergeist_victory_screen = self.root / "images" / "poltergeist_victory_screen.png"
         self.fingerprints = self.root / "images" / "fingerprints.png"
         self.writing = self.root / "images" / "book_with_writing.png"
         self.open_book = self.root / "images" / "open_book.png"
@@ -80,21 +84,53 @@ class Image_Loader:
         """
         return self.instruction_screen
 
-    def get_game_over_screen(self):
+    def get_demon_game_over_screen(self):
         """gets the game over screen
 
         Returns:
             self: returns the game over screen
         """
-        return self.game_over_screen
+        return self.demon_game_over_screen
 
-    def get_victory_screen(self):
+    def get_wraith_game_over_screen(self):
+        """gets the game over screen
+
+        Returns:
+            self: returns the game over screen
+        """
+        return self.wraith_game_over_screen
+
+    def get_poltergeist_game_over_screen(self):
+        """gets the game over screen
+
+        Returns:
+            self: returns the game over screen
+        """
+        return self.poltergeist_game_over_screen
+
+    def get_demon_victory_screen(self):
         """gets the victory screen
 
         Returns:
             self: returns the victory screen
         """
-        return self.victory_screen
+        return self.demon_victory_screen
+
+    def get_wraith_victory_screen(self):
+        """gets the victory screen
+
+        Returns:
+            self: returns the victory screen
+        """
+        return self.wraith_victory_screen
+
+    def get_poltergeist_victory_screen(self):
+        """gets the victory screen
+
+        Returns:
+            self: returns the victory screen
+        """
+        return self.poltergeist_victory_screen
 
     def get_ghost_types_screen(self):
         """gets ghost types screen 
