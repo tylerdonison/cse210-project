@@ -16,9 +16,7 @@ class Hunt_Mode:
             self (Hunt_Mode): an instance of Hunt_Mode
             ghost (Sprite): Ghost will go into hunt_mode to hunt the player.
         """
-        # self.target = ghost.target
-        # self.ghost = ghost
-        # self.sprite = ghost.sprite
+
         self.ghost_change_x = 0
         self.ghost_change_y = 0
 
@@ -34,9 +32,6 @@ class Hunt_Mode:
             time (int): time since the hunt started
             room_map (Room): the room the ghost starts to hunt in
         """
-        #physics(player_sprite, front_door_list) #lock front door
-        #add sound to indicate locked door
-        #generate random coordinates in room
                 
         player_position = (player.sprite._get_center_x(), player.sprite._get_center_y())
         ghost_position = (ghost_sprite._get_center_x(), ghost_sprite._get_center_y())
@@ -97,7 +92,7 @@ class Hunt_Mode:
             player_sprite (Sprite): Player Sprite
             ghost (Sprite): Ghost Sprite
         """
-        # Random 1 in 100 chance that we'll change from our old direction and
+        # Random chance that we'll change from our old direction and
         # then re-aim toward the player
         ghost.center_x += self.ghost_change_x
         ghost.center_y += self.ghost_change_y
