@@ -150,23 +150,23 @@ class setup(arcade.View):
         instrument = arcade.Sprite(
                 Image_Loader().get_thermos(), CHARACTER_SCALING / 16)
         instrument.set_position(750, 160)
-        self.instruments.append(instrument)
-        self.scene.add_sprite(INSTRUMENTS[0], self.instruments[0])
+        self._instruments.append(instrument)
+        self._scene.add_sprite(INSTRUMENTS[0], self._instruments[0])
         instrument = arcade.Sprite(
             Image_Loader().get_vacuum(), CHARACTER_SCALING / 8)
         instrument.set_position(830, 160) 
-        self.instruments.append(instrument)
-        self.scene.add_sprite(INSTRUMENTS[1], self.instruments[1])
+        self._instruments.append(instrument)
+        self._scene.add_sprite(INSTRUMENTS[1], self._instruments[1])
         instrument = arcade.Sprite(
             Image_Loader().get_bible(), CHARACTER_SCALING / 60)
         instrument.set_position(910, 160) 
-        self.instruments.append(instrument)
-        self.scene.add_sprite(INSTRUMENTS[2], self.instruments[2])
+        self._instruments.append(instrument)
+        self._scene.add_sprite(INSTRUMENTS[2], self._instruments[2])
         instrument = arcade.Sprite(
             Image_Loader().open_book, CHARACTER_SCALING / 4.5)
         instrument.set_position(990, 160)
-        self.instruments.append(instrument)
-        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])   
+        self._instruments.append(instrument)
+        self._scene.add_sprite(INSTRUMENTS[3], self._instruments[3])   
         
     def draw_map(self):
         """This function draws the map using the image loader
@@ -367,10 +367,10 @@ class setup(arcade.View):
         self._handle_collisions_action = Handle_Collisions_Action(
             self._player, self._ghost, self._instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
-            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
-                self.game_end(self.ghost.ghost_type)
+            if self._ghost.check_correct_instrument(self._player.index_of_instrument):
+                self.game_end(self._ghost.ghost_type)
             else:
-                self.game_over(self.ghost.ghost_type)
+                self.game_over(self._ghost.ghost_type)
                 
         index_of_instrument = self._handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self._player.index_of_instrument:
@@ -387,12 +387,12 @@ class setup(arcade.View):
         """
  
         self.handle_collisions_action = Handle_Collisions_Action(
-            self.player, self.ghost, self.instruments)
+            self._player, self._ghost, self._instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
-            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
-                self.game_end(self.ghost.ghost_type)
+            if self._ghost.check_correct_instrument(self._player.index_of_instrument):
+                self.game_end(self._ghost.ghost_type)
             else:
-                self.game_over(self.ghost.ghost_type)
+                self.game_over(self._ghost.ghost_type)
 
     def check_if_correct_instrument(self):
         """Checks if the player has the correct instrument to catch the ghost
