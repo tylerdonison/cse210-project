@@ -8,7 +8,7 @@
  "margin":0,
  "name":"more_tiles",
  "spacing":0,
- "tilecount":28,
+ "tilecount":29,
  "tiledversion":"1.7.2",
  "tileheight":256,
  "tiles":[
@@ -178,6 +178,12 @@
          "id":201,
          "image":"piano_chair.png",
          "imageheight":256,
+         "imagewidth":128
+        }, 
+        {
+         "id":202,
+         "image":"penguin_plush_dead.png",
+         "imageheight":128,
          "imagewidth":128
         }],
  "tilewidth":256,
