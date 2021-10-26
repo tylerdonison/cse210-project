@@ -92,7 +92,6 @@ class setup(arcade.View):
         self._room_name = ROOM_LIST[randint(0, len(ROOM_LIST) - 1)]
 
         self._ghost = None
-        print(self._room_name)
 
         arcade.set_background_color(arcade.csscolor.BLACK)
         
@@ -411,8 +410,6 @@ class setup(arcade.View):
         Args:
             self(setup): an instance of setup
         """
-        print(constants.INSTRUMENTS[self._player.index_of_instrument])
-        print(constants.INTRUMENT_NEEDED[self._ghost.ghost_type])
         if constants.INSTRUMENTS[self._player.index_of_instrument] == constants.INTRUMENT_NEEDED[self._ghost.ghost_type]:
             return True
         return False
