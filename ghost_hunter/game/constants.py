@@ -12,7 +12,7 @@ INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Piano","Table"],
                             "Bathroom":["Bathroom Sink","Bathtub","Toilet"]}
                             
 OBJECT_COORDINATES = {"Sink":[476,735], "Piano":[320, 1472], "Table":[320, 1162], "Bed":[1408, 1280], 
-"Penguin Plush":[960, 1332], "Dresser":[1344, 1600], "Bathroom Sink":[908, 704], "Bathtub":[1392, 620], "Toilet":[1216, 862]}
+"Penguin Plush":[960, 1322], "Dresser":[1344, 1600], "Bathroom Sink":[908, 704], "Bathtub":[1392, 620], "Toilet":[1216, 862]}
 
 INSTRUMENTS = ["Ghost Thermo", "Vacuum", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
@@ -34,7 +34,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
 SCREEN_TITLE = "Python Ghost Hunter"
 
-INTERVAL_BEFORE_HUNT = 3
+INTERVAL_BEFORE_HUNT = 30
 TILE_SCALING = 1
 CHARACTER_SCALING = 1
 SPRITE_PIXEL_SIZE = 128
