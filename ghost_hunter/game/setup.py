@@ -1,7 +1,6 @@
 import arcade
 from arcade import camera
 from arcade import sprite_list
-from arcade.key import V
 from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
@@ -255,7 +254,7 @@ class setup(arcade.View):
                 self.player.has_instrument = False
                 self.player.index_of_instrument = None
             else:
-                self.collisions_update()
+                self.collision_with_instruments()
         # elif key == arcade.key.ESCAPE:
         #     game_view = PauseScreen()
         #     game_view.on_draw()
@@ -355,9 +354,9 @@ class setup(arcade.View):
             self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
-                self.game_end()
+                self.game_end(self.ghost.ghost_type)
             else:
-                self.game_over()
+                self.game_over(self.ghost.ghost_type)
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
@@ -376,22 +375,22 @@ class setup(arcade.View):
             self.player, self.ghost, self.instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
-                self.game_end()
+                self.game_end(self.ghost.ghost_type)
             else:
-                self.game_over()
+                self.game_over(self.ghost.ghost_type)
 
 
-    def game_over(self):
+    def game_over(self, ghost_type = "Penguin"):
         """The game is over and we close the window.
         
         Args:
             self: window
         """
         """The game is over"""
-        game_over_screen = GameOverScreen()
+        game_over_screen = GameOverScreen(ghost_type)
         self.window.show_view(game_over_screen)
     
-    def game_end(self):
+    def game_end(self, ghost_type = "Penguin"):
 
         """The game has ended because the ghost was caught. Closes the window.
         
@@ -399,7 +398,7 @@ class setup(arcade.View):
             self: window
 
         """
-        victory_screen = VictoryScreen()
+        victory_screen = VictoryScreen(ghost_type)
         self.window.show_view(victory_screen)
 
 # """ Pause screen gives players options to pause the game and close the game."""
