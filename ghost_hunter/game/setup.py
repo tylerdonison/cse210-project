@@ -270,10 +270,10 @@ class setup(arcade.View):
                 self._player.index_of_instrument = None
             else:
                 self.collision_with_instruments()
-        # elif key == arcade.key.ESCAPE:
-        #     game_view = PauseScreen()
-        #     game_view.on_draw()
-        #     self.window.show_view(game_view)
+        elif key == arcade.key.ESCAPE:
+            game_view = GameOverScreen(self._ghost.ghost_type)
+            game_view.on_draw()
+            self.window.show_view(game_view)
                 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key.        
@@ -433,78 +433,3 @@ class setup(arcade.View):
         """
         victory_screen = VictoryScreen(ghost_type)
         self.window.show_view(victory_screen)
-
-# """ Pause screen gives players options to pause the game and close the game."""
-# class PauseScreen(arcade.View):
-#     """Code that runs at the start of the game or when the title screen is called.
-#     """
-
-#     def __init__(self):
-#         """Class Constructor
-#         """
-#         super().__init__()
-#         self.texture = arcade.load_texture(Image_Loader().get_pause_screen())
-
-#         # --- Required for all code that uses UI element,
-#         # a UIManager to handle the UI.
-#         self.manager = arcade.gui.UIManager()
-#         self.manager.enable()
-
-#         # Create a vertical BoxGroup to align buttons
-#         self.v_box1 = arcade.gui.UIBoxLayout()
-#         self.v_box2 = arcade.gui.UIBoxLayout()
-
-#         # Create the buttons
-#         continue_button = arcade.gui.UIFlatButton(text="Continue", width=200)
-#         self.v_box1.add(continue_button.with_space_around(bottom=20))
-
-#         quit_button = arcade.gui.UIFlatButton(text="Exit Program", width=200)
-#         self.v_box2.add(quit_button.with_space_around(bottom=20))
-
-#         # --- Method 2 for handling click events,
-#         # assign self.on_click_start as callback
-#         continue_button.on_click = self.on_click_start
-#         quit_button.on_click = self.on_click_quit
-
-#         # Create a widget to hold the v_box widget, that will center the buttons
-#         self.manager.add(
-#             arcade.gui.UIAnchorWidget(
-#                 anchor_x="center",
-#                 align_x=-150,
-#                 anchor_y="bottom",
-#                 child=self.v_box1)
-#         )
-
-#         self.manager.add(
-#             arcade.gui.UIAnchorWidget(
-#                 anchor_x="center",
-#                 align_x=150,
-#                 anchor_y="bottom",
-#                 child=self.v_box2)
-#         )
-
-
-
-#     def on_draw(self):
-#         """ Draw this view """
-#         arcade.start_render()
-#         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
-#                                 SCREEN_WIDTH, SCREEN_HEIGHT)
-#         self.manager.draw() 
-
-#     def on_click_start(self, event):
-#         """On click start event
-
-#         Args:
-#             event (Arcade.view): on click, resume the game
-#         """
-#         self.window.show_view(setup())
-    
-
-#     def on_click_quit(self, event):
-#         """On Click quit
-
-#         Args:
-#             event (arcade.view): On click quit the game
-#         """
-#         self.window.close()
