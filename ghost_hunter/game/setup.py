@@ -137,7 +137,6 @@ class setup(arcade.View):
         Args:
             self(setup): an instance of setup
         """
-        
         self._camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
         self._gui_camera = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
     
@@ -174,7 +173,6 @@ class setup(arcade.View):
 
         Args:
             self(setup): an instance of setup
-
         """
         map_name = Image_Loader().get_map_name()
         # Layer specific options are defined based on Layer names in a dictionary
@@ -200,8 +198,7 @@ class setup(arcade.View):
         self.setup_instruments()
     
     def player_setup(self):
-        """ This function sets up the player and ghost sprites
-
+        """ This function sets up the player and ghost sprites.
 
         Args:
             self(setup): an instance of setup
@@ -218,7 +215,6 @@ class setup(arcade.View):
             self(setup): an instance of setup
 
             """
-
         # Clear the screen to the background color
         arcade.start_render()
 
@@ -248,8 +244,7 @@ class setup(arcade.View):
         Args:
             self(setup): an instance of setup
             key(Key): the key that was pressed
-            """
-
+        """
         if key == arcade.key.UP or key == arcade.key.W:
             self._sound_loader.play_single_footstep_sound()
             self._player.character_direction = 0
@@ -283,9 +278,7 @@ class setup(arcade.View):
         Args:
             self(setup): an instance of setup
             key(Key): the key that was pressed
-
         """
-
         if key == arcade.key.UP or key == arcade.key.W:
             self._player.sprite.change_y = 0
             #player animation
@@ -307,11 +300,10 @@ class setup(arcade.View):
 
 
     def center_camera_to_player(self):
-        """This function centers the camera on the player
+        """This function centers the camera on the player.
 
         Args:
             self(setup): an instance of setup
-
         """
         screen_center_x = self._player.sprite.center_x - (self._camera.viewport_width / 2)
         screen_center_y = self._player.sprite.center_y - (
@@ -363,7 +355,6 @@ class setup(arcade.View):
         
         self.collision_with_ghost()
 
-    """capture ghost via the room, not the physical ghost's presence"""
     def collision_with_instruments(self):
 
         """Handles the collision with instruments
@@ -402,7 +393,6 @@ class setup(arcade.View):
                 self.game_end(self.ghost.ghost_type)
             else:
                 self.game_over(self.ghost.ghost_type)
- 
 
     def check_if_correct_instrument(self):
         """Checks if the player has the correct instrument to catch the ghost

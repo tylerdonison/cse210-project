@@ -117,5 +117,4 @@ class MenuDirector(arcade.View):
         Args:
             event (arcade): exists the game
         """
-        self.sound_loader.play_swoosh1()
         arcade.exit()

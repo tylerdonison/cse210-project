@@ -36,9 +36,6 @@ class Player(arcade.Sprite):
         self.has_instrument = False
         self.index_of_instrument = None
         
-
-        #needs to be set up to be lower, but it will trigger hunting mode too fast
-        #while we are still working on it
         timer = Timer(5.0, self.decrease_sanity)
         timer.start()
         self.cur_texture = 0
