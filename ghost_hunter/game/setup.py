@@ -391,10 +391,11 @@ class setup(arcade.View):
             self._player, self._ghost, self._instruments)
         if self.handle_collisions_action.check_collision_between_player_and_ghost():
             if self._player.index_of_instrument != None:
-                if self.check_if_correct_instrument():
-                    self.game_end(self._ghost.ghost_type)
-                else:
-                    self.game_over(self._ghost.ghost_type)
+                self.game_over(self._ghost.ghost_type)
+            elif self.check_if_correct_instrument():
+                self.game_end(self._ghost.ghost_type)
+            else:
+                self.game_over(self._ghost.ghost_type)
 
     def check_if_correct_instrument(self):
         """Checks if the player has the correct instrument to catch the ghost
