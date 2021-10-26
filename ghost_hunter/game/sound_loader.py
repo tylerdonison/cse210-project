@@ -27,7 +27,7 @@ class Sound_Loader:
         self.footsteps_on_trail = self.root / "sounds" / \
             "Hiking_A_Trail-SoundBible.com-589916437.mp3"
         self.hall_clock = self.root / "sounds"/"Hall_Clock.mp3"
-        self.heart_beat = self.root / "sounds"/"Heart_Beat.mp3"
+        self.heart_beat = self.root / "sounds"/"Heart_Beat.wav"
         self.scary = self.root / "sounds"/"Scary-Titus_Calen-1449371204.mp3"
         self.thunder = self.root / "sounds"/"Portrait_Hall_Thunder_quiet.wav"
         self.witch = self.root / "sounds" / \
