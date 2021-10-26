@@ -106,10 +106,6 @@ class setup(arcade.View):
         self.player_light = Light(0, 0, 180,  arcade.csscolor.WHITE, 'soft')
 
         self.red_light_layer = Light(0, 0, 180, arcade.csscolor.RED, 'soft')
-        
-        #choose random ghost type
-        #choose random ghost location
-        #call ghost to begin random actions, pass in player
 
     def setup_camera(self):
         """Setup the Cameras.
@@ -145,9 +141,7 @@ class setup(arcade.View):
             Image_Loader().open_book, CHARACTER_SCALING / 4.5)
         instrument.set_position(990, 160)
         self.instruments.append(instrument)
-        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])
-        
-        
+        self.scene.add_sprite(INSTRUMENTS[3], self.instruments[3])    
 
     def draw_map(self):
         """This function draws the map using the image loader.
