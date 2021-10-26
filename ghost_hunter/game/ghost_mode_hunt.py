@@ -45,7 +45,6 @@ class Hunt_Mode:
             
             point_to_position = room_map.generate_random()
             ghost_sprite.set_position(point_to_position.x, point_to_position.y)
-            print("hunted without errors")
             
         if time > constants.INTERVAL_BEFORE_HUNT * 60:
             if arcade.has_line_of_sight(player_position, ghost_position, wall_list):
