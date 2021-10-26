@@ -14,7 +14,9 @@ class Image_Loader:
         self.title_screen = self.root / "images" / "title_screen_v2.png"
         self.instruction_screen = self.root / "images" / "instruction_screen_controls_v2.png"
         self.ghost_types_screen = self.root / "images" / "ghost_types_screen.png"
-        self.pause_screen = self.root / "images" / "pause_screen.png"
+        self.pause_screen = self.root / "images" / "pause_screen_v2.png"
+        self.game_over_screen = self.root / "images" / "game_over_screen.png"
+        self.victory_screen = self.root / "images" / "victory_screen.png"
         self.fingerprints = self.root / "images" / "fingerprints.png"
         self.writing = self.root / "images" / "book_with_writing.png"
         self.open_book = self.root / "images" / "open_book.png"
@@ -74,6 +76,22 @@ class Image_Loader:
             self: returns instruction screen
         """
         return self.instruction_screen
+
+    def get_game_over_screen(self):
+        """gets the game over screen
+
+        Returns:
+            self: returns the game over screen
+        """
+        return self.game_over_screen
+
+    def get_victory_screen(self):
+        """gets the victory screen
+
+        Returns:
+            self: returns the victory screen
+        """
+        return self.victory_screen
 
     def get_ghost_types_screen(self):
         """gets ghost types screen 

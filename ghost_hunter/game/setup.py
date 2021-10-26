@@ -1,6 +1,7 @@
 import arcade
 from arcade import camera
 from arcade import sprite_list
+from arcade.key import V
 from arcade.sprite import Sprite
 from game.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH 
 from game.constants import CHARACTER_SCALING, TILE_SCALING
@@ -12,6 +13,8 @@ from arcade.experimental.lights import Light, LightLayer
 from game.ghost import Ghost
 from game.image_loader import Image_Loader
 from game.sound_loader import Sound_Loader
+from game.victory import VictoryScreen
+from game.game_over import GameOverScreen
 from game.room import Room
 from game.handle_collisions_action import Handle_Collisions_Action
 from random import randint
@@ -221,7 +224,11 @@ class setup(arcade.View):
                 self.player.has_instrument = False
                 self.player.index_of_instrument = None
             else:
-                self.collision_with_instruments()
+                self.collisions_update()
+        # elif key == arcade.key.ESCAPE:
+        #     game_view = PauseScreen()
+        #     game_view.on_draw()
+        #     self.window.show_view(game_view)
                 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
@@ -301,8 +308,11 @@ class setup(arcade.View):
         """
         self.handle_collisions_action = Handle_Collisions_Action(
             self.player, self.ghost, self.instruments)
-
-
+        if self.handle_collisions_action.check_collision_between_player_and_ghost():
+            if self.ghost.check_correct_instrument(self.player.index_of_instrument):
+                self.game_end()
+            else:
+                self.game_over()
         index_of_instrument = self.handle_collisions_action.check_collision_between_player_and_instruments() 
         if index_of_instrument != None and index_of_instrument != self.player.index_of_instrument:
             self.player.set_instrument(self.instruments[index_of_instrument], index_of_instrument)
@@ -318,15 +328,91 @@ class setup(arcade.View):
             if self.ghost.check_correct_instrument(self.player.index_of_instrument):
                 self.game_end()
             else:
-                #self.game_over()
-                sys.exit
+                self.game_over()
 
 
     def game_over(self):
         """The game is over"""
-        self.window.close()
+        game_over_screen = GameOverScreen()
+        self.window.show_view(game_over_screen)
     
     def game_end(self):
-        """The game has ended because the ghost was caught. w
+        """The game has ended because the ghost was caught.
         """
-        self.window.close()
+        victory_screen = VictoryScreen()
+        self.window.show_view(victory_screen)
+
+# """ Pause screen gives players options to pause the game and close the game."""
+# class PauseScreen(arcade.View):
+#     """Code that runs at the start of the game or when the title screen is called.
+#     """
+
+#     def __init__(self):
+#         """Class Constructor
+#         """
+#         super().__init__()
+#         self.texture = arcade.load_texture(Image_Loader().get_pause_screen())
+
+#         # --- Required for all code that uses UI element,
+#         # a UIManager to handle the UI.
+#         self.manager = arcade.gui.UIManager()
+#         self.manager.enable()
+
+#         # Create a vertical BoxGroup to align buttons
+#         self.v_box1 = arcade.gui.UIBoxLayout()
+#         self.v_box2 = arcade.gui.UIBoxLayout()
+
+#         # Create the buttons
+#         continue_button = arcade.gui.UIFlatButton(text="Continue", width=200)
+#         self.v_box1.add(continue_button.with_space_around(bottom=20))
+
+#         quit_button = arcade.gui.UIFlatButton(text="Exit Program", width=200)
+#         self.v_box2.add(quit_button.with_space_around(bottom=20))
+
+#         # --- Method 2 for handling click events,
+#         # assign self.on_click_start as callback
+#         continue_button.on_click = self.on_click_start
+#         quit_button.on_click = self.on_click_quit
+
+#         # Create a widget to hold the v_box widget, that will center the buttons
+#         self.manager.add(
+#             arcade.gui.UIAnchorWidget(
+#                 anchor_x="center",
+#                 align_x=-150,
+#                 anchor_y="bottom",
+#                 child=self.v_box1)
+#         )
+
+#         self.manager.add(
+#             arcade.gui.UIAnchorWidget(
+#                 anchor_x="center",
+#                 align_x=150,
+#                 anchor_y="bottom",
+#                 child=self.v_box2)
+#         )
+
+
+
+#     def on_draw(self):
+#         """ Draw this view """
+#         arcade.start_render()
+#         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+#                                 SCREEN_WIDTH, SCREEN_HEIGHT)
+#         self.manager.draw() 
+
+#     def on_click_start(self, event):
+#         """On click start event
+
+#         Args:
+#             event (Arcade.view): on click, resume the game
+#         """
+#         self.window.show_view(setup())
+    
+
+#     def on_click_quit(self, event):
+#         """On Click quit
+
+#         Args:
+#             event (arcade.view): On click quit the game
+#         """
+#         self.window.close()
