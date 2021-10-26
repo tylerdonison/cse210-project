@@ -14,7 +14,7 @@ INTERACTIONS_DICTIONARY = { "Dinning Room":["Sink","Piano","Table"],
 OBJECT_COORDINATES = {"Sink":[476,735], "Piano":[320, 1472], "Table":[320, 1162], "Bed":[1408, 1280], 
 "Penguin Plush":[960, 1332], "Dresser":[1344, 1600], "Bathroom Sink":[928, 764], "Bathtub":[1392, 620], "Toilet":[1216, 852]}
 
-INSTRUMENTS = ["Vacuum", "Ghost Thermo", "Bible", "Journal"]
+INSTRUMENTS = ["Ghost Thermo", "Vacuum", "Bible", "Journal"]
 #ROOM MAX COORDINATES = [MIN X, MIN Y, MAX X, MAX Y]
 DINNING_MAX_COORDINATES = [192, 576, 704, 1600]
 BEDROOM_MAX_COORDINATES = [960, 1088, 1472, 1600]
@@ -44,7 +44,7 @@ GHOST_MOVEMENT_SPEED = 2.6
 HUNT_DURATION = 30
 MAX_COOLDOWN_TIME = 10
 TIME_BETWEEN_PROBABILITES = 0.5 #number of seconds between when the "dice" are rolled for a ghost action
-MAX_SANITY_BEFORE_HUNT = 60
+MAX_SANITY_BEFORE_HUNT = 100 #60
 
 LEFT_VIEWPORT_MARGIN = 200
 RIGHT_VIEWPORT_MARGIN = 200
